@@ -347,9 +347,9 @@ export default function Page() {
         <p className="eyebrow">{t.notes.eyebrow}</p>
         <div className="mt-16 grid gap-16 md:grid-cols-12">
           <h2 className="manifesto md:col-span-8">{t.notes.titleTop[0]}<br />{t.notes.titleTop[1]}<br /><span>{t.notes.titleAccent[0]}<br />{t.notes.titleAccent[1]}</span></h2>
-          <div className="flex flex-col justify-end gap-8 md:col-span-4">
-            <p className="body-copy">{t.notes.copyA}</p>
-            <p className="body-copy">{t.notes.copyB}</p>
+          <div className="flex flex-col justify-center gap-8 md:col-span-4">
+            <p className="notes-copy">{t.notes.copyA}</p>
+            <p className="notes-copy">{t.notes.copyB}</p>
           </div>
         </div>
         <div className="principles">{t.notes.principles.map((principle, index) => (

@@ -74,6 +74,7 @@ button { cursor: pointer; }
 
 .manifesto { font-size: clamp(2.7rem, 6.2vw, 6rem); line-height: .96; letter-spacing: -.05em; font-weight: 520; }
 .manifesto span { color: var(--muted-foreground); }
+.notes-copy { color: var(--muted-foreground); font-size: clamp(1.15rem, 1.8vw, 1.55rem); line-height: 1.5; letter-spacing: -.015em; }
 .principles { margin-top: 7rem; padding-top: 1.5rem; border-top: 1px solid var(--border); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; color: var(--foreground); font-size: clamp(1.3rem, 3vw, 2.8rem); letter-spacing: -.04em; }
 .principles i { color: var(--primary); font-style: normal; }
 .process-display { margin-top: 4rem; min-height: 13rem; border-left: 1px solid var(--primary); padding-left: 1.5rem; }
