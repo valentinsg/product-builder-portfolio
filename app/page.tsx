@@ -622,7 +622,7 @@ export default function Page() {
           </div>
         )}
         {capabilityView === 'tools' && (
-          <div className="hub-grid" data-reveal>
+          <div className="hub-grid">
             <p className="eyebrow">{t.capabilities.hubTitle}</p>
             <div className="hub-categories">
               {t.capabilities.hub.map(category => (
@@ -644,7 +644,7 @@ export default function Page() {
           </div>
         )}
         {capabilityView === 'skills' && (
-          <div className="skills-grid" data-reveal>
+          <div className="skills-grid">
             <p className="eyebrow">{t.capabilities.skillsTitle}</p>
             <div className="skills-categories">
               {t.capabilities.skills.map(category => (
