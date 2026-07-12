@@ -1,10 +1,13 @@
 'use client'
 
-import { FormEvent, useEffect, useState } from 'react'
-import { Check, Copy, Menu, X } from 'lucide-react'
+import { FormEvent, useEffect, useRef, useState } from 'react'
+import { Check, Copy, Menu, MessageCircle, X } from 'lucide-react'
+import Lenis from 'lenis'
 
 const EMAIL = 'sanchezguevaravalentin@gmail.com'
+const WHATSAPP = 'https://wa.me/5492236680041'
 const LANG_KEY = 'vsg-lang'
+const SECTION_IDS = ['top', 'notes', 'work', 'process', 'growth', 'capabilities', 'about', 'contact']
 
 const images = {
   portrait: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/imagen-hero-EOUthObLnZly3vdrHHzetidLdbVjnC.png',
@@ -25,6 +28,7 @@ const projectImages = [images.casino, images.health, images.velmor, images.healt
 const content = {
   en: {
     nav: [['Work', '#work'], ['Process', '#process'], ['Notes', '#notes'], ['About', '#about']],
+    minimap: { top: 'Home', notes: 'Notes', work: 'Work', process: 'Process', growth: 'Journey', capabilities: 'Capabilities', about: 'About', contact: 'Contact' } as Record<string, string>,
     available: 'Available for work',
     brand: 'Valentín / Product Builder',
     hero: {
@@ -76,6 +80,8 @@ const content = {
     growth: {
       eyebrow: '04 — Growth',
       title: ['More products.', 'More ownership.'],
+      copy: 'Each stage left me something I still use: the coding fundamentals, the agency pace, and the judgment that comes from owning products.',
+      stats: [['6+', 'years building'], ['10+', 'products in production'], ['10+', 'client accounts']],
       timeline: [
         ['2020', 'Programming Foundations', 'Discovered programming through free online courses. Started building websites for friends and local businesses.'],
         ['2021', 'University & English', 'Started studying Programming at UTN while improving my English and continuing freelance work.'],
@@ -91,15 +97,15 @@ const content = {
       viewTools: 'Tools',
       groups: [
         { name: 'Build', offer: 'Engineering, end to end · Frontend & backend · Databases & auth · Integrations & payments', tools: 'TypeScript · React · Next.js · Node.js · Java · PostgreSQL · Supabase · REST APIs' },
-        { name: 'Shape', offer: 'Technical discovery · Product thinking · User flows · System design · AI-assisted prototyping · LLM integrations', tools: 'Notion · FigJam · Figma · ChatGPT · Claude · Cursor' },
+        { name: 'Shape', offer: 'Product thinking · User flows · System design · LLM integrations', tools: 'Notion · FigJam · Figma · ChatGPT · Claude · Cursor' },
         { name: 'Improve', offer: 'Performance · SEO · Analytics · CI/CD · Testing', tools: 'Lighthouse · Google Analytics 4 · Search Console · GitHub Actions · Playwright' },
-        { name: 'Explore', offer: 'AI applications · Web3 products · Real-time systems · Geospatial platforms · Game development', tools: 'LLM APIs · WebSockets · Realtime databases · Geolocation & maps · Game systems' },
+        { name: 'Explore', offer: 'Web3 products · Real-time systems · Interactive maps · Game development', tools: 'LLM APIs · WebSockets · Realtime databases · Map APIs · Game systems' },
       ],
     },
     about: {
       eyebrow: '06 — The person behind the products',
       title: ['Building is a big part.', 'Not the only part.'],
-      copy: 'I enjoy training, learning how businesses grow, listening to hip-hop and playing games. I get lost in side projects, and most of them eventually teach me something useful.',
+      copy: 'I enjoy training, learning how businesses grow and gaming. I’m a bit of a music nerd — hip-hop culture in particular — and there’s always some side project of mine in the works.',
       nowLabel: 'Now building',
       now: [
         { label: 'MiStock', href: 'https://mistock.estudiove.com' },
@@ -115,19 +121,21 @@ const content = {
     footer: {
       eyebrow: '07 — Let’s ship',
       title: ['Let’s build', 'something real.'],
-      copy: 'Whether you’re starting from an idea or improving an existing product, I’m always happy to talk. I like complex systems and teams that care about the details.',
+      copy: 'Got an idea going around your head, a product that’s stuck, or a team that needs hands? Write me. I always reply — and if I’m not the right person for it, I’ll tell you quickly, no runaround.',
       formCompany: 'Company or name',
       formCompanyPlaceholder: 'Who are you?',
       formEmail: 'Your email',
       formMessage: 'What are you working on?',
       formMessagePlaceholder: 'A short note is enough.',
       formSubmit: 'Write me a note',
+      wsp: 'Chat on WhatsApp',
       backToTop: 'Back to top',
       subject: 'Portfolio note from',
     },
   },
   es: {
     nav: [['Proyectos', '#work'], ['Proceso', '#process'], ['Ideas', '#notes'], ['Sobre mí', '#about']],
+    minimap: { top: 'Inicio', notes: 'Ideas', work: 'Proyectos', process: 'Proceso', growth: 'Recorrido', capabilities: 'Capacidades', about: 'Sobre mí', contact: 'Contacto' } as Record<string, string>,
     available: 'Disponible para proyectos',
     brand: 'Valentín / Product Builder',
     hero: {
@@ -179,6 +187,8 @@ const content = {
     growth: {
       eyebrow: '04 — Recorrido',
       title: ['Más productos.', 'Más responsabilidad.'],
+      copy: 'Cada etapa me dejó algo que sigo usando: las bases del código, el ritmo de agencia y el criterio que da tener productos propios.',
+      stats: [['6+', 'años construyendo'], ['10+', 'productos en producción'], ['10+', 'cuentas de clientes']],
       timeline: [
         ['2020', 'Primeras bases', 'Descubrí la programación con cursos online gratuitos. Empecé haciendo webs para amigos y negocios locales.'],
         ['2021', 'Universidad e inglés', 'Empecé a estudiar Programación en la UTN mientras mejoraba mi inglés y seguía con trabajos freelance.'],
@@ -194,15 +204,15 @@ const content = {
       viewTools: 'Herramientas',
       groups: [
         { name: 'Construir', offer: 'Ingeniería de punta a punta · Frontend y backend · Bases de datos y auth · Integraciones y pagos', tools: 'TypeScript · React · Next.js · Node.js · Java · PostgreSQL · Supabase · REST APIs' },
-        { name: 'Dar forma', offer: 'Discovery técnico · Visión de producto · Flujos de usuario · Diseño de sistemas · Prototipado con IA · Integraciones con LLMs', tools: 'Notion · FigJam · Figma · ChatGPT · Claude · Cursor' },
+        { name: 'Dar forma', offer: 'Visión de producto · Flujos de usuario · Diseño de sistemas · Integraciones con LLMs', tools: 'Notion · FigJam · Figma · ChatGPT · Claude · Cursor' },
         { name: 'Mejorar', offer: 'Performance · SEO · Analytics · CI/CD · Testing', tools: 'Lighthouse · Google Analytics 4 · Search Console · GitHub Actions · Playwright' },
-        { name: 'Explorar', offer: 'Aplicaciones con IA · Productos Web3 · Sistemas en tiempo real · Plataformas geoespaciales · Desarrollo de juegos', tools: 'APIs de LLMs · WebSockets · Bases de datos realtime · Geolocalización y mapas · Sistemas de juego' },
+        { name: 'Explorar', offer: 'Productos Web3 · Sistemas en tiempo real · Mapas interactivos · Desarrollo de juegos', tools: 'APIs de LLMs · WebSockets · Bases de datos realtime · APIs de mapas · Sistemas de juego' },
       ],
     },
     about: {
       eyebrow: '06 — La persona detrás de los productos',
       title: ['Construir es una gran parte.', 'No es la única.'],
-      copy: 'Disfruto entrenar, entender cómo crecen los negocios, escuchar hip-hop y jugar. Me pierdo en proyectos paralelos y casi todos terminan enseñándome algo útil.',
+      copy: 'Disfruto entrenar, entender cómo crecen los negocios y jugar. Soy bastante melómano —la cultura del hip-hop en particular— y siempre tengo algún proyecto paralelo dando vueltas.',
       nowLabel: 'Construyendo ahora',
       now: [
         { label: 'MiStock', href: 'https://mistock.estudiove.com' },
@@ -218,13 +228,14 @@ const content = {
     footer: {
       eyebrow: '07 — Hagámoslo realidad',
       title: ['Construyamos', 'algo real.'],
-      copy: 'Ya sea que estés empezando con una idea o mejorando un producto existente, siempre estoy dispuesto a conversar. Me interesan los sistemas complejos y los equipos que cuidan los detalles.',
+      copy: '¿Tenés una idea dando vueltas, un producto trabado o un equipo que necesita manos? Escribime. Respondo siempre, y si no soy la persona indicada para lo tuyo, te lo digo rápido y sin vueltas.',
       formCompany: 'Empresa o nombre',
       formCompanyPlaceholder: '¿Quién sos?',
       formEmail: 'Tu email',
       formMessage: '¿En qué estás trabajando?',
       formMessagePlaceholder: 'Con una nota breve alcanza.',
       formSubmit: 'Escribime',
+      wsp: 'Hablemos por WhatsApp',
       backToTop: 'Volver arriba',
       subject: 'Nota desde el portfolio de',
     },
@@ -238,10 +249,18 @@ export default function Page() {
   const [activeStep, setActiveStep] = useState(0)
   const [copied, setCopied] = useState(false)
   const [capabilityView, setCapabilityView] = useState<'offer' | 'tools'>('offer')
+  const [activeSection, setActiveSection] = useState('top')
+  const lenisRef = useRef<Lenis | null>(null)
 
   const t = content[language]
 
   useEffect(() => {
+    const fromUrl = new URLSearchParams(window.location.search).get('lang')
+    if (fromUrl === 'en' || fromUrl === 'es') {
+      setLanguage(fromUrl)
+      window.localStorage.setItem(LANG_KEY, fromUrl)
+      return
+    }
     const stored = window.localStorage.getItem(LANG_KEY)
     if (stored === 'en' || stored === 'es') {
       setLanguage(stored)
@@ -260,6 +279,47 @@ export default function Page() {
     nodes.forEach(node => observer.observe(node))
     return () => observer.disconnect()
   }, [])
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const lenis = new Lenis({ duration: 1.15 })
+    lenisRef.current = lenis
+    let frame = 0
+    const loop = (time: number) => { lenis.raf(time); frame = requestAnimationFrame(loop) }
+    frame = requestAnimationFrame(loop)
+    const onClick = (event: MouseEvent) => {
+      const anchor = (event.target as HTMLElement).closest?.('a[href^="#"]')
+      if (!anchor) return
+      const target = document.querySelector(anchor.getAttribute('href') || '')
+      if (!target) return
+      event.preventDefault()
+      lenis.scrollTo(target as HTMLElement, { offset: -64 })
+    }
+    document.addEventListener('click', onClick)
+    return () => {
+      cancelAnimationFrame(frame)
+      document.removeEventListener('click', onClick)
+      lenis.destroy()
+      lenisRef.current = null
+    }
+  }, [])
+
+  useEffect(() => {
+    const sections = SECTION_IDS.map(id => document.getElementById(id)).filter(Boolean) as HTMLElement[]
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(entry => entry.isIntersecting && setActiveSection(entry.target.id)),
+      { rootMargin: '-40% 0px -55% 0px' },
+    )
+    sections.forEach(section => observer.observe(section))
+    return () => observer.disconnect()
+  }, [])
+
+  const scrollToSection = (id: string) => {
+    const section = document.getElementById(id)
+    if (!section) return
+    if (lenisRef.current) lenisRef.current.scrollTo(section, { offset: id === 'top' ? 0 : -64 })
+    else section.scrollIntoView({ behavior: 'smooth' })
+  }
 
   const chooseLanguage = (lang: Lang) => {
     setLanguage(lang)
@@ -305,6 +365,16 @@ export default function Page() {
         </div>
       )}
 
+      <nav className="minimap" aria-label="Section map">
+        {SECTION_IDS.map(id => (
+          <button key={id} className={activeSection === id ? 'active' : ''} onClick={() => scrollToSection(id)} aria-label={t.minimap[id]}>
+            <span className="minimap-label">{t.minimap[id]}</span>
+            <span className="minimap-bar" />
+          </button>
+        ))}
+        <a className="minimap-wsp" href={WHATSAPP} target="_blank" rel="noreferrer" aria-label="WhatsApp"><MessageCircle /></a>
+      </nav>
+
       <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/80 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between px-5 md:px-10">
           <a href="#top" className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.2em]" aria-label="Valentín, back to top">
@@ -329,10 +399,10 @@ export default function Page() {
 
       <section id="top" className="hero-section">
         <div className="hero-glow" />
-        <div className="relative mx-auto flex min-h-svh max-w-[1440px] flex-col justify-end px-5 pb-16 pt-28 md:px-10 md:pb-28">
+        <div className="relative mx-auto flex min-h-svh max-w-[1440px] flex-col justify-end px-5 pb-16 pt-26 md:px-10 md:pb-28">
           <div className="hero-kicker font-mono text-xs uppercase tracking-[0.24em] text-muted-foreground"><span>{t.hero.role}</span><span>{t.hero.location}</span></div>
           <div className="hero-grid">
-            <div className="relative z-10 flex flex-col justify-end">
+            <div className="relative z-10 flex flex-col justify-center pb-2 md:pb-10">
               <h1 className="hero-title text-balance">{t.hero.titleA}<br /><span>{t.hero.titleB}</span></h1>
               <p className="hero-intro">{t.hero.intro}</p>
               <div className="hero-actions"><a href="#work">{t.hero.ctaWork}</a><a href="#notes">{t.hero.ctaThink}</a></div>
@@ -411,11 +481,21 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="impact-section">
+      <section id="growth" className="impact-section">
         <div className="section-shell py-28 md:py-40" data-reveal>
           <p className="eyebrow">{t.growth.eyebrow}</p>
           <div className="mt-16 grid gap-16 lg:grid-cols-2">
-            <h2 className="section-title">{t.growth.title[0]}<br /><span>{t.growth.title[1]}</span></h2>
+            <div className="flex flex-col justify-between gap-14">
+              <h2 className="section-title">{t.growth.title[0]}<br /><span>{t.growth.title[1]}</span></h2>
+              <div>
+                <p className="body-copy max-w-md">{t.growth.copy}</p>
+                <div className="growth-stats">
+                  {t.growth.stats.map(stat => (
+                    <div key={stat[1]}><strong>{stat[0]}</strong><span>{stat[1]}</span></div>
+                  ))}
+                </div>
+              </div>
+            </div>
             <div>
               {t.growth.timeline.map(item => (
                 <div className="timeline-row" key={item[0]}><span>{item[0]}</span><div><h3>{item[1]}</h3><p>{item[2]}</p></div></div>
@@ -425,7 +505,7 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="section-shell py-28 md:py-44" data-reveal>
+      <section id="capabilities" className="section-shell py-28 md:py-44" data-reveal>
         <div className="capabilities-header">
           <div>
             <p className="eyebrow">{t.capabilities.eyebrow}</p>
@@ -478,6 +558,7 @@ export default function Page() {
             <div>
               <p className="body-copy">{t.footer.copy}</p>
               <button onClick={copyEmail} className="email-button">{EMAIL} {copied ? <Check /> : <Copy />}</button>
+              <a className="wsp-button" href={WHATSAPP} target="_blank" rel="noreferrer"><MessageCircle />{t.footer.wsp}</a>
               <div className="mt-8 flex gap-6 font-mono text-xs uppercase tracking-[0.14em]">
                 <a className="border-b border-border pb-1 transition-colors hover:border-primary hover:text-primary" href="https://www.linkedin.com/in/valent%C3%ADn-s-761910200/" target="_blank" rel="noreferrer">LinkedIn</a>
                 <a className="border-b border-border pb-1 transition-colors hover:border-primary hover:text-primary" href="https://github.com/valentinsg" target="_blank" rel="noreferrer">GitHub</a>
