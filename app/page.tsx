@@ -47,7 +47,7 @@ const content = {
     },
     process: {
       eyebrow: '03 — How I work',
-      title: ['From idea', 'to production.'],
+      title: ['From idea', 'to production.'],
       copy: 'This process didn’t come from a book. It came from shipping things, breaking them and keeping them alive with users inside. Six steps I repeat, with variations, on every project.',
       steps: [
         ['01', 'Understand the problem', 'What are we really trying to fix?'],
@@ -150,7 +150,7 @@ const content = {
     },
     process: {
       eyebrow: '03 — Cómo trabajo',
-      title: ['De la idea', 'a producción.'],
+      title: ['De la idea', 'a producción.'],
       copy: 'Este proceso no salió de un libro: salió de lanzar cosas, romperlas y tener que sostenerlas con usuarios adentro. Seis pasos que repito, con matices, en cada proyecto.',
       steps: [
         ['01', 'Entender el problema', '¿Qué estamos tratando de resolver en serio?'],
@@ -393,7 +393,7 @@ export default function Page() {
           <div className="mt-16 grid gap-16 lg:grid-cols-12 lg:gap-20">
             <div className="flex flex-col justify-between lg:col-span-5">
               <div>
-                <h2 className="section-title">{t.process.title[0]}<br />{t.process.title[1]}</h2>
+                <h2 className="section-title process-title">{t.process.title[0]}<br />{t.process.title[1]}</h2>
                 <p className="mt-8 max-w-md body-copy process-copy">{t.process.copy}</p>
               </div>
               <div className="process-display"><span>{t.process.steps[activeStep][0]}</span><h3>{t.process.steps[activeStep][1]}</h3><p>{t.process.steps[activeStep][2]}</p></div>
