@@ -39,16 +39,16 @@ const content = {
     },
     notes: {
       eyebrow: '01 — Notes on building',
-      titleTop: ['Not screens.', 'Not features.'],
-      titleAccent: ['Useful products,', 'built carefully.'],
-      copyA: 'Most product work is less dramatic than it sounds. Understand the problem, make a choice, build it, and see what happens.',
-      copyB: 'I like working close to the whole product because one decision usually affects the rest.',
+      titleTop: ['The hardest part', 'wasn’t code.'],
+      titleAccent: ['It was learning', 'what not to build.'],
+      copyA: 'My first product was a clothing brand, not an app. That’s where I learned the stack matters less than the problem: if you’re not solving something concrete, the code doesn’t matter.',
+      copyB: 'Since then I think about every feature in business terms: what it costs, what it returns, and who maintains it when I’m not around.',
       principles: ['Understand', 'Choose', 'Build', 'Learn'],
     },
     process: {
-      eyebrow: '02 — How I work',
-      title: ['Questions before', 'frameworks.'],
-      copy: 'Every project starts differently. I don’t follow a rigid framework. But every product I build goes through the same questions.',
+      eyebrow: '03 — How I work',
+      title: ['From idea', 'to production.'],
+      copy: 'This process didn’t come from a book. It came from shipping things, breaking them and keeping them alive with users inside. Six steps I repeat, with variations, on every project.',
       steps: [
         ['01', 'Understand the problem', 'What are we really trying to fix?'],
         ['02', 'Design the experience', 'Make the main path clear before adding more.'],
@@ -59,7 +59,7 @@ const content = {
       ],
     },
     work: {
-      eyebrow: '03 — Selected work',
+      eyebrow: '02 — Selected work',
       title: ['Products', 'I built.'],
       copy: 'I selected projects from different contexts, all approached in the same way: understand the system, find the useful work and own the result.',
       outcomeLabel: 'What stayed',
@@ -136,16 +136,16 @@ const content = {
     },
     notes: {
       eyebrow: '01 — Ideas sobre construir',
-      titleTop: ['No pantallas.', 'No funcionalidades.'],
-      titleAccent: ['Productos útiles,', 'construidos con cuidado.'],
-      copyA: 'Construir productos es menos dramático de lo que parece: entender el problema, elegir, construir y ver qué pasa.',
-      copyB: 'Me gusta trabajar cerca de todo el producto porque una decisión casi siempre afecta al resto.',
+      titleTop: ['Lo más difícil', 'no fue el código.'],
+      titleAccent: ['Fue aprender', 'qué no construir.'],
+      copyA: 'Mi primer producto fue una marca de ropa, no una app. Ahí aprendí que el stack importa menos que el problema: si no resolvés algo concreto, el código da igual.',
+      copyB: 'Desde entonces pienso cada feature en términos de negocio: qué cuesta, qué devuelve y quién la mantiene cuando yo no estoy.',
       principles: ['Entender', 'Elegir', 'Construir', 'Aprender'],
     },
     process: {
-      eyebrow: '02 — Cómo trabajo',
-      title: ['Preguntas antes que', 'frameworks.'],
-      copy: 'Cada proyecto empieza distinto. No sigo un framework rígido, pero todos los productos que construyo pasan por las mismas preguntas.',
+      eyebrow: '03 — Cómo trabajo',
+      title: ['De la idea', 'a producción.'],
+      copy: 'Este proceso no salió de un libro: salió de lanzar cosas, romperlas y tener que sostenerlas con usuarios adentro. Seis pasos que repito, con matices, en cada proyecto.',
       steps: [
         ['01', 'Entender el problema', '¿Qué estamos tratando de resolver en serio?'],
         ['02', 'Diseñar la experiencia', 'Dejar claro el camino principal antes de agregar más.'],
@@ -156,7 +156,7 @@ const content = {
       ],
     },
     work: {
-      eyebrow: '03 — Proyectos seleccionados',
+      eyebrow: '02 — Proyectos seleccionados',
       title: ['Productos que', 'construí.'],
       copy: 'Elegí proyectos de contextos distintos, abordados de la misma forma: entender el sistema, encontrar el trabajo útil y hacerme cargo del resultado.',
       outcomeLabel: 'El resultado',
@@ -345,28 +345,6 @@ export default function Page() {
         ))}</div>
       </section>
 
-      <section id="process" className="border-y border-border bg-card">
-        <div className="section-shell py-28 md:py-40" data-reveal>
-          <p className="eyebrow">{t.process.eyebrow}</p>
-          <div className="mt-12 grid gap-12 lg:grid-cols-12">
-            <div className="lg:sticky lg:top-28 lg:col-span-5 lg:h-fit">
-              <h2 className="section-title">{t.process.title[0]}<br />{t.process.title[1]}</h2>
-              <p className="mt-6 max-w-md body-copy process-copy">{t.process.copy}</p>
-              <div className="process-display"><span>{t.process.steps[activeStep][0]}</span><h3>{t.process.steps[activeStep][1]}</h3><p>{t.process.steps[activeStep][2]}</p></div>
-            </div>
-            <ol className="lg:col-span-7">
-              {t.process.steps.map((step, index) => (
-                <li key={step[0]}>
-                  <button className={`process-row ${activeStep === index ? 'active' : ''}`} onMouseEnter={() => setActiveStep(index)} onFocus={() => setActiveStep(index)} onClick={() => setActiveStep(index)}>
-                    <span>{step[0]}</span><strong>{step[1]}</strong><span className="process-arrow">+</span>
-                  </button>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </div>
-      </section>
-
       <section id="work" className="py-28 md:py-44">
         <div className="section-shell" data-reveal>
           <p className="eyebrow">{t.work.eyebrow}</p>
@@ -391,6 +369,30 @@ export default function Page() {
               </div>
             </article>
           ))}
+        </div>
+      </section>
+
+      <section id="process" className="border-y border-border bg-card">
+        <div className="section-shell py-28 md:py-40" data-reveal>
+          <p className="eyebrow">{t.process.eyebrow}</p>
+          <div className="mt-16 grid gap-16 lg:grid-cols-12 lg:gap-20">
+            <div className="flex flex-col justify-between lg:col-span-5">
+              <div>
+                <h2 className="section-title">{t.process.title[0]}<br />{t.process.title[1]}</h2>
+                <p className="mt-8 max-w-md body-copy process-copy">{t.process.copy}</p>
+              </div>
+              <div className="process-display"><span>{t.process.steps[activeStep][0]}</span><h3>{t.process.steps[activeStep][1]}</h3><p>{t.process.steps[activeStep][2]}</p></div>
+            </div>
+            <ol className="process-list lg:col-span-7">
+              {t.process.steps.map((step, index) => (
+                <li key={step[0]}>
+                  <button className={`process-row ${activeStep === index ? 'active' : ''}`} onMouseEnter={() => setActiveStep(index)} onFocus={() => setActiveStep(index)} onClick={() => setActiveStep(index)}>
+                    <span>{step[0]}</span><strong>{step[1]}</strong><span className="process-arrow">+</span>
+                  </button>
+                </li>
+              ))}
+            </ol>
+          </div>
         </div>
       </section>
 
