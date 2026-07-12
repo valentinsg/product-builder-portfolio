@@ -3,6 +3,7 @@
 import { FormEvent, useEffect, useRef, useState } from 'react'
 import { Check, Copy, Menu, X } from 'lucide-react'
 import Lenis from 'lenis'
+import Link from 'next/link'
 
 const WhatsAppIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden focusable="false">
@@ -107,6 +108,50 @@ const content = {
         { name: 'Improve', offer: 'Performance · SEO · Analytics · CI/CD · Testing', tools: 'Lighthouse · Google Analytics 4 · Search Console · GitHub Actions · Playwright' },
         { name: 'Explore', offer: 'Web3 products · Real-time systems · Interactive maps · Game development', tools: 'LLM APIs · WebSockets · Realtime databases · Map APIs · Game systems' },
       ],
+      hubTitle: 'The toolkit, by use case',
+      hub: [
+        { name: 'Build', items: [{ label: 'TypeScript' }, { label: 'React' }, { label: 'Next.js' }, { label: 'Node.js' }, { label: 'Java' }, { label: 'PostgreSQL' }, { label: 'Supabase' }, { label: 'REST APIs' }] },
+        { name: 'Product & design', items: [{ label: 'Notion' }, { label: 'FigJam' }, { label: 'Figma' }] },
+        { name: 'AI', items: [{ label: 'ChatGPT' }, { label: 'Claude' }, { label: 'Cursor' }, { label: 'Graphify' }] },
+        { name: 'Ship & measure', items: [{ label: 'Lighthouse' }, { label: 'Google Analytics 4' }, { label: 'Search Console' }, { label: 'GitHub Actions' }, { label: 'Playwright' }] },
+        { name: 'Explore', items: [{ label: 'LLM APIs' }, { label: 'WebSockets' }, { label: 'Realtime databases' }, { label: 'Map APIs' }, { label: 'Game systems' }] },
+        { name: 'Visual references', items: [{ label: 'Mobbin', href: 'https://mobbin.com' }, { label: 'Component Gallery', href: 'https://component.gallery/design-systems/' }, { label: 'Saaspo', href: 'https://saaspo.com' }, { label: 'Landing.love', href: 'https://landing.love' }, { label: 'Craftwork', href: 'https://craftwork.design/curated/websites' }, { label: 'Navbar Gallery', href: 'https://navbar.gallery' }, { label: 'CTA Gallery', href: 'https://cta.gallery' }, { label: 'Rebrand Gallery', href: 'https://rebrand.gallery' }, { label: 'Hugeicons', href: 'https://hugeicons.com' }, { label: 'MeiGen', href: 'https://www.meigen.ai' }] },
+        { name: 'Builder inspiration', items: [{ label: 'Cult UI', href: 'https://www.cult-ui.com/' }, { label: 'design-skills-joaco', href: 'https://design-skills-joaco.vercel.app' }, { label: 'revpdf.com', href: 'https://revpdf.com' }, { label: 'Obscura', href: 'https://github.com/h4ckf0r0day/obscura' }, { label: 'Starlight', href: 'https://starlight.astro.build/es' }] },
+      ],
+      hubMoodboardLabel: 'These, organized by feature type',
+      hubMoodboardHref: '/moodboard',
+      viewSkills: 'Skills',
+      skillsTitle: 'Skill levels, honestly',
+      skills: [
+        { name: 'Build', items: [
+          { label: 'TypeScript', level: 'Expert', tier: 'expert' },
+          { label: 'React', level: 'Expert', tier: 'expert' },
+          { label: 'Next.js', level: 'Expert', tier: 'expert' },
+          { label: 'REST APIs', level: 'Expert', tier: 'expert' },
+          { label: 'Node.js', level: 'Advanced', tier: 'advanced' },
+          { label: 'PostgreSQL', level: 'Advanced', tier: 'advanced' },
+          { label: 'Supabase', level: 'Advanced', tier: 'advanced' },
+          { label: 'Java', level: 'Advanced', tier: 'advanced' },
+        ] },
+        { name: 'Shape', items: [
+          { label: 'Product thinking', level: 'Expert', tier: 'expert' },
+          { label: 'System design', level: 'Advanced', tier: 'advanced' },
+          { label: 'LLM integrations', level: 'Advanced', tier: 'advanced' },
+          { label: 'Figma / FigJam', level: 'Advanced', tier: 'advanced' },
+        ] },
+        { name: 'Improve', items: [
+          { label: 'SEO', level: 'Advanced', tier: 'advanced' },
+          { label: 'Performance', level: 'Advanced', tier: 'advanced' },
+          { label: 'Analytics', level: 'Advanced', tier: 'advanced' },
+          { label: 'CI/CD & testing', level: 'Familiar', tier: 'familiar' },
+        ] },
+        { name: 'Explore', items: [
+          { label: 'Web3', level: 'Advanced', tier: 'advanced' },
+          { label: 'Real-time systems', level: 'Advanced', tier: 'advanced' },
+          { label: 'Map APIs', level: 'Familiar', tier: 'familiar' },
+          { label: 'Game systems', level: 'Familiar', tier: 'familiar' },
+        ] },
+      ],
     },
     about: {
       eyebrow: '06 — The person behind the products',
@@ -117,6 +162,7 @@ const content = {
         { label: 'MiStock', href: 'https://mistock.estudiove.com' },
         { label: 'Pelotita', href: '' },
         { label: 'Estudio Ve', href: 'https://estudiove.com' },
+        { label: 'Avi Salud', href: 'https://www.avisalud.com.ar/' },
         { label: 'Presidential', href: '' },
         { label: 'Cambridge B2', href: '' },
       ],
@@ -214,6 +260,50 @@ const content = {
         { name: 'Mejorar', offer: 'Performance · SEO · Analytics · CI/CD · Testing', tools: 'Lighthouse · Google Analytics 4 · Search Console · GitHub Actions · Playwright' },
         { name: 'Explorar', offer: 'Productos Web3 · Sistemas en tiempo real · Mapas interactivos · Desarrollo de juegos', tools: 'APIs de LLMs · WebSockets · Bases de datos realtime · APIs de mapas · Sistemas de juego' },
       ],
+      hubTitle: 'La caja de herramientas, por caso de uso',
+      hub: [
+        { name: 'Construir', items: [{ label: 'TypeScript' }, { label: 'React' }, { label: 'Next.js' }, { label: 'Node.js' }, { label: 'Java' }, { label: 'PostgreSQL' }, { label: 'Supabase' }, { label: 'REST APIs' }] },
+        { name: 'Producto y diseño', items: [{ label: 'Notion' }, { label: 'FigJam' }, { label: 'Figma' }] },
+        { name: 'IA', items: [{ label: 'ChatGPT' }, { label: 'Claude' }, { label: 'Cursor' }, { label: 'Graphify' }] },
+        { name: 'Lanzar y medir', items: [{ label: 'Lighthouse' }, { label: 'Google Analytics 4' }, { label: 'Search Console' }, { label: 'GitHub Actions' }, { label: 'Playwright' }] },
+        { name: 'Explorar', items: [{ label: 'APIs de LLMs' }, { label: 'WebSockets' }, { label: 'Bases de datos realtime' }, { label: 'APIs de mapas' }, { label: 'Sistemas de juego' }] },
+        { name: 'Referencias visuales', items: [{ label: 'Mobbin', href: 'https://mobbin.com' }, { label: 'Component Gallery', href: 'https://component.gallery/design-systems/' }, { label: 'Saaspo', href: 'https://saaspo.com' }, { label: 'Landing.love', href: 'https://landing.love' }, { label: 'Craftwork', href: 'https://craftwork.design/curated/websites' }, { label: 'Navbar Gallery', href: 'https://navbar.gallery' }, { label: 'CTA Gallery', href: 'https://cta.gallery' }, { label: 'Rebrand Gallery', href: 'https://rebrand.gallery' }, { label: 'Hugeicons', href: 'https://hugeicons.com' }, { label: 'MeiGen', href: 'https://www.meigen.ai' }] },
+        { name: 'Inspiración de builders', items: [{ label: 'Cult UI', href: 'https://www.cult-ui.com/' }, { label: 'design-skills-joaco', href: 'https://design-skills-joaco.vercel.app' }, { label: 'revpdf.com', href: 'https://revpdf.com' }, { label: 'Obscura', href: 'https://github.com/h4ckf0r0day/obscura' }, { label: 'Starlight', href: 'https://starlight.astro.build/es' }] },
+      ],
+      hubMoodboardLabel: 'Lo mismo, organizado por tipo de feature',
+      hubMoodboardHref: '/moodboard',
+      viewSkills: 'Skills',
+      skillsTitle: 'Nivel real, sin inflar',
+      skills: [
+        { name: 'Construir', items: [
+          { label: 'TypeScript', level: 'Experto', tier: 'expert' },
+          { label: 'React', level: 'Experto', tier: 'expert' },
+          { label: 'Next.js', level: 'Experto', tier: 'expert' },
+          { label: 'REST APIs', level: 'Experto', tier: 'expert' },
+          { label: 'Node.js', level: 'Avanzado', tier: 'advanced' },
+          { label: 'PostgreSQL', level: 'Avanzado', tier: 'advanced' },
+          { label: 'Supabase', level: 'Avanzado', tier: 'advanced' },
+          { label: 'Java', level: 'Avanzado', tier: 'advanced' },
+        ] },
+        { name: 'Dar forma', items: [
+          { label: 'Visión de producto', level: 'Experto', tier: 'expert' },
+          { label: 'Diseño de sistemas', level: 'Avanzado', tier: 'advanced' },
+          { label: 'Integraciones con LLMs', level: 'Avanzado', tier: 'advanced' },
+          { label: 'Figma / FigJam', level: 'Avanzado', tier: 'advanced' },
+        ] },
+        { name: 'Mejorar', items: [
+          { label: 'SEO', level: 'Avanzado', tier: 'advanced' },
+          { label: 'Performance', level: 'Avanzado', tier: 'advanced' },
+          { label: 'Analytics', level: 'Avanzado', tier: 'advanced' },
+          { label: 'CI/CD y testing', level: 'Básico', tier: 'familiar' },
+        ] },
+        { name: 'Explorar', items: [
+          { label: 'Web3', level: 'Avanzado', tier: 'advanced' },
+          { label: 'Sistemas en tiempo real', level: 'Avanzado', tier: 'advanced' },
+          { label: 'APIs de mapas', level: 'Básico', tier: 'familiar' },
+          { label: 'Sistemas de juego', level: 'Básico', tier: 'familiar' },
+        ] },
+      ],
     },
     about: {
       eyebrow: '06 — La persona detrás de los productos',
@@ -224,6 +314,7 @@ const content = {
         { label: 'MiStock', href: 'https://mistock.estudiove.com' },
         { label: 'Pelotita', href: '' },
         { label: 'Estudio Ve', href: 'https://estudiove.com' },
+        { label: 'Avi Salud', href: 'https://www.avisalud.com.ar/' },
         { label: 'Presidential', href: '' },
         { label: 'Cambridge B2', href: '' },
       ],
@@ -254,7 +345,7 @@ export default function Page() {
   const [showLangModal, setShowLangModal] = useState(false)
   const [activeStep, setActiveStep] = useState(0)
   const [copied, setCopied] = useState(false)
-  const [capabilityView, setCapabilityView] = useState<'offer' | 'tools'>('offer')
+  const [capabilityView, setCapabilityView] = useState<'offer' | 'tools' | 'skills'>('offer')
   const [activeSection, setActiveSection] = useState('top')
   const lenisRef = useRef<Lenis | null>(null)
 
@@ -520,13 +611,58 @@ export default function Page() {
           <div className="capability-toggle" aria-label="Capability view">
             <button className={capabilityView === 'offer' ? 'active' : ''} onClick={() => setCapabilityView('offer')}>{t.capabilities.viewOffer}</button>
             <button className={capabilityView === 'tools' ? 'active' : ''} onClick={() => setCapabilityView('tools')}>{t.capabilities.viewTools}</button>
+            <button className={capabilityView === 'skills' ? 'active' : ''} onClick={() => setCapabilityView('skills')}>{t.capabilities.viewSkills}</button>
           </div>
         </div>
-        <div className="capabilities">
-          {t.capabilities.groups.map((group, index) => (
-            <div className="capability-row" key={group.name}><span>0{index + 1}</span><h3>{group.name}</h3><p>{group[capabilityView]}</p></div>
-          ))}
-        </div>
+        {capabilityView !== 'skills' && (
+          <div className="capabilities">
+            {t.capabilities.groups.map((group, index) => (
+              <div className="capability-row" key={group.name}><span>0{index + 1}</span><h3>{group.name}</h3><p>{group[capabilityView]}</p></div>
+            ))}
+          </div>
+        )}
+        {capabilityView === 'tools' && (
+          <div className="hub-grid" data-reveal>
+            <p className="eyebrow">{t.capabilities.hubTitle}</p>
+            <div className="hub-categories">
+              {t.capabilities.hub.map(category => (
+                <div className="hub-category" key={category.name}>
+                  <h4>{category.name}</h4>
+                  <div className="hub-tags">
+                    {category.items.map(item =>
+                      'href' in item && item.href ? (
+                        <a key={item.label} href={item.href} target="_blank" rel="noreferrer" className="tag hub-tag-link">{item.label}</a>
+                      ) : (
+                        <span key={item.label} className="tag">{item.label}</span>
+                      ),
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <Link href={t.capabilities.hubMoodboardHref} className="hub-moodboard-link">{t.capabilities.hubMoodboardLabel} →</Link>
+          </div>
+        )}
+        {capabilityView === 'skills' && (
+          <div className="skills-grid" data-reveal>
+            <p className="eyebrow">{t.capabilities.skillsTitle}</p>
+            <div className="skills-categories">
+              {t.capabilities.skills.map(category => (
+                <div className="skill-category" key={category.name}>
+                  <h4>{category.name}</h4>
+                  <div className="skill-list">
+                    {category.items.map(item => (
+                      <div className="skill-list-row" key={item.label}>
+                        <span>{item.label}</span>
+                        <span className="skill-level" data-level={item.tier}>{item.level}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </section>
 
       <section id="about" className="about-section">
