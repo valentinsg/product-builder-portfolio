@@ -43,7 +43,7 @@ const content = {
       titleAccent: ['It was learning', 'what not to build.'],
       copyA: 'My first product was a clothing brand, not an app. That’s where I learned the stack matters less than the problem: if you’re not solving something concrete, the code doesn’t matter.',
       copyB: 'Since then I think about every feature in business terms: what it costs, what it returns, and who maintains it when I’m not around.',
-      principles: ['Understand', 'Choose', 'Build', 'Learn'],
+      principles: ['Understand', 'Choose', 'Build', 'Ship', 'Measure', 'Learn', 'Iterate', 'Listen'],
     },
     process: {
       eyebrow: '03 — How I work',
@@ -146,7 +146,7 @@ const content = {
       titleAccent: ['Fue aprender', 'qué no construir.'],
       copyA: 'Mi primer producto fue una marca de ropa, no una app. Ahí aprendí que el stack importa menos que el problema: si no resolvés algo concreto, el código da igual.',
       copyB: 'Desde entonces pienso cada feature en términos de negocio: qué cuesta, qué devuelve y quién la mantiene cuando yo no estoy.',
-      principles: ['Entender', 'Elegir', 'Construir', 'Aprender'],
+      principles: ['Entender', 'Elegir', 'Construir', 'Lanzar', 'Medir', 'Aprender', 'Iterar', 'Escuchar'],
     },
     process: {
       eyebrow: '03 — Cómo trabajo',
@@ -343,7 +343,7 @@ export default function Page() {
         </div>
       </section>
 
-      <section id="notes" className="section-shell py-28 md:py-44" data-reveal>
+      <section id="notes" className="section-shell pt-28 pb-14 md:pt-44 md:pb-20" data-reveal>
         <p className="eyebrow">{t.notes.eyebrow}</p>
         <div className="mt-16 grid gap-16 md:grid-cols-12">
           <h2 className="manifesto md:col-span-8">{t.notes.titleTop[0]}<br />{t.notes.titleTop[1]}<br /><span>{t.notes.titleAccent[0]}<br />{t.notes.titleAccent[1]}</span></h2>
@@ -352,12 +352,15 @@ export default function Page() {
             <p className="notes-copy">{t.notes.copyB}</p>
           </div>
         </div>
-        <div className="principles">{t.notes.principles.map((principle, index) => (
-          <span key={principle} className="contents"><span>{principle}</span>{index < t.notes.principles.length - 1 && <i>/</i>}</span>
-        ))}</div>
+        <div className="principles-marquee">
+          <div className="principles-track">
+            <div className="principles-group">{t.notes.principles.map(principle => <span key={principle}>{principle}<i>/</i></span>)}</div>
+            <div className="principles-group" aria-hidden>{t.notes.principles.map(principle => <span key={principle}>{principle}<i>/</i></span>)}</div>
+          </div>
+        </div>
       </section>
 
-      <section id="work" className="py-28 md:py-44">
+      <section id="work" className="pt-14 pb-28 md:pt-24 md:pb-44">
         <div className="section-shell" data-reveal>
           <p className="eyebrow">{t.work.eyebrow}</p>
           <div className="mt-10 flex flex-col justify-between gap-8 md:flex-row md:items-end">

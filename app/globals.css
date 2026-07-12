@@ -75,8 +75,13 @@ button { cursor: pointer; }
 .manifesto { font-size: clamp(2.7rem, 6.2vw, 6rem); line-height: .96; letter-spacing: -.05em; font-weight: 520; }
 .manifesto span { color: var(--muted-foreground); }
 .notes-copy { color: var(--muted-foreground); font-size: clamp(1.15rem, 1.8vw, 1.55rem); line-height: 1.5; letter-spacing: -.015em; }
-.principles { margin-top: 7rem; padding-top: 1.5rem; border-top: 1px solid var(--border); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; color: var(--foreground); font-size: clamp(1.3rem, 3vw, 2.8rem); letter-spacing: -.04em; }
-.principles i { color: var(--primary); font-style: normal; }
+.principles-marquee { margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid var(--border); overflow: hidden; -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent); mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent); }
+.principles-track { display: flex; width: max-content; animation: marquee 26s linear infinite; }
+.principles-marquee:hover .principles-track { animation-play-state: paused; }
+.principles-group { display: flex; align-items: center; }
+.principles-group span { display: flex; align-items: center; white-space: nowrap; color: var(--foreground); font-size: clamp(1.3rem, 3vw, 2.6rem); letter-spacing: -.04em; }
+.principles-group i { color: var(--primary); font-style: normal; margin-inline: 2.2rem; }
+@keyframes marquee { to { transform: translateX(-50%); } }
 .process-display { margin-top: 4rem; min-height: 13rem; border-left: 1px solid var(--primary); padding-left: 1.5rem; }
 .process-display > span { font-family: var(--font-geist-mono); color: var(--primary); font-size: .7rem; }
 .process-display h3 { margin-top: 1rem; font-size: clamp(2.4rem, 5vw, 4.8rem); letter-spacing: -.06em; }
