@@ -60,7 +60,7 @@ button { cursor: pointer; }
 .hero-title span { color: var(--primary); }
 .hero-intro { margin-top: 2rem; max-width: 34rem; color: var(--muted-foreground); font-size: clamp(1rem, 1.5vw, 1.25rem); line-height: 1.6; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2rem; }
-.hero-actions a { display: inline-flex; align-items: center; gap: .6rem; padding: .95rem 1.6rem; border-radius: 999px; font-family: var(--font-geist-mono), monospace; font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; transition: background .2s, color .2s, transform .2s; }
+.hero-actions a { display: inline-flex; align-items: center; gap: .6rem; padding: .95rem 1.6rem; font-family: var(--font-geist-mono), monospace; font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; transition: background .2s, color .2s, transform .2s; }
 .hero-actions a:first-child { background: var(--primary); color: var(--primary-foreground); }
 .hero-actions a:first-child:hover { background: color-mix(in srgb, var(--primary) 82%, white); }
 .hero-actions a:last-child { padding-inline: .5rem 0; color: var(--muted-foreground); }

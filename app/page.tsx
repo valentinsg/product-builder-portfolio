@@ -329,7 +329,7 @@ export default function Page() {
 
       <section id="top" className="hero-section">
         <div className="hero-glow" />
-        <div className="relative mx-auto flex min-h-svh max-w-[1440px] flex-col justify-end px-5 pb-12 pt-28 md:px-10 md:pb-16">
+        <div className="relative mx-auto flex min-h-svh max-w-[1440px] flex-col justify-end px-5 pb-16 pt-28 md:px-10 md:pb-28">
           <div className="hero-kicker font-mono text-xs uppercase tracking-[0.24em] text-muted-foreground"><span>{t.hero.role}</span><span>{t.hero.location}</span></div>
           <div className="hero-grid">
             <div className="relative z-10 flex flex-col justify-end">
