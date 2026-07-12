@@ -336,10 +336,10 @@ export default function Page() {
               <h1 className="hero-title text-balance">{t.hero.titleA}<br /><span>{t.hero.titleB}</span></h1>
               <p className="hero-intro">{t.hero.intro}</p>
               <div className="hero-actions"><a href="#work">{t.hero.ctaWork}</a><a href="#notes">{t.hero.ctaThink}</a></div>
+              <p className="hero-bottom">{t.hero.bottom}</p>
             </div>
             <figure className="hero-portrait" aria-label="Portrait of Valentín"><img src={images.portrait} alt="Valentín wearing a dark hoodie" /></figure>
           </div>
-          <p className="hero-bottom">{t.hero.bottom}</p>
         </div>
       </section>
 
