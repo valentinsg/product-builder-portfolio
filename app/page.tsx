@@ -99,12 +99,18 @@ const content = {
     about: {
       eyebrow: '06 — The person behind the products',
       title: ['Building is a big part.', 'Not the only part.'],
-      copy: 'I enjoy training, learning how businesses grow, listening to hip-hop, playing games and designing game mechanics. I get lost in side projects, and most of them eventually teach me something useful.',
+      copy: 'I enjoy training, learning how businesses grow, listening to hip-hop and playing games. I get lost in side projects, and most of them eventually teach me something useful.',
       nowLabel: 'Now building',
-      now: ['MiStock', 'Pelotita', 'Estudio Ve', 'Presidential', 'Cambridge B2'],
+      now: [
+        { label: 'MiStock', href: 'https://mistock.estudiove.com' },
+        { label: 'Pelotita', href: '' },
+        { label: 'Estudio Ve', href: 'https://estudiove.com' },
+        { label: 'Presidential', href: '' },
+        { label: 'Cambridge B2', href: '' },
+      ],
       exploringLabel: 'Currently exploring',
       exploring: ['AI', 'Product strategy', 'Game systems', 'Business'],
-      always: 'Boca Juniors ❤️💙💛',
+      always: 'Boca Juniors fan — no cure for that 💙💛💙',
     },
     footer: {
       eyebrow: '07 — Let’s ship',
@@ -196,12 +202,18 @@ const content = {
     about: {
       eyebrow: '06 — La persona detrás de los productos',
       title: ['Construir es una gran parte.', 'No es la única.'],
-      copy: 'Disfruto entrenar, entender cómo crecen los negocios, escuchar hip-hop, jugar y diseñar mecánicas de juego. Me pierdo en proyectos paralelos y casi todos terminan enseñándome algo útil.',
+      copy: 'Disfruto entrenar, entender cómo crecen los negocios, escuchar hip-hop y jugar. Me pierdo en proyectos paralelos y casi todos terminan enseñándome algo útil.',
       nowLabel: 'Construyendo ahora',
-      now: ['MiStock', 'Pelotita', 'Estudio Ve', 'Presidential', 'Cambridge B2'],
+      now: [
+        { label: 'MiStock', href: 'https://mistock.estudiove.com' },
+        { label: 'Pelotita', href: '' },
+        { label: 'Estudio Ve', href: 'https://estudiove.com' },
+        { label: 'Presidential', href: '' },
+        { label: 'Cambridge B2', href: '' },
+      ],
       exploringLabel: 'Explorando ahora',
       exploring: ['IA', 'Estrategia de producto', 'Sistemas de juego', 'Negocios'],
-      always: 'Boca Juniors ❤️💙💛',
+      always: 'Enfermo por Boca, no tiene cura 💙💛💙',
     },
     footer: {
       eyebrow: '07 — Hagámoslo realidad',
@@ -442,7 +454,9 @@ export default function Page() {
               <img className="about-face" src={images.face} alt="Portrait of Valentín" loading="lazy" />
               <div>
                 <p className="eyebrow">{t.about.nowLabel}</p>
-                <ul className="mt-4">{t.about.now.map(item => <li key={item}>{item}</li>)}</ul>
+                <ul className="mt-4">{t.about.now.map(item => (
+                  <li key={item.label}>{item.href ? <a href={item.href} target="_blank" rel="noreferrer">{item.label}<span aria-hidden>↗</span></a> : item.label}</li>
+                ))}</ul>
               </div>
               <div>
                 <p className="eyebrow">{t.about.exploringLabel}</p>
