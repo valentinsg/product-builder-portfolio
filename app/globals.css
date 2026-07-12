@@ -90,6 +90,8 @@ button { cursor: pointer; }
 .process-row.active .process-arrow { color: var(--primary); transform: rotate(45deg); }
 .process-arrow { transition: transform .25s; }
 
+.work-intro { max-width: 30rem; color: var(--muted-foreground); font-size: clamp(1.15rem, 1.8vw, 1.55rem); line-height: 1.5; letter-spacing: -.015em; }
+
 .project-heading { display: flex; align-items: center; gap: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
 .project-layout { display: grid; gap: 3rem; padding-top: 2rem; }
 .project-copy { display: flex; flex-direction: column; justify-content: center; }

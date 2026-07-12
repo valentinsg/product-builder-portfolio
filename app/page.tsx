@@ -362,7 +362,7 @@ export default function Page() {
           <p className="eyebrow">{t.work.eyebrow}</p>
           <div className="mt-10 flex flex-col justify-between gap-8 md:flex-row md:items-end">
             <h2 className="section-title">{t.work.title[0]}<br />{t.work.title[1]}</h2>
-            <p className="max-w-sm body-copy">{t.work.copy}</p>
+            <p className="work-intro">{t.work.copy}</p>
           </div>
         </div>
         <div className="mt-24 flex flex-col gap-32 md:mt-40 md:gap-52">
