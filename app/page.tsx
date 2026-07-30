@@ -13,7 +13,7 @@ const WhatsAppIcon = () => (
 const EMAIL = 'sanchezguevaravalentin@gmail.com'
 const WHATSAPP = 'https://wa.me/5492236680041'
 const LANG_KEY = 'vsg-lang'
-const SECTION_IDS = ['top', 'work', 'process', 'growth', 'capabilities', 'notes', 'about', 'contact']
+const SECTION_IDS = ['top', 'work', 'craft', 'growth', 'notes', 'about', 'contact']
 
 const images = {
   portrait: '/valentin-portrait.png',
@@ -68,8 +68,8 @@ const projectImages = [
 
 const content = {
   en: {
-    nav: [['Work', '#work'], ['Process', '#process'], ['Notes', '#notes'], ['About', '#about']],
-    minimap: { top: 'Home', notes: 'Notes', work: 'Work', process: 'Process', growth: 'Journey', capabilities: 'Capabilities', about: 'About', contact: 'Contact' } as Record<string, string>,
+    nav: [['Work', '#work'], ['How I work', '#craft'], ['Notes', '#notes'], ['About', '#about']],
+    minimap: { top: 'Home', notes: 'Notes', work: 'Work', craft: 'How I work', growth: 'Journey', about: 'About', contact: 'Contact' } as Record<string, string>,
     available: 'Available for work',
     brand: 'Valentín / Product Builder',
     hero: {
@@ -82,20 +82,21 @@ const content = {
       ctaThink: 'How I work',
     },
     notes: {
-      eyebrow: '05 — How it started',
+      eyebrow: '04 — How it started',
       titleTop: ['First came calculators', 'and very simple websites.'],
       titleAccent: ['Then came', 'projects for other people.'],
-      copyA: 'I started learning with friends, online courses and small experiments: calculators, exercises and a website about Felipe the Pig. I tried to get into Soy Henry, did not make it, and later enrolled at UTN.',
-      copyB: 'University did not quite click for me, so I kept learning while working part-time. I used what little I earned to pay for English lessons and spent every free hour building for people I knew. Bestseller came from that period. In 2023, Smithii finally arrived: my first experience inside a software company.',
+      copyA: 'I started like everyone else: calculators, leetcode and simple websites. I kept learning with friends, online courses and small experiments — including a website about Felipe the Pig. I tried to get into Soy Henry, did not make it, and later enrolled at UTN.',
+      copyB: 'University did not quite click for me, so I kept learning while working part-time. I used what little I earned to pay for English lessons and spent every free hour building for people I knew. Bestseller came from that period. In 2023 Smithii arrived, my first experience inside a tech company.',
       artifactCalculator: 'Calculator with browser prompts — practice, 2021',
       artifactFelipe: 'Felipe the Pig — early experiment, 2021',
       artifactBestseller: 'Bestseller Group — first client project, 2022',
       principles: ['Understand', 'Choose', 'Build', 'Ship', 'Measure', 'Learn', 'Iterate', 'Listen'],
     },
-    process: {
-      eyebrow: '02 — How I work',
-      title: ['From idea', 'to production.'],
-      copy: 'I shaped this process by launching products, making mistakes and learning to keep them running while people were already using them. These six steps guide how I work, with the nuances each project requires.',
+    craft: {
+      eyebrow: '02 — Process & capabilities',
+      title: ['How I work,', 'what I bring.'],
+      processLabel: 'The process',
+      processCopy: 'I shaped this process by launching products, making mistakes and learning to keep them running while people were already using them. These six steps guide how I work, with the nuances each project requires.',
       steps: [
         ['01', 'Listen and understand', 'What problem do we actually want to solve?'],
         ['02', 'Design the experience', 'Make the main path clear before adding more.'],
@@ -103,6 +104,23 @@ const content = {
         ['04', 'Launch early', 'A real product teaches more than a perfect draft.'],
         ['05', 'Learn from users', 'Gather feedback and see where the product helps or gets in the way.'],
         ['06', 'Improve continuously', 'Keep what works. Change what does not.'],
+      ],
+      offerLabel: 'What I bring',
+      groups: [
+        { name: 'Build', offer: 'Engineering, end to end · Frontend & backend · Databases & auth · Integrations & automation' },
+        { name: 'Shape', offer: 'Product thinking · Technical leadership · User flows · System design · Teamwork · Scrum · LLM integrations' },
+        { name: 'Improve', offer: 'Performance · SEO · Analytics · CI/CD · Testing' },
+        { name: 'Explore', offer: 'Web3 products · Real-time systems · Interactive maps · Game development' },
+      ],
+      hubTitle: 'The toolkit, by use case',
+      hub: [
+        { name: 'Build', items: [{ label: 'TypeScript' }, { label: 'React' }, { label: 'Next.js' }, { label: 'Node.js' }, { label: 'Java' }, { label: 'PostgreSQL' }, { label: 'Neon' }, { label: 'Supabase' }, { label: 'WordPress' }, { label: 'Shopify' }, { label: 'REST APIs' }] },
+        { name: 'Product, design & delivery', items: [{ label: 'Notion' }, { label: 'FigJam' }, { label: 'Figma' }, { label: 'Jira' }, { label: 'Scrum' }] },
+        { name: 'AI', items: [{ label: 'ChatGPT' }, { label: 'Claude' }, { label: 'Cursor' }, { label: 'Graphify' }] },
+        { name: 'Ship & measure', items: [{ label: 'Lighthouse' }, { label: 'Google Analytics 4' }, { label: 'Search Console' }, { label: 'GitHub Actions' }, { label: 'Playwright' }] },
+        { name: 'Explore', items: [{ label: 'LLM APIs' }, { label: 'WebSockets' }, { label: 'Realtime databases' }, { label: 'Map APIs' }, { label: 'Game systems' }] },
+        { name: 'Visual references', items: [{ label: 'Mobbin', href: 'https://mobbin.com' }, { label: 'Component Gallery', href: 'https://component.gallery/design-systems/' }, { label: 'Saaspo', href: 'https://saaspo.com' }, { label: 'Landing.love', href: 'https://landing.love' }, { label: 'Craftwork', href: 'https://craftwork.design/curated/websites' }, { label: 'Navbar Gallery', href: 'https://navbar.gallery' }, { label: 'CTA Gallery', href: 'https://cta.gallery' }, { label: 'Rebrand Gallery', href: 'https://rebrand.gallery' }, { label: 'Hugeicons', href: 'https://hugeicons.com' }, { label: 'MeiGen', href: 'https://www.meigen.ai' }] },
+        { name: 'Builder inspiration', items: [{ label: 'Cult UI', href: 'https://www.cult-ui.com/' }, { label: 'design-skills-joaco', href: 'https://design-skills-joaco.vercel.app' }, { label: 'revpdf.com', href: 'https://revpdf.com' }, { label: 'Obscura', href: 'https://github.com/h4ckf0r0day/obscura' }, { label: 'Starlight', href: 'https://starlight.astro.build/es' }] },
       ],
     },
     work: {
@@ -135,30 +153,8 @@ const content = {
         ['2026', 'Building My Own Products', 'Started building my own products through Estudio Ve, focusing on ownership, product thinking and long-term businesses.'],
       ],
     },
-    capabilities: {
-      eyebrow: '04 — Capabilities',
-      title: ['What I bring', 'to a product or team.'],
-      viewOffer: 'Capabilities',
-      viewTools: 'Tools',
-      groups: [
-        { name: 'Build', offer: 'Engineering, end to end · Frontend & backend · Databases & auth · Integrations & automation', tools: 'TypeScript · React · Next.js · Node.js · Java · PostgreSQL · Neon · Supabase · WordPress · Shopify · REST APIs' },
-        { name: 'Shape', offer: 'Product thinking · Technical leadership · User flows · System design · Teamwork · Scrum · LLM integrations', tools: 'Notion · FigJam · Figma · Jira · ChatGPT · Claude · Cursor' },
-        { name: 'Improve', offer: 'Performance · SEO · Analytics · CI/CD · Testing', tools: 'Lighthouse · Google Analytics 4 · Search Console · GitHub Actions · Playwright' },
-        { name: 'Explore', offer: 'Web3 products · Real-time systems · Interactive maps · Game development', tools: 'LLM APIs · WebSockets · Realtime databases · Map APIs · Game systems' },
-      ],
-      hubTitle: 'The toolkit, by use case',
-      hub: [
-        { name: 'Build', items: [{ label: 'TypeScript' }, { label: 'React' }, { label: 'Next.js' }, { label: 'Node.js' }, { label: 'Java' }, { label: 'PostgreSQL' }, { label: 'Neon' }, { label: 'Supabase' }, { label: 'WordPress' }, { label: 'Shopify' }, { label: 'REST APIs' }] },
-        { name: 'Product, design & delivery', items: [{ label: 'Notion' }, { label: 'FigJam' }, { label: 'Figma' }, { label: 'Jira' }, { label: 'Scrum' }] },
-        { name: 'AI', items: [{ label: 'ChatGPT' }, { label: 'Claude' }, { label: 'Cursor' }, { label: 'Graphify' }] },
-        { name: 'Ship & measure', items: [{ label: 'Lighthouse' }, { label: 'Google Analytics 4' }, { label: 'Search Console' }, { label: 'GitHub Actions' }, { label: 'Playwright' }] },
-        { name: 'Explore', items: [{ label: 'LLM APIs' }, { label: 'WebSockets' }, { label: 'Realtime databases' }, { label: 'Map APIs' }, { label: 'Game systems' }] },
-        { name: 'Visual references', items: [{ label: 'Mobbin', href: 'https://mobbin.com' }, { label: 'Component Gallery', href: 'https://component.gallery/design-systems/' }, { label: 'Saaspo', href: 'https://saaspo.com' }, { label: 'Landing.love', href: 'https://landing.love' }, { label: 'Craftwork', href: 'https://craftwork.design/curated/websites' }, { label: 'Navbar Gallery', href: 'https://navbar.gallery' }, { label: 'CTA Gallery', href: 'https://cta.gallery' }, { label: 'Rebrand Gallery', href: 'https://rebrand.gallery' }, { label: 'Hugeicons', href: 'https://hugeicons.com' }, { label: 'MeiGen', href: 'https://www.meigen.ai' }] },
-        { name: 'Builder inspiration', items: [{ label: 'Cult UI', href: 'https://www.cult-ui.com/' }, { label: 'design-skills-joaco', href: 'https://design-skills-joaco.vercel.app' }, { label: 'revpdf.com', href: 'https://revpdf.com' }, { label: 'Obscura', href: 'https://github.com/h4ckf0r0day/obscura' }, { label: 'Starlight', href: 'https://starlight.astro.build/es' }] },
-      ],
-    },
     about: {
-      eyebrow: '06 — Who I really am',
+      eyebrow: '05 — Who I really am',
       title: ['Code, music,', 'training and Boca.'],
       copy: 'I enjoy training, learning how businesses grow and gaming. I’m a bit of a music nerd — hip-hop culture in particular — and there’s always some side project of mine in the works.',
       nowLabel: 'Now building',
@@ -174,7 +170,7 @@ const content = {
       always: 'Boca Juniors fan 💙💛💙',
     },
     footer: {
-      eyebrow: '07 — Let’s ship',
+      eyebrow: '06 — Let’s ship',
       title: ['Let’s build', 'something real.'],
       copy: 'Have an idea you want to bring to life, a product that’s stuck, or a team that needs an extra pair of hands? Write me. I always reply.',
       formCompany: 'Company or name',
@@ -189,8 +185,8 @@ const content = {
     },
   },
   es: {
-    nav: [['Proyectos', '#work'], ['Proceso', '#process'], ['Ideas', '#notes'], ['Sobre mí', '#about']],
-    minimap: { top: 'Inicio', notes: 'Ideas', work: 'Proyectos', process: 'Proceso', growth: 'Recorrido', capabilities: 'Capacidades', about: 'Sobre mí', contact: 'Contacto' } as Record<string, string>,
+    nav: [['Proyectos', '#work'], ['Cómo trabajo', '#craft'], ['Ideas', '#notes'], ['Sobre mí', '#about']],
+    minimap: { top: 'Inicio', notes: 'Ideas', work: 'Proyectos', craft: 'Cómo trabajo', growth: 'Recorrido', about: 'Sobre mí', contact: 'Contacto' } as Record<string, string>,
     available: 'Disponible para proyectos',
     brand: 'Valentín / Product Builder',
     hero: {
@@ -203,20 +199,21 @@ const content = {
       ctaThink: 'Cómo trabajo',
     },
     notes: {
-      eyebrow: '05 — Cómo empecé',
+      eyebrow: '04 — Cómo empecé',
       titleTop: ['Primero fueron calculadoras', 'y webs bastante simples.'],
       titleAccent: ['Después vinieron', 'los proyectos para otros.'],
-      copyA: 'Empecé aprendiendo con amigos, cursos online y proyectos bastante simples: calculadoras, ejercicios y una web sobre el Chanchito Felipe. Intenté entrar a Soy Henry, no quedé, y después me anoté en la UTN.',
-      copyB: 'La facultad no terminó de engancharme, así que seguí aprendiendo mientras trabajaba medio tiempo. Con lo poco que ganaba pagaba inglés y, en cada rato libre, programaba para conocidos. De ahí salió Bestseller. En 2023 por fin llegó Smithii, mi primera experiencia dentro de una empresa de software.',
+      copyA: 'Empecé como todos: calculadoras, leetcode y webs simples. Seguí aprendiendo con amigos, cursos online y experimentos chicos — entre ellos una web sobre el Chanchito Felipe. Intenté entrar a Soy Henry, no quedé, y después me anoté en la UTN.',
+      copyB: 'La facultad no terminó de engancharme, así que seguí aprendiendo mientras trabajaba medio tiempo. Con lo poco que ganaba pagaba inglés y, en cada rato libre, programaba para conocidos. De ahí salió Bestseller. En 2023 llegó Smithii, mi primera experiencia en una empresa tech.',
       artifactCalculator: 'Calculadora por alertas — práctica, 2021',
       artifactFelipe: 'Chanchito Felipe — experimento inicial, 2021',
       artifactBestseller: 'Bestseller Group — primer proyecto para un conocido, 2022',
       principles: ['Entender', 'Elegir', 'Construir', 'Lanzar', 'Medir', 'Aprender', 'Iterar', 'Escuchar'],
     },
-    process: {
-      eyebrow: '02 — Cómo trabajo',
-      title: ['De la idea', 'a producción.'],
-      copy: 'Fui armando este proceso a medida que lanzaba productos, cometía errores y aprendía a sostenerlos con usuarios adentro. Son seis pasos que ordenan mi forma de trabajar, con los matices que pide cada proyecto.',
+    craft: {
+      eyebrow: '02 — Proceso y capacidades',
+      title: ['Cómo trabajo,', 'lo que aporto.'],
+      processLabel: 'El proceso',
+      processCopy: 'Fui armando este proceso a medida que lanzaba productos, cometía errores y aprendía a sostenerlos con usuarios adentro. Son seis pasos que ordenan mi forma de trabajar, con los matices que pide cada proyecto.',
       steps: [
         ['01', 'Escuchar y comprender el problema', '¿Qué problema queremos resolver de verdad?'],
         ['02', 'Diseñar la experiencia', 'Dejar claro el camino principal antes de agregar más.'],
@@ -224,6 +221,23 @@ const content = {
         ['04', 'Lanzar temprano', 'Un producto real enseña más que un borrador perfecto.'],
         ['05', 'Aprender de los usuarios', 'Recibir feedback, ver dónde el producto ayuda y dónde molesta.'],
         ['06', 'Mejorar continuamente', 'Conservar lo que funciona. Cambiar lo que no.'],
+      ],
+      offerLabel: 'Lo que aporto',
+      groups: [
+        { name: 'Construir', offer: 'Ingeniería de punta a punta · Frontend y backend · Bases de datos y auth · Integraciones y automatizaciones' },
+        { name: 'Dar forma', offer: 'Visión de producto · Liderazgo técnico · Flujos de usuario · Diseño de sistemas · Trabajo en equipo · Scrum · Integraciones con LLMs' },
+        { name: 'Mejorar', offer: 'Performance · SEO · Analytics · CI/CD · Testing' },
+        { name: 'Explorar', offer: 'Productos Web3 · Sistemas en tiempo real · Mapas interactivos · Desarrollo de juegos' },
+      ],
+      hubTitle: 'La caja de herramientas, por caso de uso',
+      hub: [
+        { name: 'Construir', items: [{ label: 'TypeScript' }, { label: 'React' }, { label: 'Next.js' }, { label: 'Node.js' }, { label: 'Java' }, { label: 'PostgreSQL' }, { label: 'Neon' }, { label: 'Supabase' }, { label: 'WordPress' }, { label: 'Shopify' }, { label: 'REST APIs' }] },
+        { name: 'Producto, diseño y entregas', items: [{ label: 'Notion' }, { label: 'FigJam' }, { label: 'Figma' }, { label: 'Jira' }, { label: 'Scrum' }] },
+        { name: 'IA', items: [{ label: 'ChatGPT' }, { label: 'Claude' }, { label: 'Cursor' }, { label: 'Graphify' }] },
+        { name: 'Lanzar y medir', items: [{ label: 'Lighthouse' }, { label: 'Google Analytics 4' }, { label: 'Search Console' }, { label: 'GitHub Actions' }, { label: 'Playwright' }] },
+        { name: 'Explorar', items: [{ label: 'APIs de LLMs' }, { label: 'WebSockets' }, { label: 'Bases de datos realtime' }, { label: 'APIs de mapas' }, { label: 'Sistemas de juego' }] },
+        { name: 'Referencias visuales', items: [{ label: 'Mobbin', href: 'https://mobbin.com' }, { label: 'Component Gallery', href: 'https://component.gallery/design-systems/' }, { label: 'Saaspo', href: 'https://saaspo.com' }, { label: 'Landing.love', href: 'https://landing.love' }, { label: 'Craftwork', href: 'https://craftwork.design/curated/websites' }, { label: 'Navbar Gallery', href: 'https://navbar.gallery' }, { label: 'CTA Gallery', href: 'https://cta.gallery' }, { label: 'Rebrand Gallery', href: 'https://rebrand.gallery' }, { label: 'Hugeicons', href: 'https://hugeicons.com' }, { label: 'MeiGen', href: 'https://www.meigen.ai' }] },
+        { name: 'Inspiración de builders', items: [{ label: 'Cult UI', href: 'https://www.cult-ui.com/' }, { label: 'design-skills-joaco', href: 'https://design-skills-joaco.vercel.app' }, { label: 'revpdf.com', href: 'https://revpdf.com' }, { label: 'Obscura', href: 'https://github.com/h4ckf0r0day/obscura' }, { label: 'Starlight', href: 'https://starlight.astro.build/es' }] },
       ],
     },
     work: {
@@ -256,30 +270,8 @@ const content = {
         ['2026', 'Mis propios productos', 'Empecé a construir mis propios productos desde Estudio Ve, con foco en ownership, producto y negocios a largo plazo.'],
       ],
     },
-    capabilities: {
-      eyebrow: '04 — Capacidades',
-      title: ['Lo que aporto', 'a un producto o equipo.'],
-      viewOffer: 'Capacidades',
-      viewTools: 'Herramientas',
-      groups: [
-        { name: 'Construir', offer: 'Ingeniería de punta a punta · Frontend y backend · Bases de datos y auth · Integraciones y automatizaciones', tools: 'TypeScript · React · Next.js · Node.js · Java · PostgreSQL · Neon · Supabase · WordPress · Shopify · REST APIs' },
-        { name: 'Dar forma', offer: 'Visión de producto · Liderazgo técnico · Flujos de usuario · Diseño de sistemas · Trabajo en equipo · Scrum · Integraciones con LLMs', tools: 'Notion · FigJam · Figma · Jira · ChatGPT · Claude · Cursor' },
-        { name: 'Mejorar', offer: 'Performance · SEO · Analytics · CI/CD · Testing', tools: 'Lighthouse · Google Analytics 4 · Search Console · GitHub Actions · Playwright' },
-        { name: 'Explorar', offer: 'Productos Web3 · Sistemas en tiempo real · Mapas interactivos · Desarrollo de juegos', tools: 'APIs de LLMs · WebSockets · Bases de datos realtime · APIs de mapas · Sistemas de juego' },
-      ],
-      hubTitle: 'La caja de herramientas, por caso de uso',
-      hub: [
-        { name: 'Construir', items: [{ label: 'TypeScript' }, { label: 'React' }, { label: 'Next.js' }, { label: 'Node.js' }, { label: 'Java' }, { label: 'PostgreSQL' }, { label: 'Neon' }, { label: 'Supabase' }, { label: 'WordPress' }, { label: 'Shopify' }, { label: 'REST APIs' }] },
-        { name: 'Producto, diseño y entregas', items: [{ label: 'Notion' }, { label: 'FigJam' }, { label: 'Figma' }, { label: 'Jira' }, { label: 'Scrum' }] },
-        { name: 'IA', items: [{ label: 'ChatGPT' }, { label: 'Claude' }, { label: 'Cursor' }, { label: 'Graphify' }] },
-        { name: 'Lanzar y medir', items: [{ label: 'Lighthouse' }, { label: 'Google Analytics 4' }, { label: 'Search Console' }, { label: 'GitHub Actions' }, { label: 'Playwright' }] },
-        { name: 'Explorar', items: [{ label: 'APIs de LLMs' }, { label: 'WebSockets' }, { label: 'Bases de datos realtime' }, { label: 'APIs de mapas' }, { label: 'Sistemas de juego' }] },
-        { name: 'Referencias visuales', items: [{ label: 'Mobbin', href: 'https://mobbin.com' }, { label: 'Component Gallery', href: 'https://component.gallery/design-systems/' }, { label: 'Saaspo', href: 'https://saaspo.com' }, { label: 'Landing.love', href: 'https://landing.love' }, { label: 'Craftwork', href: 'https://craftwork.design/curated/websites' }, { label: 'Navbar Gallery', href: 'https://navbar.gallery' }, { label: 'CTA Gallery', href: 'https://cta.gallery' }, { label: 'Rebrand Gallery', href: 'https://rebrand.gallery' }, { label: 'Hugeicons', href: 'https://hugeicons.com' }, { label: 'MeiGen', href: 'https://www.meigen.ai' }] },
-        { name: 'Inspiración de builders', items: [{ label: 'Cult UI', href: 'https://www.cult-ui.com/' }, { label: 'design-skills-joaco', href: 'https://design-skills-joaco.vercel.app' }, { label: 'revpdf.com', href: 'https://revpdf.com' }, { label: 'Obscura', href: 'https://github.com/h4ckf0r0day/obscura' }, { label: 'Starlight', href: 'https://starlight.astro.build/es' }] },
-      ],
-    },
     about: {
-      eyebrow: '06 — Quién soy realmente',
+      eyebrow: '05 — Quién soy realmente',
       title: ['Código, música,', 'entrenamiento y Boca.'],
       copy: 'Disfruto entrenar, entender cómo crecen los negocios y jugar. Soy bastante melómano —la cultura del hip-hop en particular— y siempre tengo algún proyecto paralelo dando vueltas.',
       nowLabel: 'Construyendo ahora',
@@ -295,7 +287,7 @@ const content = {
       always: 'Enfermo por Boca 💙💛💙',
     },
     footer: {
-      eyebrow: '07 — Hagámoslo realidad',
+      eyebrow: '06 — Hagámoslo realidad',
       title: ['Construyamos', 'algo real.'],
       copy: '¿Tenés una idea dando vueltas, un producto trabado o un equipo que necesita manos? Escribime. Respondo siempre.',
       formCompany: 'Empresa o nombre',
@@ -317,7 +309,6 @@ export default function Page() {
   const [showLangModal, setShowLangModal] = useState(false)
   const [activeStep, setActiveStep] = useState(0)
   const [copied, setCopied] = useState(false)
-  const [capabilityView, setCapabilityView] = useState<'offer' | 'tools'>('offer')
   const [activeSection, setActiveSection] = useState('top')
   const lenisRef = useRef<Lenis | null>(null)
 
@@ -496,7 +487,7 @@ export default function Page() {
             <div className="relative z-10 flex flex-col justify-center pb-2 md:pb-10">
               <h1 className="hero-title text-balance">{t.hero.titleA}<br /><span>{t.hero.titleB}</span></h1>
               <p className="hero-intro">{t.hero.intro}</p>
-              <div className="hero-actions"><a href="#work">{t.hero.ctaWork}</a><a href="#process">{t.hero.ctaThink}</a></div>
+              <div className="hero-actions"><a href="#work">{t.hero.ctaWork}</a><a href="#craft">{t.hero.ctaThink}</a></div>
             </div>
             <figure className="hero-portrait" aria-label="Portrait of Valentín"><img src={images.portrait} alt="Valentín wearing a dark hoodie" /></figure>
           </div>
@@ -536,26 +527,57 @@ export default function Page() {
         </div>
       </section>
 
-      <section id="process" className="border-y border-border bg-card">
+      <section id="craft" className="border-y border-border bg-card">
         <div className="section-shell py-28 md:py-40" data-reveal>
-          <p className="eyebrow">{t.process.eyebrow}</p>
-          <div className="mt-16 grid gap-16 lg:grid-cols-12 lg:gap-20">
-            <div className="flex flex-col justify-between lg:col-span-5">
-              <div>
-                <h2 className="section-title process-title">{t.process.title[0]}<br />{t.process.title[1]}</h2>
-                <p className="mt-8 max-w-md body-copy process-copy">{t.process.copy}</p>
+          <p className="eyebrow">{t.craft.eyebrow}</p>
+          <h2 className="mt-12 section-title craft-title">{t.craft.title[0]}<br />{t.craft.title[1]}</h2>
+
+          <div className="craft-part">
+            <p className="eyebrow">{t.craft.processLabel}</p>
+            <div className="mt-10 grid gap-16 lg:grid-cols-12 lg:gap-20">
+              <div className="flex flex-col justify-between lg:col-span-5">
+                <p className="max-w-md body-copy process-copy">{t.craft.processCopy}</p>
+                <div className="process-display"><span>{t.craft.steps[activeStep][0]}</span><h3>{t.craft.steps[activeStep][1]}</h3><p>{t.craft.steps[activeStep][2]}</p></div>
               </div>
-              <div className="process-display"><span>{t.process.steps[activeStep][0]}</span><h3>{t.process.steps[activeStep][1]}</h3><p>{t.process.steps[activeStep][2]}</p></div>
+              <ol className="process-list lg:col-span-7">
+                {t.craft.steps.map((step, index) => (
+                  <li key={step[0]}>
+                    <button className={`process-row ${activeStep === index ? 'active' : ''}`} onMouseEnter={() => setActiveStep(index)} onFocus={() => setActiveStep(index)} onClick={() => setActiveStep(index)}>
+                      <span>{step[0]}</span><strong>{step[1]}</strong><span className="process-arrow">+</span>
+                    </button>
+                  </li>
+                ))}
+              </ol>
             </div>
-            <ol className="process-list lg:col-span-7">
-              {t.process.steps.map((step, index) => (
-                <li key={step[0]}>
-                  <button className={`process-row ${activeStep === index ? 'active' : ''}`} onMouseEnter={() => setActiveStep(index)} onFocus={() => setActiveStep(index)} onClick={() => setActiveStep(index)}>
-                    <span>{step[0]}</span><strong>{step[1]}</strong><span className="process-arrow">+</span>
-                  </button>
-                </li>
+          </div>
+
+          <div className="craft-part">
+            <p className="eyebrow">{t.craft.offerLabel}</p>
+            <div className="capabilities craft-capabilities">
+              {t.craft.groups.map((group, index) => (
+                <div className="capability-row" key={group.name}><span>0{index + 1}</span><h3>{group.name}</h3><p>{group.offer}</p></div>
               ))}
-            </ol>
+            </div>
+          </div>
+
+          <div className="hub-grid">
+            <p className="eyebrow">{t.craft.hubTitle}</p>
+            <div className="hub-categories">
+              {t.craft.hub.map(category => (
+                <div className="hub-category" key={category.name}>
+                  <h4>{category.name}</h4>
+                  <div className="hub-tags">
+                    {category.items.map(item =>
+                      'href' in item && item.href ? (
+                        <a key={item.label} href={item.href} target="_blank" rel="noreferrer" className="tag hub-tag-link">{item.label}</a>
+                      ) : (
+                        <span key={item.label} className="tag">{item.label}</span>
+                      ),
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -582,45 +604,6 @@ export default function Page() {
             </div>
           </div>
         </div>
-      </section>
-
-      <section id="capabilities" className="section-shell py-28 md:py-44" data-reveal>
-        <div className="capabilities-header">
-          <div>
-            <p className="eyebrow">{t.capabilities.eyebrow}</p>
-            <h2 className="mt-12 section-title">{t.capabilities.title[0]}<br />{t.capabilities.title[1]}</h2>
-          </div>
-          <div className="capability-toggle" aria-label="Capability view">
-            <button className={capabilityView === 'offer' ? 'active' : ''} onClick={() => setCapabilityView('offer')}>{t.capabilities.viewOffer}</button>
-            <button className={capabilityView === 'tools' ? 'active' : ''} onClick={() => setCapabilityView('tools')}>{t.capabilities.viewTools}</button>
-          </div>
-        </div>
-        <div className="capabilities">
-          {t.capabilities.groups.map((group, index) => (
-            <div className="capability-row" key={group.name}><span>0{index + 1}</span><h3>{group.name}</h3><p>{group[capabilityView]}</p></div>
-          ))}
-        </div>
-        {capabilityView === 'tools' && (
-          <div className="hub-grid">
-            <p className="eyebrow">{t.capabilities.hubTitle}</p>
-            <div className="hub-categories">
-              {t.capabilities.hub.map(category => (
-                <div className="hub-category" key={category.name}>
-                  <h4>{category.name}</h4>
-                  <div className="hub-tags">
-                    {category.items.map(item =>
-                      'href' in item && item.href ? (
-                        <a key={item.label} href={item.href} target="_blank" rel="noreferrer" className="tag hub-tag-link">{item.label}</a>
-                      ) : (
-                        <span key={item.label} className="tag">{item.label}</span>
-                      ),
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
       </section>
 
       <section id="notes" className="section-shell pt-28 pb-14 md:pt-44 md:pb-20" data-reveal>
