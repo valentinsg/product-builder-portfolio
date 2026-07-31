@@ -9,7 +9,7 @@ const geistMono = Geist_Mono({ subsets: ['latin'], variable: '--font-geist-mono'
 export const metadata: Metadata = {
   metadataBase: new URL('https://valentinsg-portoflio.vercel.app'),
   alternates: { canonical: '/' },
-  title: 'Valentín Sánchez Guevara — Product Builder & Full-Stack Engineer',
+    title: 'Valentín Sánchez Guevara — Product Builder & Full-Stack Developer',
   description:
     'Full-stack engineer and product builder from Mar del Plata, Argentina. I design, build and ship digital products end to end with React, Next.js, TypeScript, Node.js and Java — from the first idea to software running in production.',
   keywords: [
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   authors: [{ name: 'Valentín Sánchez Guevara' }],
   creator: 'Valentín Sánchez Guevara',
   openGraph: {
-    title: 'Valentín Sánchez Guevara — Product Builder & Full-Stack Engineer',
+  title: 'Valentín Sánchez Guevara — Product Builder & Full-Stack Developer',
     description:
       'I build digital products that people enjoy using — from the first rough idea to software running in production.',
     type: 'website',
@@ -51,7 +51,7 @@ const personSchema = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Valentín Sánchez Guevara',
-  jobTitle: 'Full-Stack Engineer & Product Builder',
+  jobTitle: 'Product Builder & Full-Stack Developer',
   url: 'https://valentinsg-portoflio.vercel.app',
   email: 'mailto:sanchezguevaravalentin@gmail.com',
   address: { '@type': 'PostalAddress', addressLocality: 'Mar del Plata', addressCountry: 'AR' },

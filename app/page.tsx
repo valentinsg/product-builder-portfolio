@@ -1,14 +1,63 @@
 'use client'
 
-import { FormEvent, useEffect, useRef, useState } from 'react'
+import { type ReactNode, FormEvent, useEffect, useRef, useState } from 'react'
 import { Check, Copy, Menu, X } from 'lucide-react'
 import Lenis from 'lenis'
+import { motion, useReducedMotion } from 'framer-motion'
 
 const WhatsAppIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden focusable="false">
     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.297-.497.1-.198.05-.371-.025-.52-.074-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
   </svg>
 )
+
+const REVEAL_EASE: [number, number, number, number] = [0.2, 0.7, 0.2, 1]
+const REVEAL_VIEWPORT = { once: true, margin: '0px 0px -10% 0px' }
+
+function Reveal({ as = 'div', id, children, className, delay = 0, y = 24 }: { as?: 'div' | 'section'; id?: string; children: ReactNode; className?: string; delay?: number; y?: number }) {
+  const reduce = useReducedMotion()
+  const Comp = as === 'section' ? motion.section : motion.div
+  return (
+    <Comp
+      id={id}
+      className={className}
+      data-rv
+      initial={reduce ? false : { opacity: 0, y }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={REVEAL_VIEWPORT}
+      transition={{ duration: 0.6, delay, ease: REVEAL_EASE }}
+    >
+      {children}
+    </Comp>
+  )
+}
+
+const STAGGER_PARENT = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } },
+}
+
+const STAGGER_CHILD = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: REVEAL_EASE } },
+}
+
+function Stagger({ as = 'div', children, className }: { as?: 'div' | 'ol'; children: ReactNode; className?: string }) {
+  const reduce = useReducedMotion()
+  const Comp = as === 'ol' ? motion.ol : motion.div
+  return (
+    <Comp
+      className={className}
+      data-rv
+      variants={STAGGER_PARENT}
+      initial={reduce ? false : 'hidden'}
+      whileInView="show"
+      viewport={REVEAL_VIEWPORT}
+    >
+      {children}
+    </Comp>
+  )
+}
 
 const EMAIL = 'sanchezguevaravalentin@gmail.com'
 const WHATSAPP = 'https://wa.me/5492236680041'
@@ -75,8 +124,8 @@ const content = {
     available: 'Available for work',
     brand: 'Valentín / Product Builder',
     hero: {
-      role: 'Full-Stack Engineer · Product Builder',
-      location: 'Mar del Plata — Argentina',
+      role: 'Product Builder · Full-Stack Developer',
+      location: 'Mar del Plata, Argentina',
       titleA: 'I build',
       titleB: 'products.',
       intro: 'I like having ideas and turning them into products, systems or businesses. I am always learning something new, improving, or looking for ways as a developer to optimize what I build so it can grow without breaking.',
@@ -100,12 +149,12 @@ const content = {
       processLabel: 'The process',
       processCopy: 'I shaped this process by launching products, making mistakes and learning to keep them running while people were already using them. These six steps guide how I work, with the nuances each project requires.',
       steps: [
-        ['01', 'Listen and understand', 'What problem do we actually want to solve?'],
+        ['01', 'Understand the problem', 'What problem do we actually want to solve?'],
         ['02', 'Design the experience', 'Make the main path clear before adding more.'],
-        ['03', 'Build the system', 'Choose the right tools and connect the pieces.'],
-        ['04', 'Launch early', 'A real product teaches more than a perfect draft.'],
-        ['05', 'Learn from users', 'Gather feedback and see where the product helps or gets in the way.'],
-        ['06', 'Improve continuously', 'Keep what works. Change what does not.'],
+        ['03', 'Infrastructure focus', 'Choose the right tools and connect the pieces.'],
+        ['04', 'Put it in production', 'A real product teaches more than a perfect draft.'],
+        ['05', 'Validate with users', 'Know how to receive feedback — see where the product helps and where it gets in the way.'],
+        ['06', 'Keep improving', 'Keep what works. Change what does not.'],
       ],
       offerLabel: 'What I bring',
       groups: [
@@ -195,8 +244,8 @@ const content = {
     available: 'Disponible para proyectos',
     brand: 'Valentín / Product Builder',
     hero: {
-      role: 'Ingeniero Full-Stack · Product Builder',
-      location: 'Mar del Plata — Argentina',
+      role: 'Product Builder · Desarrollador Full-Stack',
+      location: 'Mar del Plata, Argentina',
       titleA: 'Construyo',
       titleB: 'productos.',
       intro: 'Me gusta tener ideas y convertirlas en productos, sistemas o negocios. Siempre estoy aprendiendo algo nuevo, mejorando o buscando como desarrollador optimizar lo que construyo para poder crecerlo sin romperse.',
@@ -220,12 +269,12 @@ const content = {
       processLabel: 'El proceso',
       processCopy: 'Fui armando este proceso a medida que lanzaba productos, cometía errores y aprendía a sostenerlos con usuarios adentro. Son seis pasos que ordenan mi forma de trabajar, con los matices que pide cada proyecto.',
       steps: [
-        ['01', 'Escuchar y comprender el problema', '¿Qué problema queremos resolver de verdad?'],
+        ['01', 'Entender el problema', '¿Qué problema queremos resolver de verdad?'],
         ['02', 'Diseñar la experiencia', 'Dejar claro el camino principal antes de agregar más.'],
-        ['03', 'Construir el sistema', 'Elegir las herramientas correctas y conectar las piezas.'],
-        ['04', 'Lanzar temprano', 'Un producto real enseña más que un borrador perfecto.'],
-        ['05', 'Aprender de los usuarios', 'Recibir feedback, ver dónde el producto ayuda y dónde molesta.'],
-        ['06', 'Mejorar continuamente', 'Conservar lo que funciona. Cambiar lo que no.'],
+        ['03', 'Enfoque en infraestructura', 'Elegir las herramientas correctas y conectar las piezas.'],
+        ['04', 'Ponerlo en producción', 'Un producto real enseña más que un borrador perfecto.'],
+        ['05', 'Validar con usuarios', 'Saber recibir feedback, ver dónde el producto aporta y dónde molesta.'],
+        ['06', 'Seguir mejorando', 'Conservar lo que funciona. Cambiar lo que no.'],
       ],
       offerLabel: 'Lo que aporto',
       groups: [
@@ -318,6 +367,7 @@ export default function Page() {
   const [activeStep, setActiveStep] = useState(0)
   const [copied, setCopied] = useState(false)
   const [activeSection, setActiveSection] = useState('top')
+  const reduceMotion = useReducedMotion()
   const lenisRef = useRef<Lenis | null>(null)
 
   const t = content[language]
@@ -340,35 +390,6 @@ export default function Page() {
   useEffect(() => {
     document.documentElement.lang = language
   }, [language])
-
-  useEffect(() => {
-    const nodes = document.querySelectorAll<HTMLElement>('[data-reveal]')
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting || entry.boundingClientRect.top < window.innerHeight) {
-          entry.target.classList.add('is-visible')
-          observer.unobserve(entry.target)
-        }
-      })
-    }, { threshold: 0.04, rootMargin: '0px 0px 12% 0px' })
-    const revealPassedNodes = () => nodes.forEach(node => {
-      if (node.getBoundingClientRect().top < window.innerHeight * 1.12) {
-        node.classList.add('is-visible')
-        observer.unobserve(node)
-      }
-    })
-    nodes.forEach(node => observer.observe(node))
-    revealPassedNodes()
-    const restoreTimer = window.setTimeout(revealPassedNodes, 600)
-    window.addEventListener('scroll', revealPassedNodes, { passive: true })
-    window.addEventListener('load', revealPassedNodes)
-    return () => {
-      observer.disconnect()
-      window.clearTimeout(restoreTimer)
-      window.removeEventListener('scroll', revealPassedNodes)
-      window.removeEventListener('load', revealPassedNodes)
-    }
-  }, [])
 
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
@@ -490,12 +511,13 @@ export default function Page() {
       <section id="top" className="hero-section">
         <div className="hero-glow" />
         <div className="relative mx-auto flex min-h-svh max-w-[1440px] flex-col justify-end px-5 pb-16 pt-26 md:px-10 md:pb-28">
-          <div className="hero-kicker font-mono text-xs uppercase tracking-[0.24em] text-muted-foreground"><span>{t.hero.role}</span><span>{t.hero.location}</span></div>
+          <div className="hero-kicker font-mono text-xs uppercase tracking-[0.24em] text-muted-foreground"><span>{t.hero.role}</span></div>
           <div className="hero-grid">
             <div className="relative z-10 flex flex-col justify-center pb-2 md:pb-10">
               <h1 className="hero-title text-balance">{t.hero.titleA}<br /><span>{t.hero.titleB}</span></h1>
               <p className="hero-intro">{t.hero.intro}</p>
               <div className="hero-actions"><a href="#work">{t.hero.ctaWork}</a><a href="#craft">{t.hero.ctaThink}</a></div>
+              <p className="hero-location">{t.hero.location}</p>
             </div>
             <figure className="hero-portrait" aria-label="Portrait of Valentín"><img src={images.portrait} alt="Valentín wearing a dark hoodie" /></figure>
           </div>
@@ -503,16 +525,24 @@ export default function Page() {
       </section>
 
       <section id="work" className="pt-14 pb-28 md:pt-24 md:pb-44">
-        <div className="section-shell" data-reveal>
+        <Reveal className="section-shell">
           <p className="eyebrow">{t.work.eyebrow}</p>
           <div className="mt-10 flex flex-col justify-between gap-8 md:flex-row md:items-end">
             <h2 className="section-title">{t.work.title[0]}<br />{t.work.title[1]}</h2>
             <p className="work-intro">{t.work.copy}</p>
           </div>
-        </div>
+        </Reveal>
         <div className="mt-24 flex flex-col gap-32 md:mt-40 md:gap-52">
           {t.work.projects.map((project, index) => (
-            <article key={project.title} className="project section-shell">
+            <motion.article
+              key={project.title}
+              className="project section-shell"
+              data-rv
+              initial={reduceMotion ? false : { opacity: 0, y: 32 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '0px 0px -12% 0px' }}
+              transition={{ duration: 0.7, ease: REVEAL_EASE }}
+            >
               <div className="project-heading"><span className="font-mono text-xs text-primary">{String(index + 1).padStart(2, '0')}</span><p className="eyebrow">{project.type}</p></div>
               <div className={`project-layout ${index % 2 ? 'project-reverse' : ''}`}>
                 <div className="project-copy">
@@ -535,13 +565,13 @@ export default function Page() {
                   <figcaption>{String(index + 1).padStart(2, '0')} / {String(t.work.projects.length).padStart(2, '0')}</figcaption>
                 </figure>
               </div>
-            </article>
+            </motion.article>
           ))}
         </div>
       </section>
 
       <section id="craft" className="border-y border-border bg-card">
-        <div className="section-shell py-28 md:py-40" data-reveal>
+        <Reveal className="section-shell py-28 md:py-40">
           <p className="eyebrow">{t.craft.eyebrow}</p>
           <h2 className="mt-12 section-title craft-title">{t.craft.title[0]}<br />{t.craft.title[1]}</h2>
 
@@ -552,25 +582,25 @@ export default function Page() {
                 <p className="max-w-md body-copy process-copy">{t.craft.processCopy}</p>
                 <div className="process-display"><span>{t.craft.steps[activeStep][0]}</span><h3>{t.craft.steps[activeStep][1]}</h3><p>{t.craft.steps[activeStep][2]}</p></div>
               </div>
-              <ol className="process-list lg:col-span-7">
+              <Stagger as="ol" className="process-list lg:col-span-7">
                 {t.craft.steps.map((step, index) => (
-                  <li key={step[0]}>
+                  <motion.li key={step[0]} data-rv variants={STAGGER_CHILD}>
                     <button className={`process-row ${activeStep === index ? 'active' : ''}`} onMouseEnter={() => setActiveStep(index)} onFocus={() => setActiveStep(index)} onClick={() => setActiveStep(index)}>
                       <span>{step[0]}</span><strong>{step[1]}</strong><span className="process-arrow">+</span>
                     </button>
-                  </li>
+                  </motion.li>
                 ))}
-              </ol>
+              </Stagger>
             </div>
           </div>
 
           <div className="craft-part">
             <p className="eyebrow">{t.craft.offerLabel}</p>
-            <div className="craft-offer">
+            <Stagger className="craft-offer">
               {t.craft.groups.map(group => (
-                <p className="craft-offer-line" key={group.name}><strong>{group.name}</strong><span>{group.offer}</span></p>
+                <motion.p className="craft-offer-line" key={group.name} data-rv variants={STAGGER_CHILD}><strong>{group.name}</strong><span>{group.offer}</span></motion.p>
               ))}
-            </div>
+            </Stagger>
           </div>
 
           <div className="hub-grid">
@@ -592,34 +622,34 @@ export default function Page() {
               ))}
             </div>
           </div>
-        </div>
+        </Reveal>
       </section>
 
       <section id="growth" className="impact-section">
-        <div className="section-shell py-28 md:py-40" data-reveal>
+        <Reveal className="section-shell py-28 md:py-40">
           <p className="eyebrow">{t.growth.eyebrow}</p>
           <div className="mt-16 grid gap-16 lg:grid-cols-2">
             <div className="flex flex-col justify-center gap-12">
               <h2 className="section-title">{t.growth.title[0]}<br /><span>{t.growth.title[1]}</span></h2>
               <div>
                 <p className="body-copy max-w-md">{t.growth.copy}</p>
-                <div className="growth-stats">
+                <Stagger className="growth-stats">
                   {t.growth.stats.map(stat => (
-                    <div key={stat[1]}><strong>{stat[0]}</strong><span>{stat[1]}</span></div>
+                    <motion.div key={stat[1]} data-rv variants={STAGGER_CHILD}><strong>{stat[0]}</strong><span>{stat[1]}</span></motion.div>
                   ))}
-                </div>
+                </Stagger>
               </div>
             </div>
-            <div>
+            <Stagger>
               {t.growth.timeline.map(item => (
-                <div className="timeline-row" key={item[0]}><span>{item[0]}</span><div><h3>{item[1]}</h3><p>{item[2]}</p></div></div>
+                <motion.div className="timeline-row" key={item[0]} data-rv variants={STAGGER_CHILD}><span>{item[0]}</span><div><h3>{item[1]}</h3><p>{item[2]}</p></div></motion.div>
               ))}
-            </div>
+            </Stagger>
           </div>
-        </div>
+        </Reveal>
       </section>
 
-      <section id="notes" className="section-shell pt-28 pb-14 md:pt-44 md:pb-20" data-reveal>
+      <Reveal as="section" id="notes" className="section-shell pt-28 pb-14 md:pt-44 md:pb-20">
         <p className="eyebrow">{t.notes.eyebrow}</p>
         <div className="mt-16 grid gap-16 md:grid-cols-12">
           <h2 className="manifesto md:col-span-8">{t.notes.title[0]}<br /><span>{t.notes.title[1]}</span></h2>
@@ -665,11 +695,11 @@ alert("¿Qué operación deseas realizar?");`}</code></pre>
             <div className="principles-group" aria-hidden>{t.notes.principles.map(principle => <span key={principle}>{principle}<i>/</i></span>)}</div>
           </div>
         </div>
-      </section>
+      </Reveal>
 
       <section id="about" className="about-section">
         <div className="section-shell py-28 md:py-40">
-          <div className="grid gap-16 lg:grid-cols-12" data-reveal>
+          <Reveal className="grid gap-16 lg:grid-cols-12">
             <div className="lg:col-span-5">
               <p className="eyebrow">{t.about.eyebrow}</p>
               <h2 className="mt-10 section-title">{t.about.title[0]}<br />{t.about.title[1]}</h2>
@@ -689,13 +719,13 @@ alert("¿Qué operación deseas realizar?");`}</code></pre>
                 <ul className="mt-4">{t.about.exploring.map(item => <li key={item}>{item}</li>)}</ul>
               </div>
             </div>
-          </div>
-          <div className="boca-line-wrap" data-reveal><p className="boca-line">{t.about.always}</p></div>
+          </Reveal>
+          <Reveal className="boca-line-wrap"><p className="boca-line">{t.about.always}</p></Reveal>
         </div>
       </section>
 
       <footer id="contact" className="footer">
-        <div className="section-shell py-24 md:py-36" data-reveal>
+        <Reveal className="section-shell py-24 md:py-36">
           <p className="eyebrow">{t.footer.eyebrow}</p>
           <h2 className="footer-title">{t.footer.title[0]}<br /><span>{t.footer.title[1]}</span></h2>
           <div className="contact-layout">
@@ -718,7 +748,7 @@ alert("¿Qué operación deseas realizar?");`}</code></pre>
             </form>
           </div>
           <div className="mt-24 flex justify-between font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground"><span>© 2026 Valentín Sánchez Guevara</span><a href="#top">{t.footer.backToTop}</a></div>
-        </div>
+        </Reveal>
       </footer>
     </main>
   )
