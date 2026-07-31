@@ -155,16 +155,16 @@ button { cursor: pointer; }
 .timeline-row h3 { font-size: 1.35rem; letter-spacing: -.03em; }
 .timeline-row p { margin-top: .35rem; color: var(--muted-foreground); line-height: 1.5; }
 .hub-grid { margin-top: 5rem; padding-top: 3rem; border-top: 1px solid var(--border); }
-.hub-categories { margin-top: 2rem; display: grid; gap: 2.5rem; grid-template-columns: 1fr; }
+.hub-categories { margin-top: 4.5rem; display: grid; gap: 3.5rem; grid-template-columns: 1fr; }
 .hub-category h4 { font-size: 1rem; letter-spacing: -.01em; color: var(--foreground); }
-.hub-tags { margin-top: 1rem; display: flex; flex-wrap: wrap; gap: .5rem; }
+.hub-tags { margin-top: 1.2rem; display: flex; flex-wrap: wrap; gap: .6rem; }
 .hub-tag-link { transition: color .2s, border-color .2s; }
 .hub-tag-link:hover { color: var(--primary); border-color: var(--primary); }
 
 /* Merged process + capabilities section */
 .craft-title { font-size: clamp(2.8rem, 6vw, 6rem); }
-.craft-part { margin-top: 6rem; padding-top: 3rem; border-top: 1px solid var(--border); }
-.craft-offer { margin-top: 2.5rem; max-width: 62rem; display: flex; flex-direction: column; gap: 1rem; }
+.craft-part { margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+.craft-offer { margin-top: 2.5rem; max-width: 62rem; display: flex; flex-direction: column; gap: 1.75rem; }
 .craft-offer-line { color: var(--muted-foreground); font-size: 1rem; line-height: 1.65; }
 .craft-offer-line strong { margin-right: .55rem; color: var(--foreground); font-weight: 550; letter-spacing: -.01em; }
 
@@ -269,7 +269,7 @@ html.lenis { scroll-behavior: auto; }
   .project-layout.project-reverse { grid-template-columns: minmax(0, 1.18fr) minmax(0, .82fr); }
   .project-reverse .project-copy { order: 2; }
   .project-reverse .project-media { order: 1; }
-  .hub-categories { grid-template-columns: repeat(3, 1fr); }
+  .hub-categories { grid-template-columns: repeat(2, 1fr); gap: 4rem 5rem; }
   .moodboard-grid { grid-template-columns: repeat(3, 1fr); }
   .contact-layout { grid-template-columns: minmax(0, .9fr) minmax(360px, 1.1fr); }
 }
