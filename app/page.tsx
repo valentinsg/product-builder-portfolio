@@ -158,8 +158,8 @@ const content = {
     },
     about: {
       eyebrow: '05 — Who I really am',
-      title: ['Code, music,', 'training and Boca.'],
-      copy: 'I enjoy training, learning how businesses grow and gaming. I’m a bit of a music nerd — hip-hop culture in particular — and there’s always some side project of mine in the works.',
+      title: ['Programming, sports,', 'music and Boca.'],
+      copy: 'I enjoy training as much as understanding how a business grows, and I’m more into video games than movies. I consider myself a music nerd in good measure — and a hip-hop culture fanatic. There’s always a side project in the works (builder before anything) and I love going to the stadium with my friends.',
       nowLabel: 'Now building',
       now: [
         { label: 'Stockeo', href: 'https://mistock.estudiove.com' },
@@ -174,7 +174,7 @@ const content = {
     },
     footer: {
       eyebrow: '06 — Let’s ship',
-      title: ['Let’s build', 'something real.'],
+      title: ['Let’s build', 'together.'],
       copy: 'Have an idea you want to bring to life, a product that’s stuck, or a team that needs an extra pair of hands? Write me. I always reply.',
       formCompany: 'Company or name',
       formCompanyPlaceholder: 'Who are you?',
@@ -185,6 +185,9 @@ const content = {
       wsp: 'Chat on WhatsApp',
       backToTop: 'Back to top',
       subject: 'Portfolio note from',
+      mailCta: 'Say hello 👋',
+      mailSubject: 'Hello Valentín 👋',
+      mailBody: 'Hello Valentín,\n\nI saw your portfolio and I’d like to talk about…\n\n',
     },
   },
   es: {
@@ -275,8 +278,8 @@ const content = {
     },
     about: {
       eyebrow: '05 — Quién soy realmente',
-      title: ['Código, música,', 'entrenamiento y Boca.'],
-      copy: 'Disfruto entrenar, entender cómo crecen los negocios y jugar. Soy bastante melómano —la cultura del hip-hop en particular— y siempre tengo algún proyecto paralelo dando vueltas.',
+      title: ['Programación, deporte,', 'música y Boca.'],
+      copy: 'Disfruto tanto de entrenar como de entender cómo crece un negocio, y soy más de los videojuegos que del cine. Me considero melómano en su justa medida —y fanático de la cultura del hip-hop—. Siempre tengo algún proyecto paralelo dando vueltas (builder antes que todo) y me encanta ir a la cancha con mis amigos.',
       nowLabel: 'Construyendo ahora',
       now: [
         { label: 'Stockeo', href: 'https://mistock.estudiove.com' },
@@ -291,7 +294,7 @@ const content = {
     },
     footer: {
       eyebrow: '06 — Hagámoslo realidad',
-      title: ['Construyamos', 'algo real.'],
+      title: ['Construyamos', 'juntos.'],
       copy: '¿Tenés una idea dando vueltas, un producto trabado o un equipo que necesita manos? Escribime. Respondo siempre.',
       formCompany: 'Empresa o nombre',
       formCompanyPlaceholder: '¿Quién sos?',
@@ -302,6 +305,9 @@ const content = {
       wsp: 'Hablemos por WhatsApp',
       backToTop: 'Volver arriba',
       subject: 'Nota desde el portfolio de',
+      mailCta: 'Hola Valentín 👋',
+      mailSubject: 'Hola Valentín 👋',
+      mailBody: 'Hola Valentín,\n\nVi tu portfolio y me gustaría charlar sobre…\n\n',
     },
   },
 } as const
@@ -697,10 +703,12 @@ alert("¿Qué operación deseas realizar?");`}</code></pre>
             <div>
               <p className="body-copy">{t.footer.copy}</p>
               <button onClick={copyEmail} className="email-button">{EMAIL} {copied ? <Check /> : <Copy />}</button>
+              <a className="wsp-button" href={`mailto:${EMAIL}?subject=${encodeURIComponent(t.footer.mailSubject)}&body=${encodeURIComponent(t.footer.mailBody)}`}>{t.footer.mailCta}</a>
               <a className="wsp-button" href={WHATSAPP} target="_blank" rel="noreferrer"><WhatsAppIcon />{t.footer.wsp}</a>
               <div className="mt-8 flex gap-6 font-mono text-xs uppercase tracking-[0.14em]">
                 <a className="border-b border-border pb-1 transition-colors hover:border-primary hover:text-primary" href="https://www.linkedin.com/in/valent%C3%ADn-s-761910200/" target="_blank" rel="noreferrer">LinkedIn</a>
                 <a className="border-b border-border pb-1 transition-colors hover:border-primary hover:text-primary" href="https://github.com/valentinsg" target="_blank" rel="noreferrer">GitHub</a>
+                <a className="border-b border-border pb-1 transition-colors hover:border-primary hover:text-primary" href="https://x.com/valentinsg_" target="_blank" rel="noreferrer">X</a>
               </div>
             </div>
             <form className="contact-form" onSubmit={sendNote}>
