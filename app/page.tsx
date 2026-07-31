@@ -129,7 +129,11 @@ const content = {
     notes: {
       eyebrow: '04 — How it started',
       title: ['I started like everyone else:', 'calculators, leetcode and simple websites.'],
-      copy: 'I kept learning with friends, online courses and small experiments. I tried to get into Soy Henry, did not make it, and later enrolled at UTN. University did not quite click for me: I worked part-time, used what little I earned to pay for English lessons and spent every free hour building for people I knew. LaCremerie, Viandas Fitness and Bestseller all came from that period. In 2023 Smithii arrived, my first experience inside a tech company.',
+      copy: [
+        'I kept learning with friends, online courses and small experiments. I tried to get into Soy Henry, did not make it, and later enrolled at UTN.',
+        'University did not quite click for me: I worked part-time, used what little I earned to pay for English lessons and spent every free hour building for people I knew. LaCremerie, Viandas Fitness and Bestseller all came from that period.',
+        'In 2023 Smithii arrived, my first experience inside a tech company.'
+      ],
       artifactCalculator: 'Calculator with browser prompts — practice, 2021',
       artifactFelipe: 'Felipe the Pig — early experiment, 2021',
       artifactBestseller: 'Bestseller Group — first client project, 2022',
@@ -150,19 +154,12 @@ const content = {
         ['05', 'Validate with users', 'Know how to receive feedback — see where the product helps and where it gets in the way.'],
         ['06', 'Keep improving', 'Keep what works. Change what does not.'],
       ],
-      offerLabel: 'What I bring',
-      groups: [
-        { name: 'Build', offer: 'Development, end to end · Frontend & backend · Databases & auth · Integrations & automation' },
-        { name: 'Shape', offer: 'Product thinking · Technical leadership · Teamwork · Scrum · LLM integrations' },
-        { name: 'Improve', offer: 'Performance · SEO · Analytics · CI/CD · Testing' },
-        { name: 'Explore', offer: 'Web3 products · Real-time systems · Interactive maps · Game development' },
-      ],
       hubTitle: 'Capabilities & toolkit',
-      hub: [
-        { name: 'Build', items: [{ label: 'TypeScript' }, { label: 'React' }, { label: 'Next.js' }, { label: 'Node.js' }, { label: 'Java' }, { label: 'PostgreSQL' }, { label: 'Neon' }, { label: 'Supabase' }, { label: 'Firebase' }, { label: 'WordPress' }, { label: 'Shopify' }, { label: 'REST APIs' }] },
-        { name: 'Product, design & delivery', items: [{ label: 'Notion' }, { label: 'Obsidian' }, { label: 'Figma' }, { label: 'Jira' }, { label: 'Scrum' }, { label: 'Slack' }, { label: 'Linear' }] },
-        { name: 'AI & exploration', items: [{ label: 'ChatGPT' }, { label: 'Claude' }, { label: 'Cursor' }, { label: 'MCP Integrations' }, { label: 'LLM APIs' }, { label: 'WebSockets' }, { label: 'Realtime databases' }, { label: 'Leaflet' }, { label: 'Three.js' }, { label: 'Game systems' }] },
-        { name: 'Ship & measure', items: [{ label: 'Lighthouse' }, { label: 'Google Analytics 4' }, { label: 'Search Console' }, { label: 'Semrush' }, { label: 'GitHub Actions' }, { label: 'Playwright' }] },
+      categories: [
+        { name: 'Build', offer: 'Development, end to end · Frontend & backend · Databases & auth · Integrations & automation', items: [{ label: 'TypeScript' }, { label: 'React' }, { label: 'Next.js' }, { label: 'Node.js' }, { label: 'Java' }, { label: 'PostgreSQL' }, { label: 'Neon' }, { label: 'Supabase' }, { label: 'Firebase' }, { label: 'WordPress' }, { label: 'Shopify' }, { label: 'REST APIs' }] },
+        { name: 'Shape', offer: 'Product thinking · Technical leadership · Teamwork · Scrum · LLM integrations', items: [{ label: 'Notion' }, { label: 'Obsidian' }, { label: 'Figma' }, { label: 'Jira' }, { label: 'Scrum' }, { label: 'Slack' }, { label: 'Linear' }] },
+        { name: 'Explore', offer: 'Web3 products · Real-time systems · Interactive maps · Game development', items: [{ label: 'ChatGPT' }, { label: 'Claude' }, { label: 'Cursor' }, { label: 'MCP Integrations' }, { label: 'LLM APIs' }, { label: 'WebSockets' }, { label: 'Realtime databases' }, { label: 'Leaflet' }, { label: 'Three.js' }, { label: 'Game systems' }] },
+        { name: 'Improve', offer: 'Performance · SEO · Analytics · CI/CD · Testing', items: [{ label: 'Lighthouse' }, { label: 'Google Analytics 4' }, { label: 'Search Console' }, { label: 'Semrush' }, { label: 'GitHub Actions' }, { label: 'Playwright' }] },
       ],
     },
     work: {
@@ -246,7 +243,11 @@ const content = {
     notes: {
       eyebrow: '04 — Cómo empecé',
       title: ['Empecé como todos:', 'calculadoras, leetcode y webs simples.'],
-      copy: 'Seguí aprendiendo con amigos, cursos online y experimentos chicos. Intenté entrar a Soy Henry, no quedé, y después me anoté en la UTN. La facultad no terminó de engancharme: trabajaba medio tiempo, con lo poco que ganaba pagaba inglés y en cada rato libre programaba para conocidos. De esa época salieron LaCremerie, Viandas Fitness y Bestseller. En 2023 llegó Smithii, mi primera experiencia en una empresa tech.',
+      copy: [
+        'Seguí aprendiendo con amigos, cursos online y experimentos chicos. Intenté entrar a Soy Henry, no quedé, y después me anoté en la UTN.',
+        'La facultad no terminó de engancharme: trabajaba medio tiempo, con lo poco que ganaba pagaba inglés y en cada rato libre programaba para conocidos. De esa época salieron LaCremerie, Viandas Fitness y Bestseller.',
+        'En 2023 llegó Smithii, mi primera experiencia en una empresa tech.'
+      ],
       artifactCalculator: 'Calculadora por alertas — práctica, 2021',
       artifactFelipe: 'Chanchito Felipe — experimento inicial, 2021',
       artifactBestseller: 'Bestseller Group — primer proyecto para un conocido, 2022',
@@ -267,19 +268,12 @@ const content = {
         ['05', 'Validar con usuarios', 'Saber recibir feedback, ver dónde el producto aporta y dónde molesta.'],
         ['06', 'Seguir mejorando', 'Conservar lo que funciona. Cambiar lo que no.'],
       ],
-      offerLabel: 'Lo que aporto',
-      groups: [
-        { name: 'Construir', offer: 'Desarrollo de punta a punta · Frontend y backend · Bases de datos y auth · Integraciones y automatizaciones' },
-        { name: 'Dar forma', offer: 'Visión de producto · Liderazgo técnico · Trabajo en equipo · Scrum · Integraciones con LLMs' },
-        { name: 'Mejorar', offer: 'Performance · SEO · Analytics · CI/CD · Testing' },
-        { name: 'Explorar', offer: 'Productos Web3 · Sistemas en tiempo real · Mapas interactivos · Desarrollo de juegos' },
-      ],
       hubTitle: 'Capacidades y herramientas',
-      hub: [
-        { name: 'Construir', items: [{ label: 'TypeScript' }, { label: 'React' }, { label: 'Next.js' }, { label: 'Node.js' }, { label: 'Java' }, { label: 'PostgreSQL' }, { label: 'Neon' }, { label: 'Supabase' }, { label: 'Firebase' }, { label: 'WordPress' }, { label: 'Shopify' }, { label: 'REST APIs' }] },
-        { name: 'Producto, diseño y entregas', items: [{ label: 'Notion' }, { label: 'Obsidian' }, { label: 'Figma' }, { label: 'Jira' }, { label: 'Scrum' }, { label: 'Slack' }, { label: 'Linear' }] },
-        { name: 'IA y exploración', items: [{ label: 'ChatGPT' }, { label: 'Claude' }, { label: 'Cursor' }, { label: 'Integraciones MCP' }, { label: 'APIs de LLMs' }, { label: 'WebSockets' }, { label: 'Bases de datos realtime' }, { label: 'Leaflet' }, { label: 'Three.js' }, { label: 'Sistemas de juego' }] },
-        { name: 'Lanzar y medir', items: [{ label: 'Lighthouse' }, { label: 'Google Analytics 4' }, { label: 'Search Console' }, { label: 'Semrush' }, { label: 'GitHub Actions' }, { label: 'Playwright' }] },
+      categories: [
+        { name: 'Construir', offer: 'Desarrollo de punta a punta · Frontend y backend · Bases de datos y auth · Integraciones y automatizaciones', items: [{ label: 'TypeScript' }, { label: 'React' }, { label: 'Next.js' }, { label: 'Node.js' }, { label: 'Java' }, { label: 'PostgreSQL' }, { label: 'Neon' }, { label: 'Supabase' }, { label: 'Firebase' }, { label: 'WordPress' }, { label: 'Shopify' }, { label: 'REST APIs' }] },
+        { name: 'Dar forma', offer: 'Visión de producto · Liderazgo técnico · Trabajo en equipo · Scrum · Integraciones con LLMs', items: [{ label: 'Notion' }, { label: 'Obsidian' }, { label: 'Figma' }, { label: 'Jira' }, { label: 'Scrum' }, { label: 'Slack' }, { label: 'Linear' }] },
+        { name: 'Explorar', offer: 'Productos Web3 · Sistemas en tiempo real · Mapas interactivos · Desarrollo de juegos', items: [{ label: 'ChatGPT' }, { label: 'Claude' }, { label: 'Cursor' }, { label: 'Integraciones MCP' }, { label: 'APIs de LLMs' }, { label: 'WebSockets' }, { label: 'Bases de datos realtime' }, { label: 'Leaflet' }, { label: 'Three.js' }, { label: 'Sistemas de juego' }] },
+        { name: 'Mejorar', offer: 'Performance · SEO · Analytics · CI/CD · Testing', items: [{ label: 'Lighthouse' }, { label: 'Google Analytics 4' }, { label: 'Search Console' }, { label: 'Semrush' }, { label: 'GitHub Actions' }, { label: 'Playwright' }] },
       ],
     },
     work: {
@@ -563,18 +557,16 @@ export default function Page() {
           <p className="eyebrow">{t.craft.eyebrow}</p>
           <h2 className="mt-12 section-title craft-title">{t.craft.title[0]}<br />{t.craft.title[1]}</h2>
 
-          
           <div className="craft-part">
             <p className="eyebrow">{t.craft.hubTitle}</p>
-            <Stagger className="craft-offer">
-              {t.craft.groups.map(group => (
-                <motion.p className="craft-offer-line" key={group.name} data-rv variants={STAGGER_CHILD}><strong>{group.name}</strong><span>{group.offer}</span></motion.p>
-              ))}
-            </Stagger>
-            <div className="hub-categories">
-              {t.craft.hub.map(category => (
-                <div className="hub-category" key={category.name}>
-                  <h4>{category.name}</h4>
+            <Stagger className="hub-categories">
+              {t.craft.categories.map((category, index) => (
+                <motion.div className={`hub-card hub-card-${index}`} key={category.name} data-rv variants={STAGGER_CHILD}>
+                  <div className="hub-card-header">
+                    <span className="hub-card-dot" />
+                    <h4>{category.name}</h4>
+                  </div>
+                  <p className="hub-card-offer">{category.offer}</p>
                   <div className="hub-tags">
                     {category.items.map(item =>
                       'href' in item && item.href ? (
@@ -584,10 +576,12 @@ export default function Page() {
                       ),
                     )}
                   </div>
-                </div>
+                </motion.div>
               ))}
-            </div>
-            <div className="craft-part">
+            </Stagger>
+          </div>
+          
+          <div className="craft-part">
             <p className="eyebrow">{t.craft.processLabel}</p>
             <div className="mt-10 grid gap-16 lg:grid-cols-12 lg:gap-20">
               <div className="flex flex-col justify-between lg:col-span-5">
@@ -604,8 +598,6 @@ export default function Page() {
                 ))}
               </Stagger>
             </div>
-          </div>
-
           </div>
         </Reveal>
       </section>
@@ -638,8 +630,10 @@ export default function Page() {
         <p className="eyebrow">{t.notes.eyebrow}</p>
         <div className="mt-16 grid gap-16 md:grid-cols-12">
           <h2 className="manifesto md:col-span-8">{t.notes.title[0]}<br /><span>{t.notes.title[1]}</span></h2>
-          <div className="flex flex-col justify-center gap-8 md:col-span-4">
-            <p className="notes-copy">{t.notes.copy}</p>
+          <div className="flex flex-col justify-center gap-5 md:col-span-4">
+            {t.notes.copy.map((paragraph, index) => (
+              <p className="notes-copy" key={index}>{paragraph}</p>
+            ))}
           </div>
         </div>
         <div id="early-work" className="origin-artifacts">

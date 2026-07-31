@@ -83,7 +83,7 @@ button { cursor: pointer; }
 
 .manifesto { font-size: clamp(2.7rem, 6.2vw, 6rem); line-height: .96; letter-spacing: -.05em; font-weight: 520; }
 .manifesto span { color: var(--muted-foreground); }
-.notes-copy { color: var(--muted-foreground); font-size: clamp(1.15rem, 1.8vw, 1.55rem); line-height: 1.5; letter-spacing: -.015em; }
+.notes-copy { color: var(--muted-foreground); font-size: clamp(0.95rem, 1.25vw, 1.12rem); line-height: 1.65; letter-spacing: -.01em; }
 .origin-artifacts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; margin-top: 4rem; isolation: isolate; }
 .origin-artifact, .origin-code-card { position: relative; width: 100%; min-width: 0; max-width: 100%; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 14px 34px rgba(0, 0, 0, .22); }
 .origin-artifact { background: #edf6fc; }
@@ -156,17 +156,89 @@ button { cursor: pointer; }
 .timeline-row p { margin-top: .35rem; color: var(--muted-foreground); line-height: 1.5; }
 .hub-grid { margin-top: 5rem; padding-top: 3rem; border-top: 1px solid var(--border); }
 .hub-categories { margin-top: 4.5rem; display: grid; gap: 3.5rem; grid-template-columns: 1fr; }
-.hub-category h4 { font-size: 1rem; letter-spacing: -.01em; color: var(--foreground); }
-.hub-tags { margin-top: 1.2rem; display: flex; flex-wrap: wrap; gap: .6rem; }
-.hub-tag-link { transition: color .2s, border-color .2s; }
-.hub-tag-link:hover { color: var(--primary); border-color: var(--primary); }
-
 /* Merged process + capabilities section */
 .craft-title { font-size: clamp(2.8rem, 6vw, 6rem); }
 .craft-part { margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
-.craft-offer { margin-top: 2.5rem; max-width: 62rem; display: flex; flex-direction: column; gap: 1.75rem; }
-.craft-offer-line { color: var(--muted-foreground); font-size: 1rem; line-height: 1.65; }
-.craft-offer-line strong { margin-right: .55rem; color: var(--foreground); font-weight: 550; letter-spacing: -.01em; }
+
+/* Unified Toolkit & Capabilities Card Layout */
+.hub-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 2.25rem 2rem;
+  border: 1px solid var(--border);
+  background: rgba(16, 16, 16, 0.4);
+  backdrop-filter: blur(12px);
+  border-radius: 1rem;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hub-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--card-accent);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 0 0 0 1px var(--card-accent);
+}
+
+.hub-card-0 { --card-accent: #ff5a1f; --card-accent-rgb: 255, 90, 31; }
+.hub-card-1 { --card-accent: #a855f7; --card-accent-rgb: 168, 85, 247; }
+.hub-card-2 { --card-accent: #00e5ff; --card-accent-rgb: 0, 229, 255; }
+.hub-card-3 { --card-accent: #ffd700; --card-accent-rgb: 255, 215, 0; }
+
+.hub-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.hub-card-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--card-accent);
+  box-shadow: 0 0 10px var(--card-accent);
+  flex-shrink: 0;
+}
+
+.hub-card-header h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+}
+
+.hub-card-offer {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--muted-foreground);
+  flex-grow: 1;
+}
+
+.hub-tags {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.6rem;
+}
+
+.hub-card .tag {
+  border: 1px solid var(--border);
+  background: rgba(25, 25, 25, 0.6);
+  border-radius: 6px;
+  padding: 0.4rem 0.65rem;
+  font-family: var(--font-geist-mono);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted-foreground);
+  transition: all 0.2s ease;
+}
+
+.hub-card .tag:hover {
+  color: var(--foreground);
+  border-color: var(--card-accent);
+  background: rgba(var(--card-accent-rgb), 0.08);
+}
 
 
 .moodboard-grid { margin-top: 4rem; display: grid; gap: 1.5rem; grid-template-columns: 1fr; }
