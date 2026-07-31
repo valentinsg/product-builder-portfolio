@@ -16,20 +16,17 @@ const REVEAL_VIEWPORT = { once: true, margin: '0px 0px -10% 0px' }
 
 function Reveal({ as = 'div', id, children, className, delay = 0, y = 24 }: { as?: 'div' | 'section'; id?: string; children: ReactNode; className?: string; delay?: number; y?: number }) {
   const reduce = useReducedMotion()
-  const Comp = as === 'section' ? motion.section : motion.div
-  return (
-    <Comp
-      id={id}
-      className={className}
-      data-rv
-      initial={reduce ? false : { opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={REVEAL_VIEWPORT}
-      transition={{ duration: 0.6, delay, ease: REVEAL_EASE }}
-    >
-      {children}
-    </Comp>
-  )
+  const props = {
+    id,
+    className,
+    'data-rv': '',
+    initial: reduce ? false : { opacity: 0, y },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: REVEAL_VIEWPORT,
+    transition: { duration: 0.6, delay, ease: REVEAL_EASE },
+  }
+  if (as === 'section') return <motion.section {...props}>{children}</motion.section>
+  return <motion.div {...props}>{children}</motion.div>
 }
 
 const STAGGER_PARENT = {
@@ -44,19 +41,16 @@ const STAGGER_CHILD = {
 
 function Stagger({ as = 'div', children, className }: { as?: 'div' | 'ol'; children: ReactNode; className?: string }) {
   const reduce = useReducedMotion()
-  const Comp = as === 'ol' ? motion.ol : motion.div
-  return (
-    <Comp
-      className={className}
-      data-rv
-      variants={STAGGER_PARENT}
-      initial={reduce ? false : 'hidden'}
-      whileInView="show"
-      viewport={REVEAL_VIEWPORT}
-    >
-      {children}
-    </Comp>
-  )
+  const props = {
+    className,
+    'data-rv': '',
+    variants: STAGGER_PARENT,
+    initial: reduce ? false : 'hidden',
+    whileInView: 'show',
+    viewport: REVEAL_VIEWPORT,
+  }
+  if (as === 'ol') return <motion.ol {...props}>{children}</motion.ol>
+  return <motion.div {...props}>{children}</motion.div>
 }
 
 const EMAIL = 'sanchezguevaravalentin@gmail.com'
@@ -147,7 +141,7 @@ const content = {
       eyebrow: '02 — Process & capabilities',
       title: ['How I work,', 'what I bring.'],
       processLabel: 'The process',
-      processCopy: 'I shaped this process by launching products, making mistakes and learning to keep them running while people were already using them. These six steps guide how I work, with the nuances each project requires.',
+      processCopy: 'This is the process I always end up coming back to. Six steps that keep my work organized, with the flexibility each project needs.',
       steps: [
         ['01', 'Understand the problem', 'What problem do we actually want to solve?'],
         ['02', 'Design the experience', 'Make the main path clear before adding more.'],
@@ -158,20 +152,17 @@ const content = {
       ],
       offerLabel: 'What I bring',
       groups: [
-        { name: 'Build', offer: 'Engineering, end to end · Frontend & backend · Databases & auth · Integrations & automation' },
-        { name: 'Shape', offer: 'Product thinking · Technical leadership · User flows · System design · Teamwork · Scrum · LLM integrations' },
+        { name: 'Build', offer: 'Development, end to end · Frontend & backend · Databases & auth · Integrations & automation' },
+        { name: 'Shape', offer: 'Product thinking · Technical leadership · Teamwork · Scrum · LLM integrations' },
         { name: 'Improve', offer: 'Performance · SEO · Analytics · CI/CD · Testing' },
         { name: 'Explore', offer: 'Web3 products · Real-time systems · Interactive maps · Game development' },
       ],
-      hubTitle: 'The toolkit, by use case',
+      hubTitle: 'Capabilities & toolkit',
       hub: [
-        { name: 'Build', items: [{ label: 'TypeScript' }, { label: 'React' }, { label: 'Next.js' }, { label: 'Node.js' }, { label: 'Java' }, { label: 'PostgreSQL' }, { label: 'Neon' }, { label: 'Supabase' }, { label: 'WordPress' }, { label: 'Shopify' }, { label: 'REST APIs' }] },
-        { name: 'Product, design & delivery', items: [{ label: 'Notion' }, { label: 'FigJam' }, { label: 'Figma' }, { label: 'Jira' }, { label: 'Scrum' }] },
-        { name: 'AI', items: [{ label: 'ChatGPT' }, { label: 'Claude' }, { label: 'Cursor' }, { label: 'Graphify' }] },
-        { name: 'Ship & measure', items: [{ label: 'Lighthouse' }, { label: 'Google Analytics 4' }, { label: 'Search Console' }, { label: 'GitHub Actions' }, { label: 'Playwright' }] },
-        { name: 'Explore', items: [{ label: 'LLM APIs' }, { label: 'WebSockets' }, { label: 'Realtime databases' }, { label: 'Map APIs' }, { label: 'Game systems' }] },
-        { name: 'Visual references', items: [{ label: 'Mobbin', href: 'https://mobbin.com' }, { label: 'Component Gallery', href: 'https://component.gallery/design-systems/' }, { label: 'Saaspo', href: 'https://saaspo.com' }, { label: 'Landing.love', href: 'https://landing.love' }, { label: 'Craftwork', href: 'https://craftwork.design/curated/websites' }, { label: 'Navbar Gallery', href: 'https://navbar.gallery' }, { label: 'CTA Gallery', href: 'https://cta.gallery' }, { label: 'Rebrand Gallery', href: 'https://rebrand.gallery' }, { label: 'Hugeicons', href: 'https://hugeicons.com' }, { label: 'MeiGen', href: 'https://www.meigen.ai' }] },
-        { name: 'Builder inspiration', items: [{ label: 'Cult UI', href: 'https://www.cult-ui.com/' }, { label: 'design-skills-joaco', href: 'https://design-skills-joaco.vercel.app' }, { label: 'revpdf.com', href: 'https://revpdf.com' }, { label: 'Obscura', href: 'https://github.com/h4ckf0r0day/obscura' }, { label: 'Starlight', href: 'https://starlight.astro.build/es' }] },
+        { name: 'Build', items: [{ label: 'TypeScript' }, { label: 'React' }, { label: 'Next.js' }, { label: 'Node.js' }, { label: 'Java' }, { label: 'PostgreSQL' }, { label: 'Neon' }, { label: 'Supabase' }, { label: 'Firebase' }, { label: 'WordPress' }, { label: 'Shopify' }, { label: 'REST APIs' }] },
+        { name: 'Product, design & delivery', items: [{ label: 'Notion' }, { label: 'Obsidian' }, { label: 'Figma' }, { label: 'Jira' }, { label: 'Scrum' }, { label: 'Slack' }, { label: 'Linear' }] },
+        { name: 'AI & exploration', items: [{ label: 'ChatGPT' }, { label: 'Claude' }, { label: 'Cursor' }, { label: 'MCP Integrations' }, { label: 'LLM APIs' }, { label: 'WebSockets' }, { label: 'Realtime databases' }, { label: 'Leaflet' }, { label: 'Three.js' }, { label: 'Game systems' }] },
+        { name: 'Ship & measure', items: [{ label: 'Lighthouse' }, { label: 'Google Analytics 4' }, { label: 'Search Console' }, { label: 'Semrush' }, { label: 'GitHub Actions' }, { label: 'Playwright' }] },
       ],
     },
     work: {
@@ -193,8 +184,8 @@ const content = {
     },
     growth: {
       eyebrow: '03 — Growth',
-      title: ['The milestones', 'that shaped me.'],
-      copy: 'Coding fundamentals, my first professional role, the pace of agency work and my own products: a few milestones that shaped how I work.',
+      title: ['Turning', 'points.'],
+      copy: 'Coding fundamentals, my first professional role, the pace of agency work and my own products: a few turning points that shaped how I work.',
       stats: [['3+', 'professional years'], ['15+', 'projects in production'], ['5+', 'industries']],
       timeline: [
         ['2020', 'Programming Foundations', 'Discovered programming through free online courses. Started building websites for friends and local businesses.'],
@@ -211,10 +202,10 @@ const content = {
       nowLabel: 'Now building',
       now: [
         { label: 'Stockeo', href: 'https://mistock.estudiove.com' },
-        { label: 'Pelotita', href: '' },
+        { label: 'Pelotita', href: 'https://pelotita-football-platform-three.vercel.app/' },
         { label: 'Estudio Ve', href: 'https://estudiove.com' },
         { label: 'Avi Salud', href: 'https://www.avisalud.com.ar/' },
-        { label: 'Presidential Simulator', href: '' },
+        { label: 'Presidential Simulator', href: '#work' },
       ],
       exploringLabel: 'Cambridge B2',
       exploring: ['Preparing for the exam'],
@@ -267,7 +258,7 @@ const content = {
       eyebrow: '02 — Proceso y capacidades',
       title: ['Cómo trabajo,', 'lo que aporto.'],
       processLabel: 'El proceso',
-      processCopy: 'Fui armando este proceso a medida que lanzaba productos, cometía errores y aprendía a sostenerlos con usuarios adentro. Son seis pasos que ordenan mi forma de trabajar, con los matices que pide cada proyecto.',
+      processCopy: 'Es el proceso al que siempre termino volviendo. Seis pasos que me ordenan, con la flexibilidad que pide cada proyecto.',
       steps: [
         ['01', 'Entender el problema', '¿Qué problema queremos resolver de verdad?'],
         ['02', 'Diseñar la experiencia', 'Dejar claro el camino principal antes de agregar más.'],
@@ -278,20 +269,17 @@ const content = {
       ],
       offerLabel: 'Lo que aporto',
       groups: [
-        { name: 'Construir', offer: 'Ingeniería de punta a punta · Frontend y backend · Bases de datos y auth · Integraciones y automatizaciones' },
-        { name: 'Dar forma', offer: 'Visión de producto · Liderazgo técnico · Flujos de usuario · Diseño de sistemas · Trabajo en equipo · Scrum · Integraciones con LLMs' },
+        { name: 'Construir', offer: 'Desarrollo de punta a punta · Frontend y backend · Bases de datos y auth · Integraciones y automatizaciones' },
+        { name: 'Dar forma', offer: 'Visión de producto · Liderazgo técnico · Trabajo en equipo · Scrum · Integraciones con LLMs' },
         { name: 'Mejorar', offer: 'Performance · SEO · Analytics · CI/CD · Testing' },
         { name: 'Explorar', offer: 'Productos Web3 · Sistemas en tiempo real · Mapas interactivos · Desarrollo de juegos' },
       ],
-      hubTitle: 'La caja de herramientas, por caso de uso',
+      hubTitle: 'Capacidades y herramientas',
       hub: [
-        { name: 'Construir', items: [{ label: 'TypeScript' }, { label: 'React' }, { label: 'Next.js' }, { label: 'Node.js' }, { label: 'Java' }, { label: 'PostgreSQL' }, { label: 'Neon' }, { label: 'Supabase' }, { label: 'WordPress' }, { label: 'Shopify' }, { label: 'REST APIs' }] },
-        { name: 'Producto, diseño y entregas', items: [{ label: 'Notion' }, { label: 'FigJam' }, { label: 'Figma' }, { label: 'Jira' }, { label: 'Scrum' }] },
-        { name: 'IA', items: [{ label: 'ChatGPT' }, { label: 'Claude' }, { label: 'Cursor' }, { label: 'Graphify' }] },
-        { name: 'Lanzar y medir', items: [{ label: 'Lighthouse' }, { label: 'Google Analytics 4' }, { label: 'Search Console' }, { label: 'GitHub Actions' }, { label: 'Playwright' }] },
-        { name: 'Explorar', items: [{ label: 'APIs de LLMs' }, { label: 'WebSockets' }, { label: 'Bases de datos realtime' }, { label: 'APIs de mapas' }, { label: 'Sistemas de juego' }] },
-        { name: 'Referencias visuales', items: [{ label: 'Mobbin', href: 'https://mobbin.com' }, { label: 'Component Gallery', href: 'https://component.gallery/design-systems/' }, { label: 'Saaspo', href: 'https://saaspo.com' }, { label: 'Landing.love', href: 'https://landing.love' }, { label: 'Craftwork', href: 'https://craftwork.design/curated/websites' }, { label: 'Navbar Gallery', href: 'https://navbar.gallery' }, { label: 'CTA Gallery', href: 'https://cta.gallery' }, { label: 'Rebrand Gallery', href: 'https://rebrand.gallery' }, { label: 'Hugeicons', href: 'https://hugeicons.com' }, { label: 'MeiGen', href: 'https://www.meigen.ai' }] },
-        { name: 'Inspiración de builders', items: [{ label: 'Cult UI', href: 'https://www.cult-ui.com/' }, { label: 'design-skills-joaco', href: 'https://design-skills-joaco.vercel.app' }, { label: 'revpdf.com', href: 'https://revpdf.com' }, { label: 'Obscura', href: 'https://github.com/h4ckf0r0day/obscura' }, { label: 'Starlight', href: 'https://starlight.astro.build/es' }] },
+        { name: 'Construir', items: [{ label: 'TypeScript' }, { label: 'React' }, { label: 'Next.js' }, { label: 'Node.js' }, { label: 'Java' }, { label: 'PostgreSQL' }, { label: 'Neon' }, { label: 'Supabase' }, { label: 'Firebase' }, { label: 'WordPress' }, { label: 'Shopify' }, { label: 'REST APIs' }] },
+        { name: 'Producto, diseño y entregas', items: [{ label: 'Notion' }, { label: 'Obsidian' }, { label: 'Figma' }, { label: 'Jira' }, { label: 'Scrum' }, { label: 'Slack' }, { label: 'Linear' }] },
+        { name: 'IA y exploración', items: [{ label: 'ChatGPT' }, { label: 'Claude' }, { label: 'Cursor' }, { label: 'Integraciones MCP' }, { label: 'APIs de LLMs' }, { label: 'WebSockets' }, { label: 'Bases de datos realtime' }, { label: 'Leaflet' }, { label: 'Three.js' }, { label: 'Sistemas de juego' }] },
+        { name: 'Lanzar y medir', items: [{ label: 'Lighthouse' }, { label: 'Google Analytics 4' }, { label: 'Search Console' }, { label: 'Semrush' }, { label: 'GitHub Actions' }, { label: 'Playwright' }] },
       ],
     },
     work: {
@@ -313,8 +301,8 @@ const content = {
     },
     growth: {
       eyebrow: '03 — Recorrido',
-      title: ['Los hitos que', 'me fueron formando.'],
-      copy: 'Las bases del código, mi primer trabajo profesional, el ritmo de agencia y mis propios productos: algunos de los hitos que marcaron mi forma de trabajar.',
+      title: ['Puntos de', 'inflexión.'],
+      copy: 'Las bases del código, mi primer trabajo profesional, el ritmo de agencia y mis propios productos: los puntos que marcaron mi forma de trabajar.',
       stats: [['3+', 'años profesionales'], ['15+', 'proyectos en producción'], ['5+', 'industrias']],
       timeline: [
         ['2020', 'Primeras bases', 'Descubrí la programación con cursos online gratuitos. Empecé haciendo webs para amigos y negocios locales.'],
@@ -331,10 +319,10 @@ const content = {
       nowLabel: 'Construyendo ahora',
       now: [
         { label: 'Stockeo', href: 'https://mistock.estudiove.com' },
-        { label: 'Pelotita', href: '' },
+        { label: 'Pelotita', href: 'https://pelotita-football-platform-three.vercel.app/' },
         { label: 'Estudio Ve', href: 'https://estudiove.com' },
         { label: 'Avi Salud', href: 'https://www.avisalud.com.ar/' },
-        { label: 'Simulador presidencial', href: '' },
+        { label: 'Simulador presidencial', href: '#work' },
       ],
       exploringLabel: 'Cambridge B2',
       exploring: ['Preparando el examen'],
@@ -595,16 +583,12 @@ export default function Page() {
           </div>
 
           <div className="craft-part">
-            <p className="eyebrow">{t.craft.offerLabel}</p>
+            <p className="eyebrow">{t.craft.hubTitle}</p>
             <Stagger className="craft-offer">
               {t.craft.groups.map(group => (
                 <motion.p className="craft-offer-line" key={group.name} data-rv variants={STAGGER_CHILD}><strong>{group.name}</strong><span>{group.offer}</span></motion.p>
               ))}
             </Stagger>
-          </div>
-
-          <div className="hub-grid">
-            <p className="eyebrow">{t.craft.hubTitle}</p>
             <div className="hub-categories">
               {t.craft.hub.map(category => (
                 <div className="hub-category" key={category.name}>
