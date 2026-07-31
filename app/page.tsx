@@ -563,25 +563,7 @@ export default function Page() {
           <p className="eyebrow">{t.craft.eyebrow}</p>
           <h2 className="mt-12 section-title craft-title">{t.craft.title[0]}<br />{t.craft.title[1]}</h2>
 
-          <div className="craft-part">
-            <p className="eyebrow">{t.craft.processLabel}</p>
-            <div className="mt-10 grid gap-16 lg:grid-cols-12 lg:gap-20">
-              <div className="flex flex-col justify-between lg:col-span-5">
-                <p className="max-w-md body-copy process-copy">{t.craft.processCopy}</p>
-                <div className="process-display"><span>{t.craft.steps[activeStep][0]}</span><h3>{t.craft.steps[activeStep][1]}</h3><p>{t.craft.steps[activeStep][2]}</p></div>
-              </div>
-              <Stagger as="ol" className="process-list lg:col-span-7">
-                {t.craft.steps.map((step, index) => (
-                  <motion.li key={step[0]} data-rv variants={STAGGER_CHILD}>
-                    <button className={`process-row ${activeStep === index ? 'active' : ''}`} onMouseEnter={() => setActiveStep(index)} onFocus={() => setActiveStep(index)} onClick={() => setActiveStep(index)}>
-                      <span>{step[0]}</span><strong>{step[1]}</strong><span className="process-arrow">+</span>
-                    </button>
-                  </motion.li>
-                ))}
-              </Stagger>
-            </div>
-          </div>
-
+          
           <div className="craft-part">
             <p className="eyebrow">{t.craft.hubTitle}</p>
             <Stagger className="craft-offer">
@@ -605,6 +587,25 @@ export default function Page() {
                 </div>
               ))}
             </div>
+            <div className="craft-part">
+            <p className="eyebrow">{t.craft.processLabel}</p>
+            <div className="mt-10 grid gap-16 lg:grid-cols-12 lg:gap-20">
+              <div className="flex flex-col justify-between lg:col-span-5">
+                <p className="max-w-md body-copy process-copy">{t.craft.processCopy}</p>
+                <div className="process-display"><span>{t.craft.steps[activeStep][0]}</span><h3>{t.craft.steps[activeStep][1]}</h3><p>{t.craft.steps[activeStep][2]}</p></div>
+              </div>
+              <Stagger as="ol" className="process-list lg:col-span-7">
+                {t.craft.steps.map((step, index) => (
+                  <motion.li key={step[0]} data-rv variants={STAGGER_CHILD}>
+                    <button className={`process-row ${activeStep === index ? 'active' : ''}`} onMouseEnter={() => setActiveStep(index)} onFocus={() => setActiveStep(index)} onClick={() => setActiveStep(index)}>
+                      <span>{step[0]}</span><strong>{step[1]}</strong><span className="process-arrow">+</span>
+                    </button>
+                  </motion.li>
+                ))}
+              </Stagger>
+            </div>
+          </div>
+
           </div>
         </Reveal>
       </section>
