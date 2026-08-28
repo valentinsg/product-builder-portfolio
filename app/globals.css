@@ -391,6 +391,33 @@ html.lenis { scroll-behavior: auto; }
   .principles-track { animation: none; }
 }
 
+/* Case study — architecture diagram */
+.arch-flow { margin-top: 3.5rem; display: flex; flex-direction: column; align-items: center; }
+.arch-node { position: relative; width: 100%; max-width: 30rem; border: 1px solid var(--border); background: var(--card); border-radius: var(--radius); padding: 1.4rem 1.6rem; text-align: center; }
+.arch-node-title { font-family: var(--font-geist-mono), monospace; font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--foreground); }
+.arch-node-detail { margin-top: .5rem; font-size: .84rem; color: var(--muted-foreground); line-height: 1.55; }
+.arch-connector { padding-block: .5rem; color: var(--muted-foreground); font-family: var(--font-geist-mono), monospace; font-size: .95rem; }
+.arch-branches { margin-top: 0; display: grid; gap: 1rem; grid-template-columns: 1fr; width: 100%; max-width: 58rem; }
+.arch-branches .arch-node { max-width: none; }
+.arch-note { margin-top: 1.5rem; max-width: 30rem; text-align: center; color: var(--muted-foreground); font-size: .78rem; line-height: 1.5; }
+@media (min-width: 768px) { .arch-branches { grid-template-columns: repeat(3, 1fr); } }
+
+/* Case study — incident cards */
+.incident-card { border-top: 1px solid var(--border); padding-top: 3rem; margin-top: 3rem; }
+.incident-card:first-child { margin-top: 0; border-top: none; padding-top: 0; }
+.incident-head { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.incident-title { margin-top: .85rem; font-size: clamp(1.5rem, 3vw, 2.2rem); letter-spacing: -.03em; font-weight: 550; }
+.incident-rows { margin-top: 1.75rem; display: grid; gap: 1rem; }
+.incident-row { display: grid; grid-template-columns: 7rem 1fr; gap: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+.incident-row:first-child { border-top: none; padding-top: 0; }
+.incident-row > span { font-family: var(--font-geist-mono), monospace; font-size: .62rem; text-transform: uppercase; letter-spacing: .1em; color: var(--primary); }
+.incident-row p { color: var(--muted-foreground); line-height: 1.6; font-size: .95rem; }
+@media (min-width: 768px) { .incident-row { grid-template-columns: 9rem 1fr; } }
+
+/* Case study — hero screenshot */
+.case-hero-shot { margin-top: 3.5rem; border: 1px solid var(--border); overflow: hidden; box-shadow: 0 14px 34px rgba(0, 0, 0, .22); }
+.case-hero-shot img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: top; filter: saturate(.85); }
+
 /* Project content must never remain hidden if a reveal is skipped while scrolling. */
 .project .project-heading,
 .project .project-copy > * { opacity: 1 !important; transform: none !important; }
