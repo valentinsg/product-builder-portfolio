@@ -1,11 +1,23 @@
 'use client'
 
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
+
+import GithubContributions from './github-contributions'
 
 const LANG_KEY = 'vsg-lang'
 
 type Lang = 'en' | 'es'
+
+/*
+ * ─────────────────────────────────────────────────────────────────────────────
+ * PLACEHOLDERS TO FILL WITH REAL INFO LATER (do not invent):
+ *  - video.src        → the actual "How Pelotita works" clip (60–90s)
+ *  - database.todo    → indexes, EXPLAIN/query plans, transactions, pooling
+ *  - ownership.todo   → error tracking / alerting / structured logging stack
+ *  - additional (Avi Salud) → whole section is scaffolding, content comes later
+ * ─────────────────────────────────────────────────────────────────────────────
+ */
 
 const content = {
   en: {
@@ -14,88 +26,170 @@ const content = {
     hero: {
       eyebrow: 'Case Study',
       title: 'Pelotita.',
-      tagline: 'A live football platform I built and operate solo — Next.js, self-hosted Postgres, Redis, and a custom WebSocket server, all running on a VPS I administer myself.',
+      tagline: 'A live football platform I built and run solo — Next.js, self-hosted Postgres, Redis, and a custom WebSocket server on a VPS I administer.',
       live: 'Live in production',
-      stats: [['360', 'commits in 6 weeks, solo'], ['10k+', 'matches processed'], ['2', 'person team, 1 engineer']] as [string, string][],
+      stats: [
+        ['360', 'commits · 6 weeks'],
+        ['10k+', 'matches processed'],
+        ['32', 'tables migrated, zero loss'],
+        ['1', 'engineer'],
+      ] as [string, string][],
     },
-    overview: {
-      eyebrow: 'What it is',
-      paragraphs: [
-        'Pelotita is a live football platform: live scores, standings, cup brackets, stats, editorial content, and a fantasy football league ("Gran DT") with real-time drafting. It covers Argentina\'s top divisions plus Europe\'s top 5 leagues and continental cups. The stated ambition is to compete with Promiedos, the dominant live-scores site in Argentina — this isn\'t a toy project, it\'s built to take real, sustained traffic and eventually carry ads and paid plans.',
-        'Team of two: I own product, architecture, the database, and all engineering. A second person handles content and editorial. Everything below happened in production, with real users and real traffic, and I was the only engineer responsible for diagnosing it, deciding the fix, and shipping it — no team, no safety net.',
+    video: {
+      eyebrow: 'Watch',
+      title: 'How Pelotita works',
+      src: '', // TODO: paste the 60–90s clip URL / file here
+      placeholder: 'Video coming soon',
+      caption:
+        '60–90s walkthrough: the live product, how external football data is ingested, stored and pushed to users in real time, and how the infrastructure fits together.',
+    },
+    commits: {
+      eyebrow: 'Proof of work',
+      title: 'Six weeks, heads down.',
+      headline: (total: string) => `${total} contributions in the last year`,
+      caption:
+        'The Pelotita build is 360 commits of that — close to a quarter of my GitHub year, concentrated into about six weeks as the only engineer.',
+      stats: ([['360', 'commits on Pelotita'], ['~6', 'weeks'], ['1', 'engineer']]) as [string, string][],
+      profile: 'github.com/valentinsg ↗',
+    },
+    built: {
+      eyebrow: 'What I built',
+      title: 'The product.',
+      lead: 'Pelotita covers Argentina\'s top divisions, Europe\'s top 5 leagues and continental cups: live scores, standings, cup brackets, stats, editorial content, and a fantasy league ("Gran DT") with real-time drafting. Two-person team — I own product, architecture, database, and all engineering.',
+      items: [
+        'Next.js 16 App Router — frontend and API, raw-SQL data layer, no ORM',
+        'Data ingestion from external football sources with a two-speed sync',
+        'Self-hosted Postgres 18 + Redis on a VPS I provision and administer',
+        'Custom WebSocket layer — live scores, standings, and the fantasy draft',
+        'CI/CD pipeline, staging environment, production deploy and rollback path',
       ],
+    },
+    pipeline: {
+      eyebrow: 'How it works',
+      title: 'Data to user.',
+      intro: 'External football data in, real-time updates out — every hop runs on infrastructure I operate.',
+      steps: [
+        ['ESPN / Promiedos', 'Unofficial scraped sources, hit only by the VPS — never the browser'],
+        ['Sync jobs', 'Two-speed: general sweep every 1–2h, live sync only during match windows'],
+        ['Postgres 18', 'Self-hosted on the app\'s VPS, localhost-only, zero egress cost'],
+        ['Redis pub/sub', 'Sync job publishes only the matches that changed'],
+        ['WebSocket process', 'Single instance, split from the clustered app'],
+        ['Next.js 16', 'App Router, PM2 cluster ×2, behind Cloudflare'],
+        ['User', 'Browser over HTTPS / WSS through a Cloudflare Tunnel'],
+      ] as [string, string][],
+      foot: 'Fantasy league data and authentication run on a separate Supabase Postgres.',
     },
     architecture: {
-      eyebrow: 'Architecture',
-      title: 'Request to render.',
-      flow: [
-        { title: 'User', detail: 'Browser, over HTTPS' },
-        { title: 'pelotita.com.ar', detail: 'Domain on NIC Argentina, DNS delegated to Cloudflare' },
-        { title: 'Cloudflare (free)', detail: 'CDN + cache + TLS + Cloudflare Tunnel — no inbound ports open on the server. wss://ws.pelotita.com.ar routed through the same tunnel.' },
-        { title: 'Hetzner VPS', detail: 'Next.js 16 under PM2, clustered ×2. CX23 — 2 vCPU / 4 GB, Falkenstein. Same box also runs Postgres, Redis, and the WebSocket process.' },
+      eyebrow: 'Technical architecture',
+      title: 'The stack, by layer.',
+      layers: [
+        ['Frontend', 'Next.js 16 (App Router, Turbopack), React 19, TypeScript, Tailwind v4'],
+        ['Backend', 'Next.js API routes, raw pg data layer, sync jobs as crons on the VPS'],
+        ['Database', 'Postgres 18 self-hosted (football data) · Supabase Postgres (auth + fantasy, 32 tables, RLS)'],
+        ['Realtime', 'Redis pub/sub → dedicated single-instance WebSocket server (wss://ws.pelotita.com.ar)'],
+        ['Infrastructure', 'Hetzner CX23 VPS (2 vCPU / 4 GB) · PM2 · Cloudflare CDN/TLS/Tunnel — no inbound ports open · GitHub Actions CI/CD · Cloudflare R2 backups'],
+      ] as [string, string][],
+      note: 'Football data comes from ESPN and Promiedos — unofficial, scraped, hit only by the VPS, never by the browser.',
+    },
+    database: {
+      eyebrow: 'Database',
+      title: 'PostgreSQL, up close.',
+      lead: 'Postgres is the core of the platform, not a line in a stack list. Two databases: a self-hosted Postgres 18 for football data, and Supabase Postgres for auth and fantasy.',
+      facts: [
+        'Self-hosted Postgres 18 on the same VPS as the app — localhost-only, never exposed, zero egress cost.',
+        'Accessed with raw pg. No ORM — hand-written SQL.',
+        'Core self-hosted tables: football_snapshots, sync_log, api_usage.',
+        'Supabase side: 32 tables, RLS policies, storage buckets, and auth.users.',
+        'Integrity: FK from public.profiles → auth.users, the on_auth_user_created trigger, and triggers that write derived history rows.',
+        'Migrations kept as SQL files; the production region move was done via a direct pg_dump with row counts verified identical (challenge 03).',
+        'pg_dump --no-privileges silently drops role GRANTs — now a fixed step in the migration checklist.',
       ],
-      branches: [
-        { title: 'Postgres 18 (self-hosted)', detail: 'football_snapshots, sync_log, api_usage — localhost-only, never leaves the server, zero egress cost.' },
-        { title: 'Redis → WebSocket', detail: 'Redis pub/sub feeds a dedicated, single-instance WebSocket process — powers live scores, standings, and the fantasy draft.' },
-        { title: 'Supabase (São Paulo)', detail: 'Postgres + Auth + Realtime — fantasy league data and login only.' },
+      todoTitle: 'To document — real detail to add later',
+      todo: [
+        'Indexing strategy and the queries it targets',
+        'EXPLAIN / query plans for the hot paths',
+        'Transaction boundaries in the sync jobs',
+        'Query optimization and connection pooling configuration',
       ],
-      note: 'Football data itself comes from ESPN and Promiedos — unofficial, scraped sources hit only by the VPS, never by the browser.',
+    },
+    ownership: {
+      eyebrow: 'Production ownership',
+      title: 'Not just "wrote the code."',
+      intro: 'Architecture → implementation → testing → deployment → monitoring → incident handling → iteration.',
+      steps: [
+        ['Architecture', 'Designed the full stack — edge, VPS, self-hosted Postgres/Redis, and a WebSocket process deliberately split from the clustered app.'],
+        ['Implementation', 'Sole engineer across frontend, API, raw-pg data layer, sync jobs, and realtime fan-out.'],
+        ['Testing', 'Validated the stack cutover and the DB migration against a staging URL and live matches before promoting.'],
+        ['Deployment', 'A GitHub Action SSHes into the VPS, builds, and reloads the PM2 cluster on every push to master.'],
+        ['Monitoring', 'UptimeRobot on the real HTTPS chain through Cloudflare; sync_log and api_usage track ingestion health.'],
+        ['Incident handling', 'Diagnosed and fixed the Supabase egress near-outage, the silent realtime failure, and the data-provider suspension — solo, in production.'],
+        ['Iteration', 'The same realtime layer now also powers live standings, fantasy drafting, and live chat.'],
+      ] as [string, string][],
+      todo: 'TODO: error tracking / alerting / structured logging stack — add specifics.',
     },
     challenges: {
-      eyebrow: 'Challenges solved',
+      eyebrow: 'Three key engineering challenges',
       title: 'Owned end to end.',
-      intro: 'Five things that broke, or almost broke, in production — and how I fixed them alone.',
       items: [
         {
-          tag: 'Infra migration',
+          id: '01',
+          tag: 'Production Infrastructure',
           title: 'Zero-downtime migration off Vercel to a self-hosted VPS',
           rows: [
-            ['Problem', "Vercel's Hobby plan capped out at 4 hours of active CPU/month — likely already exceeded by crons syncing live data every 2 minutes — and its terms restrict the free tier to non-commercial use, a real problem once ads and paid plans go live."],
-            ['Root cause', "Pro was ruled out too: usage-based billing means an unpredictable bill on a traffic spike or a bug, which isn't acceptable for a two-person project funding this out of pocket."],
-            ['Fix', 'New stack — Cloudflare (CDN/TLS/Tunnel) → Hetzner VPS running Next.js under PM2 → self-hosted Postgres + Redis — built and tested against a staging URL while Vercel kept serving production. Deploy pipeline rebuilt from scratch as a GitHub Action that SSHes in, builds, and reloads PM2 on every push to master. Only cut DNS after a full login → save lineup → live-sync cycle passed on the new stack, with Vercel kept alive as a rollback path.'],
-            ['Result', 'Zero downtime. Monitoring caught along the way, too — UptimeRobot was checking a bare IP on a closed port instead of the real HTTPS chain through Cloudflare; fixed before it mattered.'],
+            ['Problem', 'Vercel Hobby capped at 4h active CPU/month — likely already exceeded by 2-minute sync crons — and its free tier bars commercial use, blocking ads and paid plans.'],
+            ['Decision', 'Vercel Pro was ruled out too: usage-based billing means an unpredictable bill on a traffic spike or a bug, unacceptable for a self-funded two-person project.'],
+            ['Fix', 'New stack — Cloudflare (CDN/TLS/Tunnel) → Hetzner VPS running Next.js under PM2 → self-hosted Postgres + Redis — built and tested against a staging URL while Vercel kept serving production. Deploy pipeline rebuilt as a GitHub Action that SSHes in, builds, and reloads PM2 on every push to master. DNS was cut only after a full login → save lineup → live-sync cycle passed, with Vercel kept as a rollback path.'],
+            ['Result', 'Zero downtime. Also caught a monitoring blind spot on the way — UptimeRobot was checking a bare IP on a closed port instead of the HTTPS chain through Cloudflare.'],
           ] as [string, string][],
+          mapsTo: 'Maps to: owned production release process, solo',
         },
         {
-          tag: 'Incident response',
-          title: 'Supabase egress about to go read-only',
+          id: '02',
+          tag: 'Realtime / Reliability',
+          title: 'Cut managed services out of the hot path and built the realtime layer',
           rows: [
-            ['Problem', "Supabase's free tier (5 GB egress/month) was hours from throttling the production database to read-only."],
-            ['Root cause', 'Football data was being pushed through Supabase Realtime as large JSONB snapshots to every visitor. Compounding it: dev and prod were pointed at the same Supabase project, so every local reload and manual test was burning production quota.'],
-            ['Fix', 'Moved football data to a Postgres instance self-hosted on the same VPS as the app — same host, localhost-only traffic, doesn\'t count against any egress quota. Kept Supabase for fantasy data and auth only. Rebuilt real-time delivery on Redis pub/sub feeding a dedicated WebSocket server, verified live against real matches in progress before retiring the old path. Provisioned a separate dev Supabase project to stop the quota bleed.'],
-            ['Result', "Supabase's data volume and egress cut by close to an order of magnitude. The near-outage never recurred."],
+            ['Problem', 'Supabase\'s free tier (5 GB egress/month) was hours from throttling the production database to read-only. Separately, the fantasy draft had never worked — with no error surfaced anywhere.'],
+            ['Root cause', 'Football data was pushed through Supabase Realtime as large JSONB snapshots to every visitor, and dev + prod shared one Supabase project so local reloads burned prod quota. The draft\'s Realtime subscription pointed at a table never added to the realtime publication — it subscribed to nothing.'],
+            ['Fix', 'Moved football data to self-hosted Postgres on the app\'s VPS (localhost, no egress quota). Rebuilt realtime on Redis pub/sub feeding a dedicated single-instance WebSocket process, split from the clustered app so there\'s no ambiguity about which instance emits an event. Verified live against matches in progress before retiring the old path. Provisioned a separate dev Supabase project.'],
+            ['Result', 'Supabase data volume and egress down close to an order of magnitude; the near-outage never recurred. The same layer now powers live scores, standings, and the fantasy draft.'],
           ] as [string, string][],
+          mapsTo: 'Maps to: production & reliability · technical decision making',
         },
         {
-          tag: 'Systems design',
-          title: 'Built the real-time layer myself after the managed one silently failed',
+          id: '03',
+          tag: 'Production Database Migration',
+          title: 'Live migration, 32 tables, zero data loss',
           rows: [
-            ['Problem', 'The fantasy draft feature had never worked, with no error surfaced anywhere.'],
-            ['Root cause', "Its Supabase Realtime subscription was on a table that had never actually been added to Supabase's realtime publication — it subscribed to nothing, and nothing told anyone."],
-            ['Fix', "Rather than patch around the managed service, built a small dedicated real-time layer: the sync job publishes changed matches to Redis, and a single-instance WebSocket process — kept separate from the clustered app process so there's no ambiguity about which instance should push an event — fans it out to connected browsers."],
-            ['Result', 'That same layer now also powers live fantasy drafting, live scores, and live standings.'],
-          ] as [string, string][],
-        },
-        {
-          tag: 'Data migration',
-          title: 'Live database migration, 32 tables, zero data loss',
-          rows: [
-            ['Problem', "A Supabase project's region can't be changed after creation. Moving to a different AWS region meant migrating 32 tables, RLS policies, storage buckets, and auth.users — while the old database kept taking writes from cron jobs and live users."],
-            ['Root cause', 'Concrete things that had to be caught before they became data loss: pg_dump --no-privileges (needed to avoid ownership conflicts between projects) silently drops the GRANTs that let the app read/write at all — missed on the first pass, caught when live sync failed with "permission denied" against real data. auth.users has a foreign key from public.profiles that a --schema=public dump skips, along with the on_auth_user_created trigger. Triggers writing derived history rows needed disabling before the bulk load, or replaying the dump would have duplicated history.'],
-            ['Fix', "Chose to pg_dump the live database directly instead of hand-replaying six loose, undocumented SQL migration files in the order I thought they'd been applied — a deliberate call to avoid an ambiguous, error-prone path to prod data corruption."],
+            ['Problem', 'A Supabase project\'s region is fixed at creation. Moving AWS regions meant migrating 32 tables, RLS policies, storage buckets, and auth.users — while the old database kept taking writes from crons and live users.'],
+            ['Root cause', 'Things that would have become data loss: pg_dump --no-privileges (needed to avoid cross-project ownership conflicts) silently drops the GRANTs the app needs — caught only when live sync failed with "permission denied". auth.users has an FK from public.profiles that a --schema=public dump skips, along with the on_auth_user_created trigger. History-writing triggers had to be disabled before the bulk load or the replay would duplicate rows.'],
+            ['Fix', 'Chose a direct pg_dump of the live database over hand-replaying six loose, undocumented SQL migration files in guessed order — a deliberate call to avoid an ambiguous path to prod data corruption.'],
             ['Result', 'All 32 tables, policies, buckets, and auth data migrated with row counts verified identical between old and new. No data loss.'],
           ] as [string, string][],
+          mapsTo: 'Maps to: Postgres, deep',
+        },
+      ],
+    },
+    other: {
+      eyebrow: 'Other engineering challenges',
+      title: 'Also handled.',
+      items: [
+        {
+          title: 'Rate-limit and cost-aware data ingestion',
+          detail: 'API-Football hit a 100 req/day cap and suspended the account without warning. Switched to unofficial scraped sources (ESPN, Promiedos) with a two-speed sync: a general pass every 1–2h that skips competitions with nothing within ±3 days, and a live sync that reads stored snapshots first and only hits real APIs during a match\'s playing window.',
         },
         {
-          tag: 'Cost engineering',
-          title: 'Rate-limit and cost-aware data ingestion',
-          rows: [
-            ['Problem', 'The original paid data provider (API-Football) hit a 100 req/day cap and eventually suspended the account without warning.'],
-            ['Root cause', "The platform's core data feed depended on a single paid, rate-limited third party with no fallback."],
-            ['Fix', 'Switched to unofficial, unauthenticated scraped sources (ESPN, Promiedos) with a deliberately two-speed sync: a general sync every 1-2 hours that skips any competition with nothing happening within ±3 days (plus a daily safety sweep so nothing goes stale), and a live sync that reads already-stored snapshots first — zero external calls — and only hits real APIs when a match is actually in its playing window.'],
-            ['Result', 'Stays light on both the source and the infra while tracking multiple competitions live, simultaneously.'],
-          ] as [string, string][],
+          title: 'Monitoring correctness',
+          detail: 'UptimeRobot was probing a bare IP on a closed port; repointed at the real HTTPS chain through Cloudflare before it mattered.',
         },
+      ],
+    },
+    scale: {
+      eyebrow: 'Scale / results',
+      title: 'Where it stands.',
+      stats: [
+        '10,000+ matches processed',
+        "Argentina's top divisions + Europe's top 5 leagues + continental cups, tracked live, simultaneously",
+        'Real users — accounts, live fantasy drafts, live chat, all on the same real-time layer',
       ],
     },
     stack: {
@@ -107,14 +201,15 @@ const content = {
         { name: 'Infrastructure & Ops', items: ['PM2', 'Cloudflare (CDN/TLS/Tunnel)', 'Hetzner Cloud (VPS)', 'GitHub Actions (CI/CD)', 'Cloudflare R2 (backups)'] },
       ],
     },
-    scale: {
-      eyebrow: 'Scale',
-      title: 'Where it stands.',
-      stats: [
-        '10,000+ matches processed',
-        "Argentina's top divisions + Europe's top 5 leagues + continental cups, tracked live, simultaneously",
-        'Real users — accounts, live fantasy drafts, live chat, all on the same real-time layer',
-      ],
+    additional: {
+      eyebrow: 'Additional project',
+      title: 'The other half of the role.',
+      name: 'Avi Salud',
+      url: 'avisalud.com.ar',
+      framing:
+        'Pelotita proves product engineering, infrastructure, realtime, and production ownership. Avi Salud covers what Pelotita naturally does not: business software, operational workflows, non-technical and mobile users, and automation.',
+      covers: ['Operational software & workflows', 'Logistics', 'Non-technical / mobile users', 'Business automation', 'Real-world business requirements'],
+      placeholder: 'Full case study content coming — this section is scaffolded, not written yet.',
     },
     footer: {
       eyebrow: 'Get in touch',
@@ -129,88 +224,170 @@ const content = {
     hero: {
       eyebrow: 'Case Study',
       title: 'Pelotita.',
-      tagline: 'Una plataforma de fútbol en vivo que construí y opero solo — Next.js, Postgres self-hosteado, Redis y un servidor WebSocket propio, todo corriendo en un VPS que administro yo.',
+      tagline: 'Una plataforma de fútbol en vivo que construí y opero solo — Next.js, Postgres self-hosteado, Redis y un servidor WebSocket propio en un VPS que administro yo.',
       live: 'En producción',
-      stats: [['360', 'commits en 6 semanas, solo'], ['10k+', 'partidos procesados'], ['2', 'personas en el equipo, 1 developer']] as [string, string][],
+      stats: [
+        ['360', 'commits · 6 semanas'],
+        ['10k+', 'partidos procesados'],
+        ['32', 'tablas migradas, cero pérdida'],
+        ['1', 'developer'],
+      ] as [string, string][],
     },
-    overview: {
-      eyebrow: 'Qué es',
-      paragraphs: [
-        'Pelotita es una plataforma de fútbol en vivo: resultados en tiempo real, tablas de posiciones, llaves de copas, estadísticas, contenido editorial y una liga de fantasy football ("Gran DT") con draft en tiempo real. Cubre las divisiones principales de Argentina más las 5 grandes ligas de Europa y copas continentales. La ambición declarada es competir con Promiedos, el sitio de resultados en vivo dominante en Argentina — no es un proyecto de juguete, está construido para soportar tráfico real y sostenido, y eventualmente llevar ads y planes pagos.',
-        'Equipo de dos personas: yo soy dueño del producto, la arquitectura, la base de datos y todo el desarrollo. La segunda persona se encarga del contenido y lo editorial. Todo lo que sigue pasó en producción, con usuarios y tráfico reales, y fui el único ingeniero responsable de diagnosticarlo, decidir la solución y llevarla a producción — sin equipo, sin red de contención.',
+    video: {
+      eyebrow: 'Mirá',
+      title: 'Cómo funciona Pelotita',
+      src: '', // TODO: pegar acá la URL / archivo del clip de 60–90s
+      placeholder: 'Video en camino',
+      caption:
+        'Recorrido de 60–90s: el producto en vivo, cómo se ingieren, almacenan y envían los datos externos de fútbol a los usuarios en tiempo real, y cómo encaja la infraestructura.',
+    },
+    commits: {
+      eyebrow: 'Prueba de trabajo',
+      title: 'Seis semanas, a fondo.',
+      headline: (total: string) => `${total} contribuciones en el último año`,
+      caption:
+        'El desarrollo de Pelotita son 360 commits de eso — cerca de un cuarto de mi año en GitHub, concentrado en unas seis semanas como único ingeniero.',
+      stats: ([['360', 'commits en Pelotita'], ['~6', 'semanas'], ['1', 'developer']]) as [string, string][],
+      profile: 'github.com/valentinsg ↗',
+    },
+    built: {
+      eyebrow: 'Qué construí',
+      title: 'El producto.',
+      lead: 'Pelotita cubre las divisiones principales de Argentina, las 5 grandes ligas de Europa y copas continentales: resultados en vivo, tablas, llaves de copa, estadísticas, contenido editorial y una liga de fantasy ("Gran DT") con draft en tiempo real. Equipo de dos — yo soy dueño del producto, la arquitectura, la base de datos y todo el desarrollo.',
+      items: [
+        'Next.js 16 App Router — frontend y API, capa de datos en SQL crudo, sin ORM',
+        'Ingesta de datos desde fuentes externas de fútbol con un sync de dos velocidades',
+        'Postgres 18 + Redis self-hosteados en un VPS que provisiono y administro',
+        'Capa de WebSocket propia — resultados en vivo, tablas y el draft de fantasy',
+        'Pipeline de CI/CD, entorno de staging, deploy a producción y camino de rollback',
       ],
+    },
+    pipeline: {
+      eyebrow: 'Cómo funciona',
+      title: 'Del dato al usuario.',
+      intro: 'Entran datos externos de fútbol, salen actualizaciones en tiempo real — cada salto corre sobre infra que opero yo.',
+      steps: [
+        ['ESPN / Promiedos', 'Fuentes no oficiales scrapeadas, a las que solo le pega el VPS — nunca el navegador'],
+        ['Jobs de sync', 'Dos velocidades: barrido general cada 1–2h, sync en vivo solo durante ventanas de partido'],
+        ['Postgres 18', 'Self-hosteado en el VPS de la app, tráfico localhost-only, cero costo de egress'],
+        ['Redis pub/sub', 'El job de sync publica solo los partidos que cambiaron'],
+        ['Proceso de WebSocket', 'Una sola instancia, separada del proceso clusterizado de la app'],
+        ['Next.js 16', 'App Router, cluster de PM2 ×2, detrás de Cloudflare'],
+        ['Usuario', 'Navegador sobre HTTPS / WSS a través de un Cloudflare Tunnel'],
+      ] as [string, string][],
+      foot: 'Los datos de la liga de fantasy y la autenticación corren en un Supabase Postgres aparte.',
     },
     architecture: {
-      eyebrow: 'Arquitectura',
-      title: 'De la request al render.',
-      flow: [
-        { title: 'Usuario', detail: 'Navegador, sobre HTTPS' },
-        { title: 'pelotita.com.ar', detail: 'Dominio en NIC Argentina, DNS delegado a Cloudflare' },
-        { title: 'Cloudflare (gratis)', detail: 'CDN + cache + TLS + Cloudflare Tunnel — sin puertos de entrada abiertos en el servidor. wss://ws.pelotita.com.ar viaja por el mismo túnel.' },
-        { title: 'VPS de Hetzner', detail: 'Next.js 16 bajo PM2, clusterizado ×2. CX23 — 2 vCPU / 4 GB, Falkenstein. El mismo servidor corre también Postgres, Redis y el proceso de WebSocket.' },
+      eyebrow: 'Arquitectura técnica',
+      title: 'El stack, por capa.',
+      layers: [
+        ['Frontend', 'Next.js 16 (App Router, Turbopack), React 19, TypeScript, Tailwind v4'],
+        ['Backend', 'API routes de Next.js, capa de datos con pg crudo, jobs de sync como crons en el VPS'],
+        ['Base de datos', 'Postgres 18 self-hosteado (datos de fútbol) · Supabase Postgres (auth + fantasy, 32 tablas, RLS)'],
+        ['Tiempo real', 'Redis pub/sub → servidor WebSocket dedicado de una sola instancia (wss://ws.pelotita.com.ar)'],
+        ['Infraestructura', 'VPS Hetzner CX23 (2 vCPU / 4 GB) · PM2 · Cloudflare CDN/TLS/Tunnel — sin puertos de entrada abiertos · GitHub Actions CI/CD · backups en Cloudflare R2'],
+      ] as [string, string][],
+      note: 'Los datos de fútbol vienen de ESPN y Promiedos — no oficiales, scrapeados, a los que solo le pega el VPS, nunca el navegador.',
+    },
+    database: {
+      eyebrow: 'Base de datos',
+      title: 'PostgreSQL, de cerca.',
+      lead: 'Postgres es el núcleo de la plataforma, no una línea en una lista de stack. Dos bases: un Postgres 18 self-hosteado para datos de fútbol, y Supabase Postgres para auth y fantasy.',
+      facts: [
+        'Postgres 18 self-hosteado en el mismo VPS que la app — tráfico localhost-only, nunca expuesto, cero costo de egress.',
+        'Acceso con pg crudo. Sin ORM — SQL escrito a mano.',
+        'Tablas centrales self-hosteadas: football_snapshots, sync_log, api_usage.',
+        'Lado Supabase: 32 tablas, políticas de RLS, buckets de storage y auth.users.',
+        'Integridad: FK de public.profiles → auth.users, el trigger on_auth_user_created, y triggers que escriben filas de historial derivado.',
+        'Migraciones guardadas como archivos SQL; la mudanza de región de producción se hizo con un pg_dump directo con conteos de filas verificados idénticos (desafío 03).',
+        'pg_dump --no-privileges borra en silencio los GRANT de rol — ahora es un paso fijo del checklist de migración.',
       ],
-      branches: [
-        { title: 'Postgres 18 (self-hosted)', detail: 'football_snapshots, sync_log, api_usage — tráfico localhost-only, nunca sale del servidor, cero costo de egress.' },
-        { title: 'Redis → WebSocket', detail: 'Redis pub/sub alimenta un proceso de WebSocket dedicado, de una sola instancia — potencia resultados en vivo, tablas y el draft de fantasy.' },
-        { title: 'Supabase (São Paulo)', detail: 'Postgres + Auth + Realtime — solo datos de la liga de fantasy y login.' },
+      todoTitle: 'Para documentar — detalle real a agregar más adelante',
+      todo: [
+        'Estrategia de índices y las queries que apuntan',
+        'EXPLAIN / query plans para los caminos calientes',
+        'Límites de transacción en los jobs de sync',
+        'Optimización de queries y configuración de connection pooling',
       ],
-      note: 'Los datos de fútbol en sí vienen de ESPN y Promiedos — fuentes no oficiales, scrapeadas, a las que solo le pega el VPS, nunca el navegador.',
+    },
+    ownership: {
+      eyebrow: 'Ownership de producción',
+      title: 'No solo "escribí el código."',
+      intro: 'Arquitectura → implementación → testing → deploy → monitoreo → manejo de incidentes → iteración.',
+      steps: [
+        ['Arquitectura', 'Diseñé el stack completo — edge, VPS, Postgres/Redis self-hosteados, y un proceso de WebSocket separado a propósito del proceso clusterizado de la app.'],
+        ['Implementación', 'Único ingeniero en frontend, API, capa de datos con pg crudo, jobs de sync y fan-out de tiempo real.'],
+        ['Testing', 'Validé el corte de stack y la migración de la DB contra una URL de staging y partidos en vivo antes de promover.'],
+        ['Deploy', 'Una GitHub Action entra por SSH al VPS, buildea y recarga el cluster de PM2 en cada push a master.'],
+        ['Monitoreo', 'UptimeRobot sobre la cadena HTTPS real a través de Cloudflare; sync_log y api_usage siguen la salud de la ingesta.'],
+        ['Manejo de incidentes', 'Diagnostiqué y resolví el casi-apagón por egress de Supabase, la falla silenciosa de tiempo real y la suspensión del proveedor de datos — solo, en producción.'],
+        ['Iteración', 'La misma capa de tiempo real hoy potencia también tablas en vivo, draft de fantasy y chat en vivo.'],
+      ] as [string, string][],
+      todo: 'TODO: stack de error tracking / alerting / logging estructurado — agregar detalles.',
     },
     challenges: {
-      eyebrow: 'Desafíos resueltos',
+      eyebrow: 'Tres desafíos clave de ingeniería',
       title: 'De punta a punta.',
-      intro: 'Cinco cosas que se rompieron, o casi se rompen, en producción — y cómo las resolví solo.',
       items: [
         {
-          tag: 'Migración de infra',
+          id: '01',
+          tag: 'Infraestructura de producción',
           title: 'Migración sin downtime de Vercel a un VPS self-hosteado',
           rows: [
-            ['Problema', 'El plan Hobby de Vercel tenía un tope de 4 horas de CPU activa por mes — probablemente ya excedido por los crons que sincronizaban datos en vivo cada 2 minutos — y sus términos restringen el plan gratis a uso no comercial, un problema real en cuanto se activaran ads o planes pagos.'],
-            ['Causa raíz', 'Vercel Pro también se descartó: su facturación por uso implica una factura impredecible ante un pico de tráfico o un bug, algo inaceptable para un proyecto de dos personas bancado de su bolsillo.'],
-            ['Solución', 'Stack nuevo — Cloudflare (CDN/TLS/Tunnel) → VPS de Hetzner corriendo Next.js bajo PM2 → Postgres + Redis self-hosteados — construido y probado contra una URL de staging mientras Vercel seguía sirviendo producción. Pipeline de deploy reconstruido desde cero como una GitHub Action que entra por SSH, builda y recarga PM2 en cada push a master. Recién corté el DNS después de validar un ciclo completo de login → guardar alineación → sync en vivo en el stack nuevo, con Vercel activo como plan de rollback.'],
-            ['Resultado', 'Cero downtime. El monitoreo también se corrigió en el camino — UptimeRobot estaba chequeando una IP pelada en un puerto cerrado en vez de la cadena HTTPS real a través de Cloudflare; arreglado antes de que importara.'],
+            ['Problema', 'El plan Hobby de Vercel tenía un tope de 4h de CPU activa por mes — probablemente ya excedido por los crons de sync cada 2 minutos — y su plan gratis prohíbe el uso comercial, bloqueando ads y planes pagos.'],
+            ['Decisión', 'Vercel Pro también se descartó: su facturación por uso implica una factura impredecible ante un pico de tráfico o un bug, inaceptable para un proyecto de dos personas bancado del bolsillo.'],
+            ['Solución', 'Stack nuevo — Cloudflare (CDN/TLS/Tunnel) → VPS de Hetzner corriendo Next.js bajo PM2 → Postgres + Redis self-hosteados — construido y probado contra una URL de staging mientras Vercel seguía sirviendo producción. Pipeline de deploy reconstruido como una GitHub Action que entra por SSH, buildea y recarga PM2 en cada push a master. Recién corté el DNS después de validar un ciclo completo de login → guardar alineación → sync en vivo, con Vercel activo como plan de rollback.'],
+            ['Resultado', 'Cero downtime. También detecté un punto ciego de monitoreo en el camino — UptimeRobot chequeaba una IP pelada en un puerto cerrado en vez de la cadena HTTPS a través de Cloudflare.'],
           ] as [string, string][],
+          mapsTo: 'Alinea con: ownership del proceso de release en producción, solo',
         },
         {
-          tag: 'Respuesta a incidentes',
-          title: 'Egress de Supabase a horas de pasar a solo lectura',
+          id: '02',
+          tag: 'Tiempo real / Reliability',
+          title: 'Saqué los servicios administrados del camino crítico y construí la capa de tiempo real',
           rows: [
-            ['Problema', 'El plan gratis de Supabase (5 GB de egress/mes) estaba a horas de dejar la base de datos de producción en modo solo lectura.'],
-            ['Causa raíz', 'Los datos de fútbol se enviaban por Supabase Realtime como snapshots grandes de JSONB a cada visitante. Sumado a eso: dev y prod apuntaban al mismo proyecto de Supabase, así que cada recarga local y cada prueba manual quemaba cuota de producción.'],
-            ['Solución', 'Moví los datos de fútbol a un Postgres self-hosteado en el mismo VPS que la app — mismo servidor, tráfico localhost-only, no cuenta contra ninguna cuota de egress. Dejé Supabase solo para datos de fantasy y auth. Reconstruí la entrega en tiempo real sobre Redis pub/sub alimentando un servidor WebSocket dedicado, verificado en vivo contra partidos reales antes de dar de baja el camino viejo. Provisioné un proyecto de Supabase separado para desarrollo, para frenar el sangrado de cuota.'],
-            ['Resultado', 'Volumen de datos y egress de Supabase reducidos casi en un orden de magnitud. El casi-apagón nunca se repitió.'],
+            ['Problema', 'El plan gratis de Supabase (5 GB de egress/mes) estaba a horas de dejar la base de producción en solo lectura. Aparte, el draft de fantasy nunca había funcionado — sin ningún error visible en ningún lado.'],
+            ['Causa raíz', 'Los datos de fútbol se enviaban por Supabase Realtime como snapshots grandes de JSONB a cada visitante, y dev + prod compartían un proyecto de Supabase así que cada recarga local quemaba cuota de prod. La suscripción de Realtime del draft apuntaba a una tabla nunca agregada a la publicación de realtime — se suscribía a nada.'],
+            ['Solución', 'Moví los datos de fútbol a Postgres self-hosteado en el VPS de la app (localhost, sin cuota de egress). Reconstruí el tiempo real sobre Redis pub/sub alimentando un proceso de WebSocket dedicado de una sola instancia, separado del proceso clusterizado para que no haya ambigüedad sobre qué instancia emite cada evento. Verificado en vivo contra partidos en curso antes de dar de baja el camino viejo. Provisioné un proyecto de Supabase separado para dev.'],
+            ['Resultado', 'Volumen de datos y egress de Supabase reducidos casi en un orden de magnitud; el casi-apagón nunca se repitió. La misma capa hoy potencia resultados en vivo, tablas y el draft de fantasy.'],
           ] as [string, string][],
+          mapsTo: 'Alinea con: producción & reliability · toma de decisiones técnicas',
         },
         {
-          tag: 'Diseño de sistemas',
-          title: 'Construí la capa de tiempo real yo mismo, después de que la administrada fallara en silencio',
+          id: '03',
+          tag: 'Migración de base de datos en producción',
+          title: 'Migración en vivo, 32 tablas, cero pérdida de datos',
           rows: [
-            ['Problema', 'El draft de fantasy nunca había funcionado, sin ningún error visible en ningún lado.'],
-            ['Causa raíz', 'Su suscripción de Supabase Realtime apuntaba a una tabla que nunca había sido agregada a la publicación de realtime de Supabase — se suscribía a nada, y nada se lo avisaba a nadie.'],
-            ['Solución', 'En vez de parchar el servicio administrado, construí una capa de tiempo real chica y propia: el job de sync publica los partidos que cambiaron en Redis, y un proceso de WebSocket de una sola instancia — separado del proceso clusterizado de la app para que no haya ambigüedad sobre qué instancia debe emitir cada evento — lo reenvía a los navegadores conectados.'],
-            ['Resultado', 'Esa misma capa hoy potencia el draft de fantasy en vivo, los resultados en vivo y las tablas en vivo.'],
-          ] as [string, string][],
-        },
-        {
-          tag: 'Migración de datos',
-          title: 'Migración de base de datos en vivo, 32 tablas, cero pérdida de datos',
-          rows: [
-            ['Problema', 'La región de un proyecto de Supabase no se puede cambiar después de creado. Mudarse a otra región de AWS implicaba migrar 32 tablas, políticas de RLS, buckets de storage y auth.users — mientras la base vieja seguía recibiendo escrituras de crons y usuarios en vivo.'],
-            ['Causa raíz', 'Cosas concretas que había que atrapar antes de que se convirtieran en pérdida de datos: pg_dump --no-privileges (necesario para evitar conflictos de ownership entre proyectos) borra en silencio los GRANT que le permiten a la app leer/escribir — no lo vi en el primer intento, lo detecté cuando el sync en vivo falló con "permission denied" contra datos reales. auth.users tiene una foreign key desde public.profiles que un dump de --schema=public no incluye, junto con el trigger on_auth_user_created. Los triggers que escriben filas de historial derivado había que deshabilitarlos antes de la carga masiva, o replayear el dump duplicaba el historial.'],
-            ['Solución', 'Decidí hacer pg_dump directo de la base viva en vez de replayear a mano seis archivos SQL de migración sueltos en el orden en que creía que se habían aplicado — una decisión deliberada para evitar un camino ambiguo y propenso a error hacia la corrupción de datos de producción.'],
+            ['Problema', 'La región de un proyecto de Supabase no se puede cambiar después de creado. Mudarse de región de AWS implicaba migrar 32 tablas, políticas de RLS, buckets de storage y auth.users — mientras la base vieja seguía recibiendo escrituras de crons y usuarios en vivo.'],
+            ['Causa raíz', 'Cosas que se habrían convertido en pérdida de datos: pg_dump --no-privileges (necesario para evitar conflictos de ownership entre proyectos) borra en silencio los GRANT que la app necesita — detectado recién cuando el sync en vivo falló con "permission denied". auth.users tiene una FK desde public.profiles que un dump de --schema=public no incluye, junto con el trigger on_auth_user_created. Los triggers que escriben historial había que deshabilitarlos antes de la carga masiva o el replay duplicaba filas.'],
+            ['Solución', 'Elegí un pg_dump directo de la base viva en vez de replayear a mano seis archivos SQL de migración sueltos y sin documentar en el orden que suponía — una decisión deliberada para evitar un camino ambiguo hacia la corrupción de datos de producción.'],
             ['Resultado', 'Las 32 tablas, políticas, buckets y datos de auth migrados con conteos de filas verificados idénticos entre la base vieja y la nueva. Cero pérdida de datos.'],
           ] as [string, string][],
+          mapsTo: 'Alinea con: Postgres, a fondo',
+        },
+      ],
+    },
+    other: {
+      eyebrow: 'Otros desafíos de ingeniería',
+      title: 'También resueltos.',
+      items: [
+        {
+          title: 'Ingesta de datos consciente de rate limits y costos',
+          detail: 'API-Football llegó a un tope de 100 requests/día y suspendió la cuenta sin previo aviso. Cambié a fuentes no oficiales scrapeadas (ESPN, Promiedos) con un sync de dos velocidades: un barrido general cada 1–2h que se saltea competiciones sin actividad en ±3 días, y un sync en vivo que lee snapshots guardados primero y solo pega contra las APIs reales durante la ventana de juego de un partido.',
         },
         {
-          tag: 'Optimización de costos',
-          title: 'Ingesta de datos consciente de rate limits y costos',
-          rows: [
-            ['Problema', 'El proveedor de datos pago original (API-Football) tenía un tope de 100 requests/día y eventualmente suspendió la cuenta sin previo aviso.'],
-            ['Causa raíz', 'El feed de datos central de la plataforma dependía de un único tercero pago y rate-limited, sin fallback.'],
-            ['Solución', 'Cambié a fuentes no oficiales, sin autenticación, scrapeadas (ESPN, Promiedos) con un sync deliberadamente de dos velocidades: un sync general cada 1-2 horas que se salta cualquier competición sin actividad en una ventana de ±3 días (más un barrido diario de seguridad para que nada quede desactualizado), y un sync en vivo que primero lee snapshots ya guardados — cero llamadas externas — y solo pega contra las APIs reales cuando detecta que un partido está efectivamente en su ventana de juego.'],
-            ['Resultado', 'Se mantiene liviano tanto para la fuente como para la infra, mientras sigue múltiples competiciones en vivo, simultáneamente.'],
-          ] as [string, string][],
+          title: 'Correctitud del monitoreo',
+          detail: 'UptimeRobot chequeaba una IP pelada en un puerto cerrado; lo reapunté a la cadena HTTPS real a través de Cloudflare antes de que importara.',
         },
+      ],
+    },
+    scale: {
+      eyebrow: 'Escala / resultados',
+      title: 'Dónde está parado.',
+      stats: [
+        '10.000+ partidos procesados',
+        'Divisiones principales de Argentina + las 5 grandes ligas de Europa + copas continentales, seguidas en vivo, simultáneamente',
+        'Usuarios reales — cuentas, drafts de fantasy en vivo, chat en vivo, todo sobre la misma capa de tiempo real',
       ],
     },
     stack: {
@@ -222,14 +399,15 @@ const content = {
         { name: 'Infraestructura & Ops', items: ['PM2', 'Cloudflare (CDN/TLS/Tunnel)', 'Hetzner Cloud (VPS)', 'GitHub Actions (CI/CD)', 'Cloudflare R2 (backups)'] },
       ],
     },
-    scale: {
-      eyebrow: 'Escala',
-      title: 'Dónde está parado.',
-      stats: [
-        '10.000+ partidos procesados',
-        'Divisiones principales de Argentina + las 5 grandes ligas de Europa + copas continentales, seguidas en vivo, simultáneamente',
-        'Usuarios reales — cuentas, drafts de fantasy en vivo, chat en vivo, todo sobre la misma capa de tiempo real',
-      ],
+    additional: {
+      eyebrow: 'Proyecto adicional',
+      title: 'La otra mitad del rol.',
+      name: 'Avi Salud',
+      url: 'avisalud.com.ar',
+      framing:
+        'Pelotita demuestra product engineering, infraestructura, tiempo real y ownership de producción. Avi Salud cubre lo que Pelotita naturalmente no: software de negocio, workflows operativos, usuarios no técnicos y mobile, y automatización.',
+      covers: ['Software operativo & workflows', 'Logística', 'Usuarios no técnicos / mobile', 'Automatización de negocio', 'Requisitos reales de negocio'],
+      placeholder: 'Contenido completo del case study en camino — esta sección es andamiaje, todavía no está escrita.',
     },
     footer: {
       eyebrow: 'Hablemos',
@@ -276,7 +454,8 @@ export default function PelotitaCaseStudy() {
         </div>
       </header>
 
-      <section className="section-shell pb-20 pt-6 md:pb-28">
+      {/* 1 · HERO */}
+      <section className="section-shell pb-16 pt-6 md:pb-20">
         <p className="eyebrow">{t.hero.eyebrow}</p>
         <h1 className="mt-6 section-title">{t.hero.title}</h1>
         <p className="work-intro mt-8">{t.hero.tagline}</p>
@@ -286,7 +465,7 @@ export default function PelotitaCaseStudy() {
           <a href="https://pelotita.com.ar" target="_blank" rel="noreferrer" className="text-foreground transition-colors hover:text-primary">{t.viewLive}</a>
         </div>
 
-        <div className="growth-stats max-w-2xl">
+        <div className="growth-stats max-w-3xl" style={{ gridTemplateColumns: 'repeat(2, 1fr)' }}>
           {t.hero.stats.map(stat => (
             <div key={stat[1]}><strong>{stat[0]}</strong><span>{stat[1]}</span></div>
           ))}
@@ -297,99 +476,204 @@ export default function PelotitaCaseStudy() {
         </figure>
       </section>
 
-      <section className="section-shell pb-20 md:pb-28">
-        <p className="eyebrow">{t.overview.eyebrow}</p>
-        <div className="mt-8 grid gap-8 md:grid-cols-2">
-          {t.overview.paragraphs.map((paragraph, index) => (
-            <p className="body-copy" key={index}>{paragraph}</p>
-          ))}
-        </div>
+      {/* 1b · PROOF OF WORK — live GitHub contributions */}
+      <section className="section-shell pb-16 md:pb-20">
+        <GithubContributions labels={t.commits} />
       </section>
 
+      {/* 2 · VIDEO — "How Pelotita works" */}
       <section className="border-y border-border bg-card">
-        <div className="section-shell py-20 md:py-28">
-          <p className="eyebrow">{t.architecture.eyebrow}</p>
-          <h2 className="mt-8 section-title craft-title">{t.architecture.title}</h2>
-          <div className="arch-flow">
-            {t.architecture.flow.map((node, index) => (
-              <div key={node.title} className="w-full">
-                <div className="arch-node">
-                  <p className="arch-node-title">{node.title}</p>
-                  <p className="arch-node-detail">{node.detail}</p>
+        <div className="section-shell py-16 md:py-24">
+          <p className="eyebrow">{t.video.eyebrow}</p>
+          <h2 className="mt-6 section-title craft-title">{t.video.title}</h2>
+          <div className="case-video">
+            <div className="case-video-frame">
+              {t.video.src ? (
+                <video src={t.video.src} controls playsInline preload="metadata" />
+              ) : (
+                <div className="case-video-ph">
+                  <span className="play" aria-hidden>▶</span>
+                  <p>{t.video.placeholder}</p>
                 </div>
-                {index < t.architecture.flow.length - 1 && <p className="arch-connector text-center">↓</p>}
-              </div>
-            ))}
-            <p className="arch-connector text-center">↓</p>
-            <div className="arch-branches">
-              {t.architecture.branches.map(node => (
-                <div key={node.title} className="arch-node">
-                  <p className="arch-node-title">{node.title}</p>
-                  <p className="arch-node-detail">{node.detail}</p>
-                </div>
-              ))}
+              )}
             </div>
-            <p className="arch-note">{t.architecture.note}</p>
+            <p className="case-video-caption">{t.video.caption}</p>
           </div>
         </div>
       </section>
 
-      <section className="section-shell py-20 md:py-28">
-        <p className="eyebrow">{t.challenges.eyebrow}</p>
-        <h2 className="mt-8 section-title craft-title">{t.challenges.title}</h2>
-        <p className="work-intro mt-8">{t.challenges.intro}</p>
-        <div className="mt-16">
-          {t.challenges.items.map((incident, index) => (
-            <article className="incident-card" key={incident.title}>
-              <div className="incident-head">
-                <span className="font-mono text-xs text-primary">{String(index + 1).padStart(2, '0')}</span>
-                <span className="tag">{incident.tag}</span>
-              </div>
-              <h3 className="incident-title">{incident.title}</h3>
-              <div className="incident-rows">
-                {incident.rows.map(row => (
-                  <div className="incident-row" key={row[0]}>
-                    <span>{row[0]}</span>
-                    <p>{row[1]}</p>
-                  </div>
-                ))}
-              </div>
-            </article>
-          ))}
+      {/* 3 · WHAT I BUILT */}
+      <section className="section-shell py-16 md:py-24">
+        <p className="eyebrow">{t.built.eyebrow}</p>
+        <h2 className="mt-6 section-title craft-title">{t.built.title}</h2>
+        <p className="body-copy mt-8 max-w-3xl">{t.built.lead}</p>
+        <ul className="fact-list max-w-3xl">
+          {t.built.items.map(item => <li key={item}>{item}</li>)}
+        </ul>
+      </section>
+
+      {/* 4 · HOW IT WORKS — visual pipeline */}
+      <section className="border-y border-border bg-card">
+        <div className="section-shell py-16 md:py-24">
+          <p className="eyebrow">{t.pipeline.eyebrow}</p>
+          <h2 className="mt-6 section-title craft-title">{t.pipeline.title}</h2>
+          <p className="work-intro mt-8">{t.pipeline.intro}</p>
+          <div className="pipeline">
+            {t.pipeline.steps.map((step, index) => (
+              <Fragment key={step[0]}>
+                <div className="pipeline-step">
+                  <p className="pipeline-step-label">{step[0]}</p>
+                  <p className="pipeline-step-note">{step[1]}</p>
+                </div>
+                {index < t.pipeline.steps.length - 1 && <span className="pipeline-arrow" aria-hidden />}
+              </Fragment>
+            ))}
+          </div>
+          <p className="pipeline-foot">{t.pipeline.foot}</p>
         </div>
       </section>
 
+      {/* 5 · TECHNICAL ARCHITECTURE */}
+      <section className="section-shell py-16 md:py-24">
+        <p className="eyebrow">{t.architecture.eyebrow}</p>
+        <h2 className="mt-6 section-title craft-title">{t.architecture.title}</h2>
+        <div className="layer-list">
+          {t.architecture.layers.map(layer => (
+            <div className="layer-row" key={layer[0]}>
+              <span>{layer[0]}</span>
+              <p>{layer[1]}</p>
+            </div>
+          ))}
+        </div>
+        <p className="arch-note" style={{ marginInline: 0, textAlign: 'left' }}>{t.architecture.note}</p>
+      </section>
+
+      {/* 6 · DATABASE / POSTGRESQL */}
       <section className="border-y border-border bg-card">
-        <div className="section-shell py-20 md:py-28">
-          <p className="eyebrow">{t.stack.eyebrow}</p>
-          <h2 className="mt-8 section-title craft-title">{t.stack.title}</h2>
-          <div className="hub-categories mt-16">
-            {t.stack.groups.map((group, index) => (
-              <div className={`hub-card hub-card-${index}`} key={group.name}>
-                <div className="hub-card-header">
-                  <span className="hub-card-dot" />
-                  <h4>{group.name}</h4>
+        <div className="section-shell py-16 md:py-24">
+          <p className="eyebrow">{t.database.eyebrow}</p>
+          <h2 className="mt-6 section-title craft-title">{t.database.title}</h2>
+          <p className="body-copy mt-8 max-w-3xl">{t.database.lead}</p>
+          <ul className="fact-list max-w-3xl">
+            {t.database.facts.map(fact => <li key={fact}>{fact}</li>)}
+          </ul>
+          <div className="todo-block max-w-3xl">
+            <h4>{t.database.todoTitle}</h4>
+            <ul>
+              {t.database.todo.map(item => <li key={item}>{item}</li>)}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* 7 · PRODUCTION OWNERSHIP */}
+      <section className="section-shell py-16 md:py-24">
+        <p className="eyebrow">{t.ownership.eyebrow}</p>
+        <h2 className="mt-6 section-title craft-title">{t.ownership.title}</h2>
+        <p className="work-intro mt-8">{t.ownership.intro}</p>
+        <div className="ownership-steps">
+          {t.ownership.steps.map(step => (
+            <div className="ownership-step" key={step[0]}>
+              <span>{step[0]}</span>
+              <p>{step[1]}</p>
+            </div>
+          ))}
+        </div>
+        <p className="todo-inline">{t.ownership.todo}</p>
+      </section>
+
+      {/* 8 · THREE KEY ENGINEERING CHALLENGES */}
+      <section className="border-y border-border bg-card">
+        <div className="section-shell py-16 md:py-24">
+          <p className="eyebrow">{t.challenges.eyebrow}</p>
+          <h2 className="mt-6 section-title craft-title">{t.challenges.title}</h2>
+          <div className="mt-14">
+            {t.challenges.items.map(incident => (
+              <article className="incident-card" key={incident.id}>
+                <div className="incident-head">
+                  <span className="font-mono text-xs text-primary">{incident.id}</span>
+                  <span className="tag">{incident.tag}</span>
                 </div>
-                <div className="hub-tags">
-                  {group.items.map(item => <span className="tag" key={item}>{item}</span>)}
+                <h3 className="incident-title">{incident.title}</h3>
+                <div className="incident-rows">
+                  {incident.rows.map(row => (
+                    <div className="incident-row" key={row[0]}>
+                      <span>{row[0]}</span>
+                      <p>{row[1]}</p>
+                    </div>
+                  ))}
                 </div>
-              </div>
+                <p className="incident-mapsto">{incident.mapsTo}</p>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="section-shell py-20 md:py-28">
-        <p className="eyebrow">{t.scale.eyebrow}</p>
-        <h2 className="mt-8 section-title craft-title">{t.scale.title}</h2>
-        <ul className="mt-10 flex flex-col gap-5 border-t border-border pt-8">
-          {t.scale.stats.map(stat => (
-            <li className="flex items-start gap-3 body-copy" key={stat}>
-              <span className="mt-2 h-[.42rem] w-[.42rem] flex-none bg-primary" aria-hidden />
-              <span>{stat}</span>
-            </li>
+      {/* 9 · OTHER ENGINEERING CHALLENGES */}
+      <section className="section-shell py-16 md:py-24">
+        <p className="eyebrow">{t.other.eyebrow}</p>
+        <h2 className="mt-6 section-title craft-title">{t.other.title}</h2>
+        <div className="mini-list max-w-3xl">
+          {t.other.items.map(item => (
+            <div className="mini-item" key={item.title}>
+              <h4>{item.title}</h4>
+              <p>{item.detail}</p>
+            </div>
           ))}
-        </ul>
+        </div>
+      </section>
+
+      {/* 10 · SCALE / RESULTS */}
+      <section className="border-y border-border bg-card">
+        <div className="section-shell py-16 md:py-24">
+          <p className="eyebrow">{t.scale.eyebrow}</p>
+          <h2 className="mt-6 section-title craft-title">{t.scale.title}</h2>
+          <ul className="mt-10 flex flex-col gap-5 border-t border-border pt-8">
+            {t.scale.stats.map(stat => (
+              <li className="flex items-start gap-3 body-copy" key={stat}>
+                <span className="mt-2 h-[.42rem] w-[.42rem] flex-none bg-primary" aria-hidden />
+                <span>{stat}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* 11 · STACK */}
+      <section className="section-shell py-16 md:py-24">
+        <p className="eyebrow">{t.stack.eyebrow}</p>
+        <h2 className="mt-6 section-title craft-title">{t.stack.title}</h2>
+        <div className="hub-categories mt-14">
+          {t.stack.groups.map((group, index) => (
+            <div className={`hub-card hub-card-${index}`} key={group.name}>
+              <div className="hub-card-header">
+                <span className="hub-card-dot" />
+                <h4>{group.name}</h4>
+              </div>
+              <div className="hub-tags">
+                {group.items.map(item => <span className="tag" key={item}>{item}</span>)}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 12 · ADDITIONAL PROJECT — Avi Salud (scaffold only) */}
+      <section className="border-y border-border bg-card">
+        <div className="section-shell py-16 md:py-24">
+          <p className="eyebrow">{t.additional.eyebrow}</p>
+          <h2 className="mt-6 section-title craft-title">{t.additional.title}</h2>
+          <div className="additional-card">
+            <h3>{t.additional.name}</h3>
+            <p className="additional-url">{t.additional.url}</p>
+            <p className="additional-framing">{t.additional.framing}</p>
+            <div className="additional-covers">
+              {t.additional.covers.map(c => <span className="tag" key={c}>{c}</span>)}
+            </div>
+            <p className="todo-inline">{t.additional.placeholder}</p>
+          </div>
+        </div>
       </section>
 
       <footer className="footer">
