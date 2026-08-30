@@ -7,7 +7,7 @@ const geistSans = Geist({ subsets: ['latin'], variable: '--font-geist-sans' })
 const geistMono = Geist_Mono({ subsets: ['latin'], variable: '--font-geist-mono' })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://valentinsg-portoflio.vercel.app'),
+  metadataBase: new URL('https://valentinsg-portfolio.vercel.app'),
   alternates: { canonical: '/' },
     title: 'Valentín Sánchez Guevara — Product Builder & Full-Stack Developer',
   description:
@@ -52,7 +52,7 @@ const personSchema = {
   '@type': 'Person',
   name: 'Valentín Sánchez Guevara',
   jobTitle: 'Product Builder & Full-Stack Developer',
-  url: 'https://valentinsg-portoflio.vercel.app',
+  url: 'https://valentinsg-portfolio.vercel.app',
   email: 'mailto:sanchezguevaravalentin@gmail.com',
   address: { '@type': 'PostalAddress', addressLocality: 'Mar del Plata', addressCountry: 'AR' },
   sameAs: ['https://www.linkedin.com/in/valent%C3%ADn-s-761910200/', 'https://github.com/valentinsg'],

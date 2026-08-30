@@ -450,6 +450,10 @@ html.lenis { scroll-behavior: auto; }
 .pipeline-arrow { align-self: center; color: color-mix(in srgb, var(--primary) 70%, transparent); font-family: var(--font-geist-mono), monospace; font-size: .95rem; }
 .pipeline-arrow::after { content: "\2193"; }
 .pipeline-foot { margin-top: 1.4rem; max-width: 40rem; color: var(--muted-foreground); font-size: .82rem; line-height: 1.55; }
+.pipeline-track { margin-top: 2.5rem; }
+.pipeline-track:first-of-type { margin-top: 3rem; }
+.pipeline-track-label { font-family: var(--font-geist-mono), monospace; font-size: .64rem; letter-spacing: .14em; text-transform: uppercase; color: var(--primary); }
+.pipeline-track .pipeline { margin-top: 1rem; }
 @media (min-width: 960px) {
   .pipeline { flex-flow: row wrap; align-items: stretch; gap: .5rem; }
   .pipeline-step { flex: 1 1 0; min-width: 8.5rem; display: flex; flex-direction: column; }
@@ -505,8 +509,17 @@ html.lenis { scroll-behavior: auto; }
 .gh-profile { display: inline-block; margin-top: 1.75rem; font-family: var(--font-geist-mono), monospace; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted-foreground); border-bottom: 1px solid var(--border); padding-bottom: .3rem; transition: color .2s, border-color .2s; }
 .gh-profile:hover { color: var(--primary); border-color: var(--primary); }
 
+/* Case study — companion cross-link */
+.companion { margin-top: 2.5rem; display: flex; flex-wrap: wrap; align-items: baseline; gap: .75rem 1.25rem; border-top: 1px solid var(--border); padding-top: 1.75rem; }
+.companion-label { font-family: var(--font-geist-mono), monospace; font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted-foreground); }
+.companion-link { font-size: 1.05rem; font-weight: 550; letter-spacing: -.02em; border-bottom: 1px solid var(--border); padding-bottom: .2rem; transition: color .2s, border-color .2s; }
+.companion-link:hover { color: var(--primary); border-color: var(--primary); }
+.companion-note { flex-basis: 100%; color: var(--muted-foreground); font-size: .88rem; line-height: 1.55; }
+
 /* Case study — additional project */
 .additional-card { margin-top: 2.5rem; border: 1px solid var(--border); border-radius: var(--radius); background: var(--card); padding: 2rem; }
+.additional-card .additional-cta { display: inline-block; margin-top: 1.5rem; font-family: var(--font-geist-mono), monospace; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--foreground); border-bottom: 1px solid var(--primary); padding-bottom: .3rem; transition: color .2s; }
+.additional-card .additional-cta:hover { color: var(--primary); }
 .additional-card h3 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); letter-spacing: -.03em; font-weight: 550; }
 .additional-card .additional-url { margin-top: .5rem; font-family: var(--font-geist-mono), monospace; font-size: .68rem; letter-spacing: .1em; color: var(--muted-foreground); }
 .additional-card .additional-framing { margin-top: 1.5rem; max-width: 44rem; color: var(--muted-foreground); line-height: 1.65; font-size: .95rem; }

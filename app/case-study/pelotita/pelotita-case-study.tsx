@@ -202,14 +202,15 @@ const content = {
       ],
     },
     additional: {
-      eyebrow: 'Additional project',
+      eyebrow: 'Companion case study',
       title: 'The other half of the role.',
-      name: 'Avi Salud',
-      url: 'avisalud.com.ar',
+      name: 'AVI Salud Admin',
+      url: 'Internal ops panel · tech lead of a two-developer team',
       framing:
-        'Pelotita proves product engineering, infrastructure, realtime, and production ownership. Avi Salud covers what Pelotita naturally does not: business software, operational workflows, non-technical and mobile users, and automation.',
-      covers: ['Operational software & workflows', 'Logistics', 'Non-technical / mobile users', 'Business automation', 'Real-world business requirements'],
-      placeholder: 'Full case study content coming — this section is scaffolded, not written yet.',
+        'Pelotita proves product engineering, infrastructure, realtime, and production ownership. AVI Salud covers what Pelotita naturally does not: business software, operational workflows, non-technical users, authorization, and automation — on a shared production database, with a recovered 26-table Postgres schema and configurable RBAC enforced in RLS.',
+      covers: ['Operational workflows', 'RBAC in RLS', 'Prod schema recovery', 'Migration discipline', 'Non-technical users', 'Business automation'],
+      href: '/case-study/avi-salud',
+      cta: 'Read the AVI Salud case study →',
     },
     footer: {
       eyebrow: 'Get in touch',
@@ -400,14 +401,15 @@ const content = {
       ],
     },
     additional: {
-      eyebrow: 'Proyecto adicional',
+      eyebrow: 'Case study complementario',
       title: 'La otra mitad del rol.',
-      name: 'Avi Salud',
-      url: 'avisalud.com.ar',
+      name: 'AVI Salud Admin',
+      url: 'Panel de operaciones interno · tech lead de un equipo de dos developers',
       framing:
-        'Pelotita demuestra product engineering, infraestructura, tiempo real y ownership de producción. Avi Salud cubre lo que Pelotita naturalmente no: software de negocio, workflows operativos, usuarios no técnicos y mobile, y automatización.',
-      covers: ['Software operativo & workflows', 'Logística', 'Usuarios no técnicos / mobile', 'Automatización de negocio', 'Requisitos reales de negocio'],
-      placeholder: 'Contenido completo del case study en camino — esta sección es andamiaje, todavía no está escrita.',
+        'Pelotita demuestra product engineering, infraestructura, tiempo real y ownership de producción. AVI Salud cubre lo que Pelotita naturalmente no: software de negocio, workflows operativos, usuarios no técnicos, autorización y automatización — sobre una base de datos de producción compartida, con un esquema Postgres de 26 tablas recuperado y RBAC configurable enforced en RLS.',
+      covers: ['Workflows operativos', 'RBAC en RLS', 'Recuperación de esquema en prod', 'Disciplina de migraciones', 'Usuarios no técnicos', 'Automatización de negocio'],
+      href: '/case-study/avi-salud',
+      cta: 'Leer el case study de AVI Salud →',
     },
     footer: {
       eyebrow: 'Hablemos',
@@ -659,7 +661,7 @@ export default function PelotitaCaseStudy() {
         </div>
       </section>
 
-      {/* 12 · ADDITIONAL PROJECT — Avi Salud (scaffold only) */}
+      {/* 12 · COMPANION CASE STUDY — AVI Salud */}
       <section className="border-y border-border bg-card">
         <div className="section-shell py-16 md:py-24">
           <p className="eyebrow">{t.additional.eyebrow}</p>
@@ -671,7 +673,7 @@ export default function PelotitaCaseStudy() {
             <div className="additional-covers">
               {t.additional.covers.map(c => <span className="tag" key={c}>{c}</span>)}
             </div>
-            <p className="todo-inline">{t.additional.placeholder}</p>
+            <Link className="additional-cta" href={t.additional.href}>{t.additional.cta}</Link>
           </div>
         </div>
       </section>
