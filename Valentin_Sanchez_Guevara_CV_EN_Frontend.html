@@ -6,25 +6,25 @@
 <style>
   /* ATS-safe: single column, no tables, no icons, standard fonts */
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: Arial, Helvetica, sans-serif; font-size: 10.5pt; line-height: 1.45; color: #111; max-width: 51rem; margin: 0 auto; padding: 2.2rem 2.4rem; }
+  body { font-family: Arial, Helvetica, sans-serif; font-size: 10pt; line-height: 1.4; color: #111; max-width: 51rem; margin: 0 auto; padding: 2.2rem 2.4rem; }
   h1 { font-size: 20pt; letter-spacing: -.01em; font-weight: 700; }
   .subtitle { font-size: 11.5pt; margin-top: .15rem; }
-  .contact { margin-top: .55rem; font-size: 9.5pt; color: #333; }
-  .contact-row { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin-bottom: .35rem; }
+  .contact { margin-top: .5rem; font-size: 9.5pt; color: #333; }
+  .contact-row { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin-bottom: .3rem; }
   .contact-row:last-child { margin-bottom: 0; }
   .contact-row .sep { color: #bbb; }
-  h2 { font-size: 11pt; text-transform: uppercase; letter-spacing: .1em; color: #111; border-bottom: 1.5px solid #111; padding-bottom: .25rem; margin: 1.5rem 0 .65rem; }
-  .job { margin-bottom: .9rem; }
+  h2 { font-size: 10.5pt; text-transform: uppercase; letter-spacing: .1em; color: #111; border-bottom: 1.5px solid #111; padding-bottom: .2rem; margin: 1.05rem 0 .5rem; }
+  .job { margin-bottom: .7rem; }
   .job-head { display: flex; justify-content: space-between; flex-wrap: wrap; gap: .25rem; }
-  .job-head strong { font-size: 10.8pt; font-weight: 700; }
-  .job-head span { font-size: 9.5pt; color: #333; font-style: italic; }
+  .job-head strong { font-size: 10.5pt; font-weight: 700; }
+  .job-head span { font-size: 9.5pt; color: #333; font-style: italic; padding-right: .2em; }
   .job-sub { font-size: 9.5pt; color: #333; margin-top: .1rem; }
-  ul { margin: .35rem 0 0 1.1rem; }
-  li { margin-bottom: .22rem; }
-  .skills p { margin-bottom: .3rem; }
+  ul { margin: .3rem 0 0 1.1rem; }
+  li { margin-bottom: .18rem; }
+  .skills p { margin-bottom: .25rem; }
   a { color: #111; text-decoration: none; border-bottom: .5px solid #999; }
-  .rule { border: none; border-top: 1px solid #ccc; margin: .6rem 0 0; }
-  @media print { body { padding: 0; } @page { margin: 1.6cm 1.8cm; } }
+  .rule { border: none; border-top: 1px solid #ccc; margin: .55rem 0 0; }
+  @media print { body { padding: 0; } @page { margin: 1.3cm 1.6cm; } }
 </style>
 </head>
 <body>
@@ -47,16 +47,16 @@
 
 <h2>Summary</h2>
 <p>
-  Frontend engineer with 3+ years of professional experience building production interfaces in React, Next.js and TypeScript, plus 6 years writing code overall. I care about the details that make a UI feel fast and correct: component architecture, state management, accessibility, Core Web Vitals and clean design systems. I have shipped high-volume Web3 dashboards, e-commerce storefronts, real-time maps and healthcare platforms, and I work comfortably across React, Next.js, Tailwind CSS, Astro, WordPress and Shopify. I also connect frontend work to backend reality (Node.js, Java, PostgreSQL) when a feature needs it end to end.
+  Frontend engineer with 3+ years of professional experience building production interfaces in React, Next.js and TypeScript, plus 6 years writing code overall. I care about the details that make a UI feel fast and correct: component architecture, state management, accessibility, Core Web Vitals and clean design systems. I have shipped high-volume Web3 dashboards, e-commerce storefronts, real-time maps, a live football platform and healthcare systems, working across React, Next.js, Tailwind CSS, Astro, WordPress and Shopify. I also connect frontend work to backend reality (Node.js, PostgreSQL, real-time data) when a feature needs it end to end.
 </p>
 
 <h2>Professional Experience</h2>
-
 <div class="job">
   <div class="job-head"><strong>Founder &amp; Technical Lead — Estudio Ve</strong><span>2026 – Present</span></div>
-  <p class="job-sub">Digital product studio · Remote, Argentina · estudiove.ar</p>
+  <p class="job-sub">Digital product studio · Remote, Argentina · estudiove.com</p>
   <ul>
-    <li>Built the Next.js frontends for Stockeo (inventory SaaS) and Avi Salud's public website, focused on clear information architecture and a fast, accessible UI.</li>
+    <li>Founded the studio; built Avi Salud's public website, focused on clear information architecture and a fast, accessible UI.</li>
+    <li>Tech lead of a two-developer team on Avi Salud's internal operations system (Next.js 16, React 19, Server Components, strict TypeScript) that replaced Excel and WhatsApp for non-technical office staff.</li>
     <li>Own component design and UI decisions end to end, from Figma-level thinking to production React code.</li>
   </ul>
 </div>
@@ -75,7 +75,7 @@
   <div class="job-head"><strong>Frontend Developer &amp; Consultant — Claridad</strong><span>Dec 2024 – Sep 2025</span></div>
   <p class="job-sub">Civic safety platform · Mar del Plata (part-time) · claridad.ar</p>
   <ul>
-    <li>Sole frontend engineer on a collaborative safety map: React UI, mobile adaptation, real-time alerts and an interactive map with geolocated reports.</li>
+    <li>Sole frontend engineer in a small team building a collaborative safety map: React UI, mobile adaptation, real-time alerts and an interactive map with geolocated reports.</li>
     <li>Owned the UI/UX from first prototype to the version tested publicly in hackathons.</li>
   </ul>
 </div>
@@ -90,31 +90,34 @@
   </ul>
 </div>
 
-<h2>Personal Projects</h2>
+<h2>Projects</h2>
+<div class="job">
+  <div class="job-head"><strong>Pelotita — Founder &amp; sole engineer</strong><span>pelotita.com.ar</span></div>
+  <p class="job-sub">Live football platform: scores, standings, stats, editorial content and real-time fantasy leagues</p>
+  <ul>
+    <li>Built the Next.js 16 / React 19 / Tailwind v4 frontend for live scores, standings, cup brackets and a real-time fantasy draft, fed by a custom WebSocket layer.</li>
+    <li>160k+ Google Search impressions in its first two months; 10k+ matches processed across Argentina's top divisions, Europe's top 5 leagues and continental cups.</li>
+    <li>Also own everything behind the UI: self-hosted PostgreSQL and Redis on a VPS behind Cloudflare, with GitHub Actions CI/CD — 360 commits in six weeks as the only engineer.</li>
+  </ul>
+</div>
+
 <div class="job">
   <ul>
-    <li><strong>Pelotita (football data and fantasy):</strong> React/Next.js UI over 10k+ processed matches, built for speed under constantly changing data.</li>
-    <li><strong>Busy (clothing e-commerce):</strong> founded and built the full storefront, content and design, with no physical shop, ranking for clothing searches in Mar del Plata through technical SEO.</li>
-    <li><strong>Presidential Simulator:</strong> independent game built with friends — UI, game systems and TypeScript as a technical side project.</li>
+    <li><strong>Busy (clothing e-commerce):</strong> founded the brand and built the full storefront, content and design. With no physical shop, it ranked for clothing searches in Mar del Plata through technical SEO.</li>
+    <li><strong>Presidential Simulator:</strong> independent game I design and build solo — UI, game systems and TypeScript.</li>
   </ul>
 </div>
 
 <h2>Technical Skills</h2>
 <div class="skills">
-  <p><strong>Frontend:</strong> React, Next.js, TypeScript, JavaScript, Tailwind CSS, Chakra UI, Astro, WordPress, Shopify, component architecture, accessibility, design systems</p>
+  <p><strong>Frontend:</strong> React, Next.js, TypeScript, JavaScript, Tailwind CSS, Chakra UI, Astro, WordPress, Shopify, component architecture, accessibility, design systems, real-time UI (WebSockets)</p>
   <p><strong>Performance &amp; growth:</strong> Core Web Vitals, Lighthouse, technical SEO, Google Analytics 4, Search Console, Semrush</p>
-  <p><strong>Backend &amp; data (working knowledge):</strong> Node.js, Java, REST APIs, PostgreSQL, Supabase, Firebase</p>
+  <p><strong>Backend &amp; data:</strong> Node.js, PostgreSQL, Redis, Supabase, Firebase, REST APIs, Java</p>
   <p><strong>Tooling:</strong> Figma, Git, GitHub Actions, Playwright, Jira, Scrum</p>
 </div>
 
-<h2>Education</h2>
-<div class="job">
-  <div class="job-head"><strong>Coursework in Programming — UTN Mar del Plata</strong><span>2022</span></div>
-</div>
-<div class="job">
-  <div class="job-head"><strong>Professional Ontological Coach — Argos</strong><span>2025 – 2026</span></div>
-  <p class="job-sub">Effective communication, team leadership and handling difficult conversations.</p>
-</div>
+<h2>Education &amp; Training</h2>
+<p>Programming coursework — UTN Mar del Plata (2022, not completed) · Ontological Coaching training: communication, team leadership and difficult conversations — Argos (2025 – 2026)</p>
 
 <h2>Languages</h2>
 <p>Spanish (native) · English (intermediate, B2 certification in progress — daily written work with US clients)</p>

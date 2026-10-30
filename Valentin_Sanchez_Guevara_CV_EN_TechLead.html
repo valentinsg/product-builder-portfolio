@@ -6,25 +6,25 @@
 <style>
   /* ATS-safe: single column, no tables, no icons, standard fonts */
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: Arial, Helvetica, sans-serif; font-size: 10.5pt; line-height: 1.45; color: #111; max-width: 51rem; margin: 0 auto; padding: 2.2rem 2.4rem; }
+  body { font-family: Arial, Helvetica, sans-serif; font-size: 10pt; line-height: 1.4; color: #111; max-width: 51rem; margin: 0 auto; padding: 2.2rem 2.4rem; }
   h1 { font-size: 20pt; letter-spacing: -.01em; font-weight: 700; }
   .subtitle { font-size: 11.5pt; margin-top: .15rem; }
-  .contact { margin-top: .55rem; font-size: 9.5pt; color: #333; }
-  .contact-row { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin-bottom: .35rem; }
+  .contact { margin-top: .5rem; font-size: 9.5pt; color: #333; }
+  .contact-row { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin-bottom: .3rem; }
   .contact-row:last-child { margin-bottom: 0; }
   .contact-row .sep { color: #bbb; }
-  h2 { font-size: 11pt; text-transform: uppercase; letter-spacing: .1em; color: #111; border-bottom: 1.5px solid #111; padding-bottom: .25rem; margin: 1.5rem 0 .65rem; }
-  .job { margin-bottom: .9rem; }
+  h2 { font-size: 10.5pt; text-transform: uppercase; letter-spacing: .1em; color: #111; border-bottom: 1.5px solid #111; padding-bottom: .2rem; margin: 1.05rem 0 .5rem; }
+  .job { margin-bottom: .7rem; }
   .job-head { display: flex; justify-content: space-between; flex-wrap: wrap; gap: .25rem; }
-  .job-head strong { font-size: 10.8pt; font-weight: 700; }
-  .job-head span { font-size: 9.5pt; color: #333; font-style: italic; }
+  .job-head strong { font-size: 10.5pt; font-weight: 700; }
+  .job-head span { font-size: 9.5pt; color: #333; font-style: italic; padding-right: .2em; }
   .job-sub { font-size: 9.5pt; color: #333; margin-top: .1rem; }
-  ul { margin: .35rem 0 0 1.1rem; }
-  li { margin-bottom: .22rem; }
-  .skills p { margin-bottom: .3rem; }
+  ul { margin: .3rem 0 0 1.1rem; }
+  li { margin-bottom: .18rem; }
+  .skills p { margin-bottom: .25rem; }
   a { color: #111; text-decoration: none; border-bottom: .5px solid #999; }
-  .rule { border: none; border-top: 1px solid #ccc; margin: .6rem 0 0; }
-  @media print { body { padding: 0; } @page { margin: 1.6cm 1.8cm; } }
+  .rule { border: none; border-top: 1px solid #ccc; margin: .55rem 0 0; }
+  @media print { body { padding: 0; } @page { margin: 1.3cm 1.6cm; } }
 </style>
 </head>
 <body>
@@ -47,17 +47,17 @@
 
 <h2>Summary</h2>
 <p>
-  Technical lead and full-stack engineer with 3+ years of professional experience turning business problems into systems that ship and scale. I act as the bridge between a client's business logic and a working product: I lead architecture and delivery decisions, coordinate priorities across multiple stakeholders, and stay hands-on across React, Next.js, TypeScript, Node.js, Java and PostgreSQL. I have led technical delivery for 10+ clients at once and co-founded a product studio from the ground up. A professional Ontological Coaching background sharpens how I lead teams — not just technically, but through communication, active listening and framing hard conversations early.
+  Technical lead and full-stack engineer with 3+ years of professional experience turning business problems into systems that ship and scale. I act as the bridge between a client's business logic and a working product: I lead architecture and delivery decisions, coordinate priorities across multiple stakeholders, and stay hands-on across React, Next.js, TypeScript, Node.js and PostgreSQL — through production, releases and incidents. I have led technical delivery for 10+ clients at once and founded a product studio from the ground up. Training in Ontological Coaching sharpens how I lead teams — not just technically, but through communication, active listening and framing hard conversations early.
 </p>
 
 <h2>Professional Experience</h2>
-
 <div class="job">
   <div class="job-head"><strong>Founder &amp; Technical Lead — Estudio Ve</strong><span>2026 – Present</span></div>
-  <p class="job-sub">Digital product studio · Remote, Argentina · estudiove.ar</p>
+  <p class="job-sub">Digital product studio · Remote, Argentina · estudiove.com</p>
   <ul>
-    <li>Co-founded the studio with a partner, turning it into a team that designs, builds and owns digital products for SMBs and companies end to end — from the initial business problem to production and iteration.</li>
-    <li>Set technical strategy and architecture across every active project, including Stockeo (inventory SaaS with Java, Next.js, PostgreSQL and Mercado Pago) and Avi Salud's public site and internal operations system.</li>
+    <li>Founded the studio, which designs, builds and owns digital products for SMBs end to end — from the initial business problem to production and iteration.</li>
+    <li>Tech lead of a two-developer team on Avi Salud's internal operations system, replacing Excel and WhatsApp for a home-healthcare company; set the repo conventions and the migration process the team ships against.</li>
+    <li>Kept a shared production database safe with no staging environment: 54 migrations over six weeks with no data loss, configurable role-based access control enforced in Postgres RLS, and all 90 server actions permission-guarded.</li>
     <li>Make the product, pricing and delivery calls alongside the technical ones — treating the business outcome as part of the engineering job, not separate from it.</li>
   </ul>
 </div>
@@ -76,8 +76,8 @@
   <div class="job-head"><strong>Frontend Developer &amp; Consultant — Claridad</strong><span>Dec 2024 – Sep 2025</span></div>
   <p class="job-sub">Civic safety platform · Mar del Plata (part-time) · claridad.ar</p>
   <ul>
+    <li>Sole frontend engineer in a small, close team where technical and product decisions were made jointly, end to end.</li>
     <li>Represented the product technically in hackathons and public validation sessions, translating user and stakeholder feedback into concrete product direction.</li>
-    <li>Worked in a small, close team where technical and product decisions were made jointly, end to end.</li>
   </ul>
 </div>
 
@@ -93,27 +93,21 @@
 <h2>Leadership &amp; Ownership</h2>
 <div class="job">
   <ul>
-    <li><strong>Professional Ontological Coaching (Argos, 2025–2026):</strong> trained in leading teams through both technical direction and emotional/communication management — prioritizing clear communication as a business asset, not a soft skill on the side.</li>
+    <li><strong>Pelotita</strong> (pelotita.com.ar): founded and run a live football platform as its sole engineer — architecture, self-hosted infrastructure, releases and incident handling. 160k+ Google Search impressions in its first two months; zero-downtime migration off Vercel and a 32-table live database migration with no data loss.</li>
+    <li><strong>Ontological Coaching training (Argos, 2025–2026):</strong> leading teams through both technical direction and communication — treating clear communication as a business asset, not a soft skill on the side.</li>
     <li><strong>Founded and ran Busy</strong>, a clothing brand, end to end — product, e-commerce, payments, content, SEO and events — the first time I owned every business decision alongside every technical one.</li>
-    <li><strong>Presidential Simulator:</strong> lead a small group of friends building an independent game, coordinating scope, systems design and collaboration on a project with no external deadline.</li>
   </ul>
 </div>
 
 <h2>Technical Skills</h2>
 <div class="skills">
-  <p><strong>Leadership &amp; delivery:</strong> technical strategy, system architecture, cross-team coordination, client communication, Scrum, Jira, CI/CD, GitHub Actions</p>
-  <p><strong>Full-stack:</strong> React, Next.js, TypeScript, Node.js, Java, PostgreSQL, REST APIs, Supabase, Firebase, WordPress, Shopify</p>
+  <p><strong>Leadership &amp; delivery:</strong> technical strategy, system architecture, release process, incident handling, cross-team coordination, client communication, Scrum, Jira, CI/CD, GitHub Actions</p>
+  <p><strong>Full-stack:</strong> React, Next.js, TypeScript, Node.js, PostgreSQL (RLS, migrations), Redis, WebSockets, REST APIs, Supabase, Firebase, Java, WordPress, Shopify</p>
   <p><strong>Growth &amp; product:</strong> technical SEO, Core Web Vitals, Google Analytics 4, product judgment, pricing and business decisions, LLM integrations (OpenAI, Claude)</p>
 </div>
 
-<h2>Education</h2>
-<div class="job">
-  <div class="job-head"><strong>Coursework in Programming — UTN Mar del Plata</strong><span>2022</span></div>
-</div>
-<div class="job">
-  <div class="job-head"><strong>Professional Ontological Coach — Argos</strong><span>2025 – 2026</span></div>
-  <p class="job-sub">Effective communication, team leadership and handling difficult conversations.</p>
-</div>
+<h2>Education &amp; Training</h2>
+<p>Programming coursework — UTN Mar del Plata (2022, not completed) · Ontological Coaching training: communication, team leadership and difficult conversations — Argos (2025 – 2026)</p>
 
 <h2>Languages</h2>
 <p>Spanish (native) · English (intermediate, B2 certification in progress — daily written work with US clients)</p>

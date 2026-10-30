@@ -6,25 +6,25 @@
 <style>
   /* ATS-safe: single column, no tables, no icons, standard fonts */
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: Arial, Helvetica, sans-serif; font-size: 10.5pt; line-height: 1.45; color: #111; max-width: 51rem; margin: 0 auto; padding: 2.2rem 2.4rem; }
+  body { font-family: Arial, Helvetica, sans-serif; font-size: 10pt; line-height: 1.4; color: #111; max-width: 51rem; margin: 0 auto; padding: 2.2rem 2.4rem; }
   h1 { font-size: 20pt; letter-spacing: -.01em; font-weight: 700; }
   .subtitle { font-size: 11.5pt; margin-top: .15rem; }
-  .contact { margin-top: .55rem; font-size: 9.5pt; color: #333; }
-  .contact-row { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin-bottom: .35rem; }
+  .contact { margin-top: .5rem; font-size: 9.5pt; color: #333; }
+  .contact-row { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin-bottom: .3rem; }
   .contact-row:last-child { margin-bottom: 0; }
   .contact-row .sep { color: #bbb; }
-  h2 { font-size: 11pt; text-transform: uppercase; letter-spacing: .1em; color: #111; border-bottom: 1.5px solid #111; padding-bottom: .25rem; margin: 1.5rem 0 .65rem; }
-  .job { margin-bottom: .9rem; }
+  h2 { font-size: 10.5pt; text-transform: uppercase; letter-spacing: .1em; color: #111; border-bottom: 1.5px solid #111; padding-bottom: .2rem; margin: 1.05rem 0 .5rem; }
+  .job { margin-bottom: .7rem; }
   .job-head { display: flex; justify-content: space-between; flex-wrap: wrap; gap: .25rem; }
-  .job-head strong { font-size: 10.8pt; font-weight: 700; }
-  .job-head span { font-size: 9.5pt; color: #333; font-style: italic; }
+  .job-head strong { font-size: 10.5pt; font-weight: 700; }
+  .job-head span { font-size: 9.5pt; color: #333; font-style: italic; padding-right: .2em; }
   .job-sub { font-size: 9.5pt; color: #333; margin-top: .1rem; }
-  ul { margin: .35rem 0 0 1.1rem; }
-  li { margin-bottom: .22rem; }
-  .skills p { margin-bottom: .3rem; }
+  ul { margin: .3rem 0 0 1.1rem; }
+  li { margin-bottom: .18rem; }
+  .skills p { margin-bottom: .25rem; }
   a { color: #111; text-decoration: none; border-bottom: .5px solid #999; }
-  .rule { border: none; border-top: 1px solid #ccc; margin: .6rem 0 0; }
-  @media print { body { padding: 0; } @page { margin: 1.6cm 1.8cm; } }
+  .rule { border: none; border-top: 1px solid #ccc; margin: .55rem 0 0; }
+  @media print { body { padding: 0; } @page { margin: 1.3cm 1.6cm; } }
 </style>
 </head>
 <body>
@@ -47,18 +47,18 @@
 
 <h2>Summary</h2>
 <p>
-  Product Engineer and full-stack engineer with 3+ years of professional experience building and maintaining web products in production. I turn business problems into systems that can grow: high-volume Web3 tools, 24/7 operations platforms, SaaS, e-commerce and real-time data products. I work end to end with React, Next.js, TypeScript, Node.js, Java and PostgreSQL, combining architecture, performance, SEO, analytics and product judgment. I have also led delivery for 10+ clients and worked in Scrum teams using Jira.
+  Product Engineer and full-stack engineer with 3+ years of professional experience building and running web products in production. I take products from the business problem to architecture, deployment and operation: high-volume Web3 tools, real-time data platforms, internal business systems and e-commerce. I work end to end with React, Next.js, TypeScript, Node.js and PostgreSQL, and I own what happens after launch — self-hosted infrastructure, database migrations, authorization and incident handling. I have led technical delivery for 10+ clients and worked in Scrum teams using Jira.
 </p>
 
 <h2>Professional Experience</h2>
-
 <div class="job">
   <div class="job-head"><strong>Founder &amp; Technical Lead — Estudio Ve</strong><span>2026 – Present</span></div>
-  <p class="job-sub">Digital product studio · Remote, Argentina · estudiove.ar</p>
+  <p class="job-sub">Digital product studio · Remote, Argentina · estudiove.com</p>
   <ul>
-    <li>Lead technical strategy, architecture and delivery of digital products for SMBs and companies, from the initial problem to production.</li>
-    <li>Co-designed and currently build Stockeo, an inventory SaaS with a Java backend, Next.js frontend, PostgreSQL and Mercado Pago subscriptions.</li>
-    <li>Built Avi Salud's public website and an internal system that centralizes appointments, routines, clients, employees and financial movements.</li>
+    <li>Founded the studio; lead technical strategy, architecture and delivery of digital products for SMBs, from the initial problem to production.</li>
+    <li>Avi Salud (home-healthcare company): built the public website and, as tech lead of a two-developer team, an internal operations system (Next.js 16, React 19, Supabase) that replaced Excel and WhatsApp for scheduling, patients, staff, plans and billing.</li>
+    <li>Recovered a 26-table production schema that had never been version-controlled into a single versioned baseline, and designed configurable role-based access control enforced in Postgres Row-Level Security (26/26 tables audited).</li>
+    <li>Guarded all 90 server actions with permission checks and shipped 54 migrations (~9,000 lines of SQL) on a shared production database over six weeks with no data loss.</li>
   </ul>
 </div>
 
@@ -66,7 +66,7 @@
   <div class="job-head"><strong>Product Engineer &amp; Technical Lead — Harmonica</strong><span>Mar 2025 – Apr 2026</span></div>
   <p class="job-sub">Digital agency, US market · Remote</p>
   <ul>
-    <li>Took technical ownership of 10+ websites for US clients, coordinating priorities, technical decisions and delivery.</li>
+    <li>Took technical ownership of 10+ websites for US clients, coordinating priorities, technical decisions and delivery, communicating with clients in English day to day.</li>
     <li>Built, maintained and optimized Next.js, WordPress and Shopify products across e-commerce, wellness, personal brands and corporate sites.</li>
     <li>Improved performance, Core Web Vitals and technical SEO using Lighthouse, Google Analytics 4 and Search Console.</li>
     <li>Standardized development and deployment workflows with GitHub Actions while supporting several products in parallel.</li>
@@ -77,9 +77,8 @@
   <div class="job-head"><strong>Frontend Developer &amp; Consultant — Claridad</strong><span>Dec 2024 – Sep 2025</span></div>
   <p class="job-sub">Civic safety platform · Mar del Plata (part-time) · claridad.ar</p>
   <ul>
-    <li>Built a collaborative safety map with a small team, including geolocated reports, communities, real-time alerts and a panic button.</li>
-    <li>Integrated data and geolocation APIs and developed the frontend experience in React.</li>
-    <li>Joined hackathons and public validation initiatives, gathered feedback and iterated on the product.</li>
+    <li>Sole frontend engineer in a small team building a collaborative safety map: geolocated reports, communities, real-time alerts and a panic button, in React.</li>
+    <li>Integrated data and geolocation APIs; took the product to hackathons and public validation sessions and iterated on user feedback.</li>
   </ul>
 </div>
 
@@ -87,39 +86,42 @@
   <div class="job-head"><strong>Frontend Developer — Smithii</strong><span>Jun 2023 – Dec 2024</span></div>
   <p class="job-sub">Web3 products · Remote (United Arab Emirates) · smithii.io</p>
   <ul>
-    <li>Built high-volume Web3 tools for tokens, liquidity, airdrops and staking with React, Next.js and TypeScript.</li>
+    <li>Built high-volume Web3 tools for tokens, liquidity, airdrops and staking with React, Next.js, TypeScript and Chakra UI.</li>
     <li>Worked across three areas of the ecosystem: public tools, internal management software and a staking builder launched as a standalone product.</li>
-    <li>Optimized blockchain integrations and complex data flows to keep products fast and reliable at global scale.</li>
-    <li>Delivered end-to-end features within a Scrum team, organizing work and tracking delivery in Jira.</li>
+    <li>Optimized blockchain integrations and complex data flows to keep products fast and reliable; delivered end-to-end features in a Scrum team using Jira.</li>
   </ul>
 </div>
 
-<h2>Personal Projects</h2>
+<h2>Projects</h2>
+<div class="job">
+  <div class="job-head"><strong>Pelotita — Founder &amp; sole engineer</strong><span>pelotita.com.ar</span></div>
+  <p class="job-sub">Live football platform: scores, standings, stats, editorial content and real-time fantasy leagues</p>
+  <ul>
+    <li>Built and operate it solo: Next.js 16, self-hosted PostgreSQL 18, Redis pub/sub and a custom WebSocket server on a Hetzner VPS behind Cloudflare, with GitHub Actions CI/CD — 360 commits in six weeks.</li>
+    <li>160k+ Google Search impressions in its first two months; 10k+ matches processed across Argentina's top divisions, Europe's top 5 leagues and continental cups, with a Google AdSense monetization strategy.</li>
+    <li>Migrated production off Vercel to the self-hosted stack with zero downtime, and moved 32 tables, RLS policies and auth data across regions with row counts verified identical.</li>
+    <li>Cut Supabase egress by close to an order of magnitude after a near-outage by moving football data to self-hosted Postgres and rebuilding the real-time layer.</li>
+  </ul>
+</div>
+
 <div class="job">
   <ul>
-    <li><strong>Pelotita (football data and fantasy):</strong> 10k+ matches processed via scraping, normalized teams and tournaments, fantasy leagues and a monetization strategy using Google AdSense.</li>
-    <li><strong>Abundancia (24/7 operations platform):</strong> shifts, tasks, cash movements, receipts and balances, with AI-assisted automation and data-entry bots.</li>
-    <li><strong>Busy (clothing e-commerce):</strong> founded the brand and built the full store: e-commerce, integrations, content and design. With no physical shop, it ranked for clothing searches in Mar del Plata through technical SEO.</li>
-    <li><strong>Presidential Simulator:</strong> independent game built with friends as a technical side project — game systems, TypeScript, collaborative design.</li>
+    <li><strong>Abundancia (24/7 operations platform):</strong> shifts, tasks, cash movements, receipts and balances in one place, with AI-assisted automation and data-entry bots.</li>
+    <li><strong>Busy (clothing e-commerce):</strong> founded the brand and built the full store — e-commerce, payments, content and design. With no physical shop, it ranked for clothing searches in Mar del Plata through technical SEO.</li>
+    <li><strong>Presidential Simulator:</strong> independent game I design and build solo — game systems in TypeScript.</li>
   </ul>
 </div>
 
 <h2>Technical Skills</h2>
 <div class="skills">
   <p><strong>Frontend:</strong> React, Next.js, TypeScript, JavaScript, Tailwind CSS, Astro, Chakra UI, WordPress, Shopify</p>
-  <p><strong>Backend &amp; data:</strong> Node.js, Java, Express, REST APIs, PostgreSQL, Neon, Supabase, Firebase, MongoDB, Prisma</p>
-  <p><strong>Product &amp; delivery:</strong> system architecture, technical leadership, Scrum, Jira, CI/CD, GitHub Actions, Playwright, Figma</p>
+  <p><strong>Backend &amp; data:</strong> Node.js, Express, Java, REST APIs, PostgreSQL (RLS, migrations, raw SQL), Redis, WebSockets, Supabase, Neon, Firebase, MongoDB, Prisma</p>
+  <p><strong>Infrastructure &amp; delivery:</strong> self-hosted VPS (Hetzner), Cloudflare, PM2, CI/CD with GitHub Actions, Playwright, system architecture, technical leadership, Scrum, Jira, Figma</p>
   <p><strong>Growth, data &amp; AI:</strong> Technical SEO, Core Web Vitals, Lighthouse, Google Analytics 4, Search Console, Python (scripting and scraping), LLM integrations (OpenAI, Claude)</p>
 </div>
 
-<h2>Education</h2>
-<div class="job">
-  <div class="job-head"><strong>Coursework in Programming — UTN Mar del Plata</strong><span>2022</span></div>
-</div>
-<div class="job">
-  <div class="job-head"><strong>Professional Ontological Coach — Argos</strong><span>2025 – 2026</span></div>
-  <p class="job-sub">Effective communication, team leadership and handling difficult conversations.</p>
-</div>
+<h2>Education &amp; Training</h2>
+<p>Programming coursework — UTN Mar del Plata (2022, not completed) · Ontological Coaching training: communication, team leadership and difficult conversations — Argos (2025 – 2026)</p>
 
 <h2>Languages</h2>
 <p>Spanish (native) · English (intermediate, B2 certification in progress — daily written work with US clients)</p>
