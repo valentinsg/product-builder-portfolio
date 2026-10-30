@@ -142,18 +142,8 @@ const content = {
       principles: ['Understand', 'Choose', 'Build', 'Ship', 'Measure', 'Learn', 'Iterate', 'Listen'],
     },
     craft: {
-      eyebrow: '02 — Process & capabilities',
+      eyebrow: '02 — Capabilities',
       title: ['How I work,', 'what I bring.'],
-      processLabel: 'The process',
-      processCopy: 'This is the process I always end up coming back to. Six steps that keep my work organized, with the flexibility each project needs.',
-      steps: [
-        ['01', 'Understand the problem', 'What problem do we actually want to solve?'],
-        ['02', 'Design the experience', 'Make the main path clear before adding more.'],
-        ['03', 'Infrastructure focus', 'Choose the right tools and connect the pieces.'],
-        ['04', 'Put it in production', 'A real product teaches more than a perfect draft.'],
-        ['05', 'Validate with users', 'Know how to receive feedback — see where the product helps and where it gets in the way.'],
-        ['06', 'Keep improving', 'Keep what works. Change what does not.'],
-      ],
       hubTitle: 'Capabilities & toolkit',
       categories: [
         { name: 'Build', offer: 'Development, end to end · Frontend & backend · Databases & auth · Integrations & automation', items: [{ label: 'TypeScript' }, { label: 'React' }, { label: 'Next.js' }, { label: 'Node.js' }, { label: 'Java' }, { label: 'PostgreSQL' }, { label: 'Neon' }, { label: 'Supabase' }, { label: 'Firebase' }, { label: 'WordPress' }, { label: 'Shopify' }, { label: 'REST APIs' }] },
@@ -256,18 +246,8 @@ const content = {
       principles: ['Entender', 'Elegir', 'Construir', 'Lanzar', 'Medir', 'Aprender', 'Iterar', 'Escuchar'],
     },
     craft: {
-      eyebrow: '02 — Proceso y capacidades',
+      eyebrow: '02 — Capacidades',
       title: ['Cómo trabajo,', 'lo que aporto.'],
-      processLabel: 'El proceso',
-      processCopy: 'Es el proceso al que siempre termino volviendo. Seis pasos que me ordenan, con la flexibilidad que pide cada proyecto.',
-      steps: [
-        ['01', 'Entender el problema', '¿Qué problema queremos resolver de verdad?'],
-        ['02', 'Diseñar la experiencia', 'Dejar claro el camino principal antes de agregar más.'],
-        ['03', 'Enfoque en infraestructura', 'Elegir las herramientas correctas y conectar las piezas.'],
-        ['04', 'Ponerlo en producción', 'Un producto real enseña más que un borrador perfecto.'],
-        ['05', 'Validar con usuarios', 'Saber recibir feedback, ver dónde el producto aporta y dónde molesta.'],
-        ['06', 'Seguir mejorando', 'Conservar lo que funciona. Cambiar lo que no.'],
-      ],
       hubTitle: 'Capacidades y herramientas',
       categories: [
         { name: 'Construir', offer: 'Desarrollo de punta a punta · Frontend y backend · Bases de datos y auth · Integraciones y automatizaciones', items: [{ label: 'TypeScript' }, { label: 'React' }, { label: 'Next.js' }, { label: 'Node.js' }, { label: 'Java' }, { label: 'PostgreSQL' }, { label: 'Neon' }, { label: 'Supabase' }, { label: 'Firebase' }, { label: 'WordPress' }, { label: 'Shopify' }, { label: 'REST APIs' }] },
@@ -346,7 +326,6 @@ export default function Page() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [language, setLanguage] = useState<Lang>('en')
   const [showLangModal, setShowLangModal] = useState(false)
-  const [activeStep, setActiveStep] = useState(0)
   const [copied, setCopied] = useState(false)
   const [activeSection, setActiveSection] = useState('top')
   const reduceMotion = useReducedMotion()
@@ -579,25 +558,6 @@ export default function Page() {
                 </motion.div>
               ))}
             </Stagger>
-          </div>
-          
-          <div className="craft-part">
-            <p className="eyebrow">{t.craft.processLabel}</p>
-            <div className="mt-10 grid gap-16 lg:grid-cols-12 lg:gap-20">
-              <div className="flex flex-col justify-between lg:col-span-5">
-                <p className="max-w-md body-copy process-copy">{t.craft.processCopy}</p>
-                <div className="process-display"><span>{t.craft.steps[activeStep][0]}</span><h3>{t.craft.steps[activeStep][1]}</h3><p>{t.craft.steps[activeStep][2]}</p></div>
-              </div>
-              <Stagger as="ol" className="process-list lg:col-span-7">
-                {t.craft.steps.map((step, index) => (
-                  <motion.li key={step[0]} data-rv variants={STAGGER_CHILD}>
-                    <button className={`process-row ${activeStep === index ? 'active' : ''}`} onMouseEnter={() => setActiveStep(index)} onFocus={() => setActiveStep(index)} onClick={() => setActiveStep(index)}>
-                      <span>{step[0]}</span><strong>{step[1]}</strong><span className="process-arrow">+</span>
-                    </button>
-                  </motion.li>
-                ))}
-              </Stagger>
-            </div>
           </div>
         </Reveal>
       </section>
